@@ -628,13 +628,14 @@ class Pager_Common
             }
         }
 
-        foreach ($qs as $name => $value) {
-            $querystring[] = $name . '=' . $value;
-        }
         if (is_array($this->_extraVars)) {
             foreach ($this->_extraVars as $name => $value) {
-                $querystring[] = $name . '=' . $value;
+                $qs[$name] = $value; //eventually overwrite duplicate vars
             }
+        }
+
+        foreach ($qs as $name => $value) {
+            $querystring[] = $name . '=' . $value;
         }
 
         return '?' . implode('&amp;', $querystring) . (!empty($querystring) ? '&amp;' : '') . $this->_urlVar .'=';

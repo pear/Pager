@@ -22,12 +22,13 @@
       </maintainer>
   </maintainers>
 
-  <release>
-    <version>1.0.3</version>
-    <date>2002-05-31</date>
+   <release>
+    <version>1.0.4</version>
+    <date>2002-06-29</date>
     <state>stable</state>
     <notes>
-      Couple of minor bugs
+      Changed getCurrentPage() to getCurrentPageID() and
+      added getNextPageID() and getPreviousPageID()
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="Pager">
@@ -39,6 +40,15 @@
 
   <changelog>
     <release>
+      <version>1.0.3</version>
+      <date>2002-05-31</date>
+      <state>stable</state>
+      <notes>
+        Couple of minor bugs
+      </notes>
+    </release>
+
+    <release>
       <version>1.0.2</version>
       <date>2002-05-31</date>
       <state>stable</state>
@@ -46,12 +56,6 @@
         Applied patch from Christian Dickmann adding getCurrentPage(), numItems() 
         and optional CSS class for links.
       </notes>
-      <filelist>
-        <dir name="/" baseinstalldir="Pager">
-          <file role="php" name="Pager.php" />
-          <file role="php" name="example.php" />
-        </dir>
-      </filelist>
     </release>
 
     <release>
@@ -62,12 +66,6 @@
         o No longer barfs with no querystring
         o Now works with associative data array
       </notes>
-      <filelist>
-        <dir name="/" baseinstalldir="Pager">
-          <file role="php" name="Pager.php" />
-          <file role="php" name="example.php" />
-        </dir>
-      </filelist>
     </release>
 
     <release>
@@ -77,12 +75,6 @@
       <notes>
         This is the initial release of the Pager package.
       </notes>
-      <filelist>
-        <dir name="/" baseinstalldir="Pager">
-          <file role="php" name="Pager.php" />
-          <file role="php" name="example.php" />
-        </dir>
-      </filelist>
     </release>
   </changelog>
 

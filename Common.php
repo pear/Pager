@@ -633,6 +633,7 @@ class Pager_Common
                 if (strstr($qs[$i], '=') !== false){ // check first if exist a pair
                     list($name, $value) = explode('=', $qs[$i]);
                     if ($name != $this->_urlVar) {
+                        $name = rawurldecode($name);
                         //check for arrays in parameters: site.php?foo[]=1&foo[]=2&foo[]=3
                         if ((strpos($name, '[') !== false) &&
                             (strpos($name, ']') !== false)

@@ -32,11 +32,11 @@
 - set correct selected value for getPerPageSelectBox even when "useSession"
   option is false (bug #1263).
 - added two parameters to getPerPageSelectBox():
-  * $showAllData (if true, an <option> to show
-    all the data is displayed in the generated <select>);
-  * $optionText (text to show in each <option>; use '%d' where you want to see
+  * $showAllData (if true, an &lt;option&gt; to show
+    all the data is displayed in the generated &lt;select&gt;);
+  * $optionText (text to show in each &lt;option&gt;; use '%d' where you want to see
     the number of pages selected)
-- added showAllText option for alternate text in the $showAllData <option>
+- added showAllText option for alternate text in the $showAllData &lt;option&gt;
   (the default is the number of total items).
 - fixed getPageData() when $pageID is specified (bug #1377) (thanks to Ian Eure)
 - added tests for getPageData()

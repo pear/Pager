@@ -46,10 +46,11 @@
  */
 if (substr($_SERVER['PHP_SELF'], -1) == '/') {
     define('CURRENT_FILENAME', '');
+    define('CURRENT_PATHNAME', str_replace('\\', '/', $_SERVER['PHP_SELF']));
 } else {
     define('CURRENT_FILENAME', basename($_SERVER['PHP_SELF']));
+    define('CURRENT_PATHNAME', str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])));
 }
-define('CURRENT_PATHNAME', str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])));
 /**
  * Error codes
  */

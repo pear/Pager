@@ -25,15 +25,15 @@
 
  <release>
   <version>2.2.5</version>
-  <date>2005-01-11</date>
+  <date>2005-01-17</date>
   <state>stable</state>
   <notes>
 <![CDATA[
 - allowed use of a javascript function in the fileName [bugs #2555 and #2754]
 - added Pager_Wrapper_DBDO() function in the /examples/Pager_Wrapper example
   (thanks to garak AT studenti DOT it)
-- fixed bug #2908: Invalid GET returning array values with urlencoded brackets
-- slashes in the querystring are not urlencoded [bug #3043]
+- replaced urlencode() with htmlentities() because it was too aggressive
+  [bugs #2908, #3043 and #3212]
 ]]>
   </notes>
 
@@ -76,15 +76,15 @@
  <changelog>
        <release>
             <version>2.2.5</version>
-            <date>2005-01-11</date>
+            <date>2005-01-17</date>
             <state>stable</state>
             <notes>
 <![CDATA[
 - allowed use of a javascript function in the fileName [bugs #2555 and #2754]
 - added Pager_Wrapper_DBDO() function in the /examples/Pager_Wrapper example
   (thanks to garak AT studenti DOT it)
-- fixed bug #2908: Invalid GET returning array values with urlencoded brackets
-- slashes in the querystring are not urlencoded [bug #3043]
+- replaced urlencode() with htmlentities() because it was too aggressive
+  [bugs #2908, #3043 and #3212]
 ]]>
             </notes>
        </release>

@@ -133,17 +133,17 @@ class TestOfPager extends UnitTestCase {
         $err =& Pager::factory($options);
         $this->assertNoErrors();
     }
-    function testUrlencode() {
+    function testEscapeEntities() {
         //encode special chars
         $options = array(
             'extraVars' => array(
                 'request[]' => 'aRequest',
-                'escape'    => 'дц',
+                'escape'    => 'дц%<>',
             ),
             'perPage' => 5,
         );
         $this->pager =& Pager::factory($options);
-        $expected = '?request%5B%5D=aRequest&amp;escape=%E4%F6&amp;pageID=';
+        $expected = '?request[]=aRequest&amp;escape=&auml;&ouml;%&lt;&gt;&amp;pageID=';
         $this->assertEqual($expected, $this->pager->_getLinksUrl());
 
         //don't encode slashes
@@ -154,7 +154,6 @@ class TestOfPager extends UnitTestCase {
             'perPage' => 5,
         );
         $this->pager =& Pager::factory($options);
-        //$expected = '?request=cat%2Fsubcat&amp;pageID=';
         $expected = '?request=cat/subcat&amp;pageID=';
         $this->assertEqual($expected, $this->pager->_getLinksUrl());
     }

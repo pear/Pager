@@ -656,11 +656,10 @@ class Pager_Common
         }
 
         foreach ($qs as $name => $value) {
-            $param = rawurlencode($name) . '=' . rawurlencode($value);
-            $querystring[] = str_replace('%2F', '/', $param); //restore slashes
+            $querystring[] = $name . '=' . $value;
         }
         $querystring = array_merge($querystring, array_unique($arrays));
-        //$querystring = array_map('rawurlencode', $querystring);
+        $querystring = array_map('htmlentities', $querystring);
 
         return '?' . implode('&amp;', $querystring) . (!empty($querystring) ? '&amp;' : '') . $this->_urlVar .'=';
     }

@@ -53,6 +53,15 @@ class TestOfPager extends UnitTestCase {
     function testOffsetByPageId_outOfRange() {
         $this->assertEqual(array(0, 0), $this->pager->getOffsetByPageId(20));
     }
+    function testGetPageData() {
+        $this->assertEqual(array(0=>1, 1=>2, 2=>3, 3=>4, 4=>5), $this->pager->getPageData());
+    }
+    function testGetPageData2() {
+        $this->assertEqual(array(5=>6, 6=>7, 7=>8, 8=>9, 9=>10), $this->pager->getPageData(2));
+    }
+    function testGetPageData_OutOfRange() {
+        $this->assertEqual(false, $this->pager->getPageData(3));
+    }
     function testSelectBox() {
         $selectBox  = '<select name="'.$this->pager->_sessionVar.'">';
         $selectBox .= '<option value="5" selected="selected">5</option>';

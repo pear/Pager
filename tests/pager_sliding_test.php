@@ -29,9 +29,17 @@ class TestOfPagerSliding extends UnitTestCase {
     function testPageRangeByPageId_outOfRange() {
         $this->assertEqual(array(0, 0), $this->pager->getPageRangeByPageId(20));
     }
-//////////
     function testPageRangeByPageId2() {
         $this->assertEqual(array(2, 6), $this->pager->getPageRangeByPageId(4));
+    }
+    function testGetPageData() {
+        $this->assertEqual(array(0=>1, 1=>2), $this->pager->getPageData());
+    }
+    function testGetPageData2() {
+        $this->assertEqual(array(2=>3, 3=>4), $this->pager->getPageData(2));
+    }
+    function testGetPageData_OutOfRange() {
+        $this->assertEqual(false, $this->pager->getPageData(20));
     }
     /**
      * Returns offsets for given pageID. Eg, if you pass pageID=5 and your

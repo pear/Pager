@@ -42,6 +42,15 @@ class TestOfPagerJumping extends UnitTestCase {
     function testPageRangeByPageId_outOfRange() {
         $this->assertEqual(array(0, 0), $this->pager->getPageRangeByPageId(20));
     }
+    function testGetPageData() {
+        $this->assertEqual(array(0=>1, 1=>2, 2=>3, 3=>4, 4=>5), $this->pager->getPageData());
+    }
+    function testGetPageData2() {
+        $this->assertEqual(array(5=>6, 6=>7, 7=>8, 8=>9, 9=>10), $this->pager->getPageData(2));
+    }
+    function testGetPageData_OutOfRange() {
+        $this->assertEqual(false, $this->pager->getPageData(4));
+    }
     /**
      * Returns offsets for given pageID. Eg, if you pass pageID=5 and your
      * delta is 2, it will return 3 and 7. A pageID of 6 would give you 4 and 8

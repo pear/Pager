@@ -134,8 +134,8 @@ class Pager
      */
     function Pager($options = array())
     {
-        $mode = (isset($options['mode']) ? $options['mode'] : 'Jumping');
-        $pager_class = 'Pager_' . ucfirst($mode);
+        $mode = (isset($options['mode']) ? ucfirst($options['mode']) : 'Jumping');
+        $pager_class = 'Pager_' . $mode;
         $pager_classfile = 'Pager' . DIRECTORY_SEPARATOR . $mode . '.php';
         require_once $pager_classfile;
         $this = new $pager_class($options);

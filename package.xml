@@ -19,6 +19,12 @@ to it.
 			<email>richard@php.net</email>
 			<role>lead</role>
 		</maintainer>
+		<maintainer>
+			<user>quipo</user>
+			<name>Lorenzo Alberton</name>
+			<email>l.alberton@quipo.it</email>
+			<role>lead</role>
+		</maintainer>
 	</maintainers>
 
 	<release>

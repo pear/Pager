@@ -11,7 +11,7 @@ picking up the current page id from the url. It can also give you back/next
 and page number links taking the current url and adding the correct page id
 to it.
 	</description>
-	
+
 	<maintainers>
 		<maintainer>
 			<user>richard</user>
@@ -22,12 +22,13 @@ to it.
 	</maintainers>
 
 	<release>
-		<version>1.0.7</version>
-		<date>2002-12-01</date>
+    	<version>1.0.8</version>
+		<date>2003-09-10</date>
 		<license>BSD</license>
 		<state>stable</state>
 		<notes>
-Minor patch for script_name vs php_self
+- Minor patch for script_name vs php_self (not included in v.1.0.7)
+- Prevent URL modification
 		</notes>
 		<filelist>
 			<dir name="/" baseinstalldir="Pager">
@@ -36,8 +37,29 @@ Minor patch for script_name vs php_self
 			</dir>
 		</filelist>
 	</release>
-	
+
 	<changelog>
+		<release>
+			<version>1.0.8</version>
+			<date>2003-09-10</date>
+			<license>BSD</license>
+			<state>stable</state>
+			<notes>
+- Minor patch for script_name vs php_self (not included in v.1.0.7)
+- Prevent URL modification
+			</notes>
+		</release>
+
+		<release>
+			<version>1.0.7</version>
+			<date>2002-12-01</date>
+			<license>BSD</license>
+			<state>stable</state>
+			<notes>
+Minor patch for script_name vs php_self
+			</notes>
+		</release>
+
 		<release>
 			<version>1.0.6</version>
 			<date>2002-09-08</date>
@@ -60,7 +82,7 @@ Changed getCurrentPage() to getCurrentPageID() and
 added getNextPageID() and getPreviousPageID()
 			</notes>
 		</release>
-		
+
 		<release>
 			<version>1.0.4</version>
 			<date>2002-06-29</date>
@@ -70,7 +92,7 @@ Changed getCurrentPage() to getCurrentPageID() and
 added getNextPageID() and getPreviousPageID()
 			</notes>
 		</release>
-		
+
 		<release>
 			<version>1.0.3</version>
 			<date>2002-05-31</date>
@@ -79,17 +101,17 @@ added getNextPageID() and getPreviousPageID()
 Couple of minor bugs
 			</notes>
 		</release>
-		
+
 		<release>
 			<version>1.0.2</version>
 			<date>2002-05-31</date>
 			<state>stable</state>
 			<notes>
-Applied patch from Christian Dickmann adding getCurrentPage(), numItems() 
+Applied patch from Christian Dickmann adding getCurrentPage(), numItems()
 and optional CSS class for links.
 			</notes>
 		</release>
-		
+
 		<release>
 			<version>1.0.1</version>
 			<date>2002-05-27</date>
@@ -99,7 +121,7 @@ o No longer barfs with no querystring
 o Now works with associative data array
 			</notes>
 		</release>
-		
+
 		<release>
 			<version>1.0</version>
 			<date>2002-02-09</date>

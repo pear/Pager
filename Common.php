@@ -1125,7 +1125,7 @@ class Pager_Common
             $this->_spacesAfter .= '&nbsp;';
         }
 
-        if (isset($_REQUEST[$this->_urlVar]) && (is_null($options['currentPage']))) {
+        if (isset($_REQUEST[$this->_urlVar]) && empty($options['currentPage'])) {
             $this->_currentPage = (int)$_REQUEST[$this->_urlVar];
         }
         $this->_currentPage = max($this->_currentPage, 1);

@@ -100,9 +100,18 @@ class Pager
      *                         similar to firstPagePost.
      *  - spacesAfterSeparator
      *               (int):    number of spaces after the separator.
+     *  - firstLinkTitle (string):
+     *                          string used as title in <link rel="first"> tag
+     *  - lastLinkTitle (string):
+     *                          string used as title in <link rel="last"> tag
+     *  - prevLinkTitle (string):
+     *                          string used as title in <link rel="prev"> tag
+     *  - nextLinkTitle (string):
+     *                          string used as title in <link rel="next"> tag
      *  - curPageLinkClassName
      *               (string): name of CSS class used for current page link.
      *  - clearIfVoid(bool):   if there's only one page, don't display pager.
+     *  - extraVars (array):   additional URL vars to be added to the querystring
      *  - itemData   (array):  array of items to page.
      *  - useSessions (bool):  if true, number of items to display per page is
      *                         stored in the $_SESSION[$_sessionVar] var.

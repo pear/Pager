@@ -285,6 +285,12 @@ class Pager_Common
     var $_lastLinkTitle = 'last page';
 
     /**
+     * @var string Text to be used for the 'show all' option in the select box
+     * @access private
+     */
+    var $_showAllText  = '';
+
+    /**
      * @var array data to be paged
      * @access private
      */
@@ -612,7 +618,7 @@ class Pager_Common
         if (!empty($_SERVER['QUERY_STRING'])) {
             $qs = explode('&', str_replace('&amp;', '&', $_SERVER['QUERY_STRING']));
             for ($i = 0, $cnt = count($qs); $i < $cnt; $i++) {
-                if(strstr($qs[$i], '=') !== false){ // check first if exist a pair
+                if (strstr($qs[$i], '=') !== false){ // check first if exist a pair
                     list($name, $value) = explode('=', $qs[$i]);
                     if ($name != $this->_urlVar) {
                         $qs[$name] = $value;
@@ -820,7 +826,7 @@ class Pager_Common
      * @return string xhtml select box
      * @access public
      */
-    function getPerPageSelectBox($start=5, $end=30, $step=5)
+    function getPerPageSelectBox($start=5, $end=30, $step=5, $showAllData=false)
     {
         $start = (int)$start;
         $end   = (int)$end;
@@ -838,6 +844,13 @@ class Pager_Common
                 $tmp .= ' selected="selected"';
             }
             $tmp .= '>'.$i.'</option>';
+        }
+        if ($showAllData && $end < $this->_totalItems) {
+            $tmp .= '<option value="'.$this->_totalItems.'"';
+            if ($this->_totalItems == $selected) {
+                $tmp .= ' selected="selected"';
+            }
+            $tmp .= '>'.(empty($this->_showAllText) ? $this->_totalItems : $this->_showAllText).'</option>';
         }
         $tmp .= '</select>';
         return $tmp;
@@ -976,6 +989,7 @@ class Pager_Common
             'nextLinkTitle',
             'prevLinkTitle',
             'lastLinkTitle',
+            'showAllText',
             'itemData',
             'clearIfVoid',
             'useSessions',

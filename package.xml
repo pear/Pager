@@ -24,18 +24,14 @@
  </maintainers>
 
  <release>
-  <version>2.0</version>
-  <date>2003-09-10</date>
+  <version>2.0.1</version>
+  <date>2003-12-XX</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- New major version.
-- Pager and Pager_Sliding are now merged in the same package.
-  Every option available in Pager_Sliding is now also available
-  in Pager. The API is the same as the old one, BC is kept 100%.
-- Switch between "Jumping" and "Sliding" window mode just setting
-  an option.
-- Improved error handling.
+- Fix isFirstPage() when totalItems == 0
+- Fix getOffsetByPageId() in Pager_Jumping when totalItems == 0
+- Added test suite.
 ]]>
   </notes>
 
@@ -45,8 +41,28 @@
     <file role="php" name="Common.php" />
     <file role="php" name="Jumping.php" />
     <file role="php" name="Pager.php" />
-   <file role="php" name="Sliding.php" />
-    <file role="doc" name="examples/example.php" />
+    <file role="php" name="Sliding.php" />
+
+    <dir name="examples">
+      <file role="doc" name="example.php" />
+    </dir>
+
+    <dir name="tests">
+      <file role="test" name="all_tests.php" />
+      <file role="test" name="pager_include.php" />
+      <file role="test" name="pager_jumping_noData_test.php" />
+      <file role="test" name="pager_jumping_test.php" />
+      <file role="test" name="pager_jumping_tests.php" />
+      <file role="test" name="pager_noData_test.php" />
+      <file role="test" name="pager_sliding_noData_test.php" />
+      <file role="test" name="pager_sliding_test.php" />
+      <file role="test" name="pager_sliding_tests.php" />
+      <file role="test" name="pager_test.php" />
+      <file role="test" name="pager_tests.php" />
+      <file role="test" name="simple_include.php" />
+      <file role="doc" name="README" />
+    </dir>
+
    </dir>
   </filelist>
 
@@ -54,6 +70,19 @@
 
 
  <changelog>
+        <release>
+			<version>2.0.1</version>
+			<date>2003-12-XX</date>
+			<license>BSD</license>
+			<state>stable</state>
+			<notes>
+<![CDATA[
+- Fix isFirstPage() when totalItems == 0
+- Fix getOffsetByPageId() in Pager_Jumping when totalItems == 0
+- Added test suite.
+]]>
+			</notes>
+		</release>
         <release>
 			<version>2.0</version>
 			<date>2003-09-10</date>

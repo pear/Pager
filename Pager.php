@@ -178,14 +178,36 @@ class Pager {
     }
 
     /**
-    * Returns number of current page
+    * Returns ID of current page
     *
-    * @return int Number of current page
+    * @return integer ID of current page
     */
-    function getCurrentPage()
+    function getCurrentPageID()
     {
         return $this->_currentPage;
     }
+	
+	/**
+    * Returns next page ID. If current page is last page
+	* this function returns FALSE
+	*
+	* @return mixed Next pages' ID
+    */
+	function getNextPageID()
+	{
+		return ($this->getCurrentPageID() == $this->numPages() ? false : $this->getCurrentPageID() + 1);
+	}
+	
+	/**
+    * Returns previous page ID. If current page is first page
+	* this function returns FALSE
+	*
+	* @return mixed Previous pages' ID
+    */
+	function getPreviousPageID()
+	{
+		return $this->isFirstPage() ? false : $this->getCurrentPageID() - 1;
+	}
     
     /**
     * Returns number of items
@@ -204,7 +226,7 @@ class Pager {
     */
     function numPages()
     {
-        return $this->_totalPages;
+        return (int)$this->_totalPages;
     }
 
     /**

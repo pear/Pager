@@ -3,7 +3,7 @@
 include('Pager.php');
 
 $params['itemData'] = range(1, 140);
-$pager =& new Pager($params);
+$pager = &new Pager($params);
 $data  = $pager->getPageData();
 $links = $pager->getLinks();
 list($from, $to) = $pager->getOffsetByPageId();
@@ -32,6 +32,18 @@ list($from, $to) = $pager->getOffsetByPageId();
 		</td>
 	</tr>
 </table>
+
+<h4>Results from methods:</h4>
+<pre>
+getCurrentPageID()...: <?=$pager->getCurrentPageID()?> 
+getNextPageID()......: <?var_dump($pager->getNextPageID())?>
+getPreviousPageID()..: <?var_dump($pager->getPreviousPageID())?>
+numItems()...........: <?var_dump($pager->numItems())?>
+numPages()...........: <?var_dump($pager->numPages())?>
+isFirstPage()........: <?var_dump($pager->isFirstPage())?>
+isLastPage().........: <?var_dump($pager->isLastPage())?>
+isLastPageComplete().: <?var_dump($pager->isLastPageComplete())?>
+</pre>
 
 </body>
 </html>

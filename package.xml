@@ -49,21 +49,21 @@
       <file role="doc" name="example.php" />
     </dir>
 
-    <dir name="tests">
-      <file role="test" name="all_tests.php" />
-      <file role="test" name="pager_include.php" />
-      <file role="test" name="pager_jumping_noData_test.php" />
-      <file role="test" name="pager_jumping_test.php" />
-      <file role="test" name="pager_jumping_tests.php" />
-      <file role="test" name="pager_noData_test.php" />
-      <file role="test" name="pager_sliding_noData_test.php" />
-      <file role="test" name="pager_sliding_notExpanded_test.php" />
-      <file role="test" name="pager_sliding_test.php" />
-      <file role="test" name="pager_sliding_tests.php" />
-      <file role="test" name="pager_test.php" />
-      <file role="test" name="pager_tests.php" />
-      <file role="test" name="simple_include.php" />
-      <file role="doc" name="README" />
+    <dir name="tests" role="test">
+      <file name="all_tests.php" />
+      <file name="pager_include.php" />
+      <file name="pager_jumping_noData_test.php" />
+      <file name="pager_jumping_test.php" />
+      <file name="pager_jumping_tests.php" />
+      <file name="pager_noData_test.php" />
+      <file name="pager_sliding_noData_test.php" />
+      <file name="pager_sliding_notExpanded_test.php" />
+      <file name="pager_sliding_test.php" />
+      <file name="pager_sliding_tests.php" />
+      <file name="pager_test.php" />
+      <file name="pager_tests.php" />
+      <file name="simple_include.php" />
+      <file name="README" />
     </dir>
 
    </dir>

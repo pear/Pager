@@ -612,9 +612,13 @@ class Pager_Common
         if (!empty($_SERVER['QUERY_STRING'])) {
             $qs = explode('&', str_replace('&amp;', '&', $_SERVER['QUERY_STRING']));
             for ($i = 0, $cnt = count($qs); $i < $cnt; $i++) {
-                list($name, $value) = explode('=', $qs[$i]);
-                if ($name != $this->_urlVar) {
-                    $qs[$name] = $value;
+                if(strstr($qs[$i], '=') !== false){ // check first if exist a pair
+                    list($name, $value) = explode('=', $qs[$i]);
+                    if ($name != $this->_urlVar) {
+                        $qs[$name] = $value;
+                    }
+                } else {
+                    $qs[$qs[$i]] = '';
                 }
                 unset($qs[$i]);
             }
@@ -733,7 +737,7 @@ class Pager_Common
     {
         $prevLinkTag = '';
         if ($this->_currentPage > 1) {
-            $prevLinkTag = sprintf('<link rel="previous" href="%s" title="%s" />',
+            $prevLinkTag = sprintf('<link rel="previous" href="%s" title="%s" />'."\n",
                                    ($this->_append ? $this->_url.$this->getPreviousPageID() :
                                         $this->_url.sprintf($this->_fileName, $this->getPreviousPageID())),
                                    $this->_prevLinkTitle);
@@ -754,7 +758,7 @@ class Pager_Common
     {
         $nextLinktag = '';
         if ($this->_currentPage < $this->_totalPages) {
-            $nextLinktag = sprintf('<link rel="next" href="%s" title="%s" />',
+            $nextLinktag = sprintf('<link rel="next" href="%s" title="%s" />'."\n",
                                    ($this->_append ? $this->_url.$this->getNextPageID() :
                                         $this->_url.sprintf($this->_fileName, $this->getNextPageID())),
                                    $this->_nextLinkTitle);
@@ -774,7 +778,7 @@ class Pager_Common
         if ($this->isFirstPage()) {
             return '';
         } else {
-            return sprintf('<link rel="first" href="%s" title="%s" />',
+            return sprintf('<link rel="first" href="%s" title="%s" />'."\n",
                            ($this->_append ? $this->_url.'1' :
                                 $this->_url.sprintf($this->_fileName, 1)),
                            $this->_firstLinkTitle);
@@ -793,7 +797,7 @@ class Pager_Common
         if ($this->isLastPage()) {
             return '';
         } else {
-            return sprintf('<link rel="last" href="%s" title="%s" />',
+            return sprintf('<link rel="last" href="%s" title="%s" />'."\n",
                            ($this->_append ? $this->_url.$this->_totalPages :
                                 $this->_url.sprintf($this->_fileName, $this->_totalPages)),
                            $this->_lastLinkTitle);

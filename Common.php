@@ -364,19 +364,17 @@ class Pager_Common
      */
     function getPageData($pageID = null)
     {
-        if (isset($pageID)) {
-            if (!empty($this->_pageData[$pageID])) {
-                return $this->_pageData[$pageID];
-            } else {
-                return false;
-            }
-        }
+        $pageID = empty($pageID) ? $this->_currentPage : $pageID;
+
 
         if (!isset($this->_pageData)) {
             $this->_generatePageData();
         }
 
-        return $this->getPageData($this->_currentPage);
+        if (!empty($this->_pageData[$pageID])) {
+            return $this->_pageData[$pageID];
+        }
+        return false;
     }
 
     // }}}

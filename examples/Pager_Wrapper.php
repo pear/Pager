@@ -10,9 +10,9 @@
 // With this approach, the network load can be
 // consistently smaller than with PEAR::DB_Pager.
 //
-// Four wrappers are provided, one for each
-// PEAR db abstraction layer (DB, MDB and MDB2)
-// and one for PEAR::DB_DataObject.
+// The following wrappers are provided: one for each PEAR
+// db abstraction layer (DB, MDB and MDB2), one for
+// PEAR::DB_DataObject, and one for the PHP Eclipse library
 //
 //
 // SAMPLE USAGE
@@ -36,9 +36,11 @@
  * @param string db query
  * @param array  PEAR::Pager options
  * @param boolean Disable pagination (get all results)
+ * @param integer fetch mode constant
+ * @param array  parameters for query placeholders
  * @return array with links and paged data
  */
-function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = false)
+function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = false, $fetchMode = DB_FETCHMODE_ASSOC, $dbparams = null)
 {
    if (!array_key_exists('totalItems', $pager_options)) {
         //  be smart and try to guess the total number of records
@@ -47,13 +49,13 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
             $queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
             list($queryCount, ) = spliti('ORDER BY ', $queryCount);
             list($queryCount, ) = spliti('LIMIT ', $queryCount);
-            $totalItems = $db->getOne($queryCount);
+            $totalItems = $db->getOne($queryCount, $dbparams);
             if (DB::isError($totalItems)) {
                 return $totalItems;
             }
         } else {
             //GROUP BY => fetch the whole resultset and count the rows returned
-            $res =& $db->query($query);
+            $res =& $db->query($query, $dbparams);
             if (DB::isError($res)) {
                 return $res;
             }
@@ -75,14 +77,14 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
     list($page['from'], $page['to']) = $pager->getOffsetByPageId();
 
     $res = ($disabled)
-        ? $db->limitQuery($query, 0, $totalItems)
-        : $db->limitQuery($query, $page['from']-1, $pager_options['perPage']);
+        ? $db->limitQuery($query, 0, $totalItems, $dbparams)
+        : $db->limitQuery($query, $page['from']-1, $pager_options['perPage'], $dbparams);
 
     if (DB::isError($res)) {
         return $res;
     }
     $page['data'] = array();
-    while ($res->fetchInto($row, DB_FETCHMODE_ASSOC)) {
+    while ($res->fetchInto($row, $fetchMode)) {
        $page['data'][] = $row;
     }
     if ($disabled) {
@@ -100,9 +102,10 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
  * @param string db query
  * @param array  PEAR::Pager options
  * @param boolean Disable pagination (get all results)
+ * @param integer fetch mode constant
  * @return array with links and paged data
  */
-function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = false)
+function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = false, $fetchMode = MDB_FETCHMODE_ASSOC)
 {
     if (!array_key_exists('totalItems', $pager_options)) {
         //be smart and try to guess the total number of records
@@ -146,7 +149,7 @@ function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = f
         return $res;
     }
     $page['data'] = array();
-    while ($row = $db->fetchInto($res, MDB_FETCHMODE_ASSOC)) {
+    while ($row = $db->fetchInto($res, $fetchMode)) {
         $page['data'][] = $row;
     }
     if ($disabled) {
@@ -164,9 +167,10 @@ function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = f
  * @param string db query
  * @param array  PEAR::Pager options
  * @param boolean Disable pagination (get all results)
+ * @param integer fetch mode constant
  * @return array with links and paged data
  */
-function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = false)
+function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = false, $fetchMode = MDB2_FETCHMODE_ASSOC)
 {
     if (!array_key_exists('totalItems', $pager_options)) {
         //be smart and try to guess the total number of records
@@ -205,7 +209,7 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
     if (!$disabled) {
         $db->setLimit($pager_options['perPage'], $page['from']-1);
     }
-    $page['data'] = $db->queryAll($query, null, MDB2_FETCHMODE_ASSOC);
+    $page['data'] = $db->queryAll($query, null, $fetchMode);
     if (MDB2::isError($page['data'])) {
         return $page['data'];
     }
@@ -269,7 +273,7 @@ function Pager_Wrapper_Eclipse(&$db, $query, $pager_options = array(), $disabled
         require_once(ECLIPSE_ROOT . 'PagedQuery.php');
         $query =& new PagedQuery($db->query($query), $pager_options['perPage']);
         $totalrows = $query->getRowCount();
-        $numpages  = $query->getPageCount();
+        $numpages = $query->getPageCount();
         $whichpage = isset($_GET[$pager_options['urlVar']]) ? (int)$_GET[$pager_options['urlVar']] - 1 : 0;
         if ($whichpage >= $numpages) {
             $whichpage = $numpages - 1;

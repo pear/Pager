@@ -34,7 +34,7 @@
 
 include('Pager.php');
 
-$params['itemData'] = range(1, 140);
+$params['totalItems'] = 1600;
 $pager = &new Pager($params);
 $data  = $pager->getPageData();
 $links = $pager->getLinks();

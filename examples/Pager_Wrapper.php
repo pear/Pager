@@ -10,8 +10,9 @@
 // With this approach, the network load can be
 // consistently smaller than with PEAR::DB_Pager.
 //
-// Three wrappers are provided, one for each
-// PEAR db abstraction layer (DB, MDB and MDB2).
+// Four wrappers are provided, one for each
+// PEAR db abstraction layer (DB, MDB and MDB2)
+// and one for PEAR::DB_DataObject.
 //
 //
 // SAMPLE USAGE
@@ -223,6 +224,7 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
  * @param array  PEAR::Pager options
  * @param boolean Disable pagination (get all results)
  * @return array with links and paged data
+ * @author Massimiliano Arione <garak@studenti.it>
  */
 function Pager_Wrapper_DBDO(&$db, $pager_options = array(), $disabled = false)
 {

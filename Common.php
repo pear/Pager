@@ -823,6 +823,7 @@ class Pager_Common
      * @param integer $start
      * @param integer $end
      * @param integer $step
+     * @param boolean $showAllData If true, perPage is set equal to totalItems.
      * @return string xhtml select box
      * @access public
      */

@@ -1,6 +1,6 @@
 <?php
 // +-----------------------------------------------------------------------+
-// | Copyright (c) 2002-2003, Richard Heyes, Lorenzo Alberton              |
+// | Copyright (c) 2002-2005, Richard Heyes, Lorenzo Alberton              |
 // | All rights reserved.                                                  |
 // |                                                                       |
 // | Redistribution and use in source and binary forms, with or without    |
@@ -166,6 +166,8 @@ class Pager_Jumping extends Pager_Common
         if (!empty($next_html)) {
             $back_html = $pageID;
             $pageID = null;
+        } else {
+            $back_html = '';
         }
 
         if ($pageID != null) {

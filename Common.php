@@ -93,6 +93,12 @@ class Pager_Common
     var $_currentPage = 1;
 
     /**
+     * @var integer total pages number
+     * @access private
+     */
+    var $_totalPages  = 1;
+
+    /**
      * @var string CSS class for links
      * @access private
      */
@@ -645,7 +651,7 @@ class Pager_Common
             $querystring[] = $name . '=' . $value;
         }
         $querystring = array_merge($querystring, array_unique($arrays));
-        $querystring = array_map('htmlspecialchars', $querystring);
+        $querystring = array_map('rawurlencode', $querystring);
 
         return '?' . implode('&amp;', $querystring) . (!empty($querystring) ? '&amp;' : '') . $this->_urlVar .'=';
     }

@@ -288,7 +288,7 @@ class Pager_Common
      * @var string Text to be used for the 'show all' option in the select box
      * @access private
      */
-    var $_showAllText  = '';
+    var $_showAllText   = '';
 
     /**
      * @var array data to be paged
@@ -449,13 +449,13 @@ class Pager_Common
      * NB: in original PEAR::Pager this method accepted two parameters,
      * $back_html and $next_html. Now the only parameter accepted is
      * an integer ($pageID), since the html text for prev/next links can
-     * be set in the constructor. If a second parameter is provided, then
+     * be set in the factory. If a second parameter is provided, then
      * the method act as it previously did. This hack was done to mantain
      * backward compatibility only.
      *
      * @param integer $pageID Optional pageID. If specified, links
      *                for that page are provided instead of current one.  [ADDED IN NEW PAGER VERSION]
-     * @param  string $next_html HTML to put inside the next link [deprecated: use the constructor instead]
+     * @param  string $next_html HTML to put inside the next link [deprecated: use the factory instead]
      * @return array back/next/first/last and page links
      */
     function getLinks($pageID=null, $next_html='')
@@ -648,15 +648,15 @@ class Pager_Common
     /**
      * Returns back link
      *
-     * @param $url  URL to use in the link  [deprecated: use the constructor instead]
-     * @param $link HTML to use as the link [deprecated: use the constructor instead]
+     * @param $url  URL to use in the link  [deprecated: use the factory instead]
+     * @param $link HTML to use as the link [deprecated: use the factory instead]
      * @return string The link
      * @access private
      */
     function _getBackLink($url='', $link='')
     {
         //legacy settings... the preferred way to set an option
-        //now is adding it to the constuctor
+        //now is passing it to the factory
         if (!empty($url)) {
             $this->_path = $url;
         }
@@ -682,7 +682,7 @@ class Pager_Common
     /**
      * Returns pages link
      *
-     * @param $url  URL to use in the link [deprecated: use the constructor instead]
+     * @param $url  URL to use in the link [deprecated: use the factory instead]
      * @return string Links
      * @access private
      */
@@ -700,15 +700,15 @@ class Pager_Common
     /**
      * Returns next link
      *
-     * @param $url  URL to use in the link  [deprecated: use the constructor instead]
-     * @param $link HTML to use as the link [deprecated: use the constructor instead]
+     * @param $url  URL to use in the link  [deprecated: use the factory instead]
+     * @param $link HTML to use as the link [deprecated: use the factory instead]
      * @return string The link
      * @access private
      */
     function _getNextLink($url='', $link='')
     {
         //legacy settings... the preferred way to set an option
-        //now is adding it to the constuctor
+        //now is passing it to the factory
         if (!empty($url)) {
             $this->_path = $url;
         }
@@ -824,11 +824,16 @@ class Pager_Common
      * @param integer $end
      * @param integer $step
      * @param boolean $showAllData If true, perPage is set equal to totalItems.
+     * @param string  $optionText (text to show in each option.
+     *                Use '%d' where you want to see the number of pages selected.
      * @return string xhtml select box
      * @access public
      */
-    function getPerPageSelectBox($start=5, $end=30, $step=5, $showAllData=false)
+    function getPerPageSelectBox($start=5, $end=30, $step=5, $showAllData=false, $optionText='%d')
     {
+        if (!strstr($optionText, '%d')) {
+            return ERROR_PAGER_INVALID;
+        }
         $start = (int)$start;
         $end   = (int)$end;
         $step  = (int)$step;
@@ -844,14 +849,20 @@ class Pager_Common
             if ($i == $selected) {
                 $tmp .= ' selected="selected"';
             }
-            $tmp .= '>'.$i.'</option>';
+            $tmp .= '>'.sprintf($optionText, $i).'</option>';
         }
         if ($showAllData && $end < $this->_totalItems) {
             $tmp .= '<option value="'.$this->_totalItems.'"';
             if ($this->_totalItems == $selected) {
                 $tmp .= ' selected="selected"';
             }
-            $tmp .= '>'.(empty($this->_showAllText) ? $this->_totalItems : $this->_showAllText).'</option>';
+            $tmp .= '>';
+            if (empty($this->_showAllText)) {
+                $tmp .= sprintf($optionText, $this->_totalItems);
+            } else {
+                $tmp .= $this->_showAllText;
+            }
+            $tmp .= '</option>';
         }
         $tmp .= '</select>';
         return $tmp;
@@ -998,7 +1009,7 @@ class Pager_Common
             'sessionVar',
             'pearErrorMode',
             'extraVars'
-       );
+        );
 
         foreach ($options as $key => $value) {
             if (in_array($key, $allowed_options) && ($value !== null)) {
@@ -1009,7 +1020,7 @@ class Pager_Common
         $this->_fileName = ltrim($this->_fileName, '/');  //strip leading slash
         $this->_path     = rtrim($this->_path, '/');      //strip trailing slash
 
-       if ($this->_append) {
+        if ($this->_append) {
             $this->_fileName = CURRENT_FILENAME; //avoid easy-verified user error;
             $this->_url = $this->_path.'/'.$this->_fileName.$this->_getLinksUrl();
         } else {
@@ -1086,7 +1097,7 @@ class Pager_Common
         if (!isset($errorMessages)) {
             $errorMessages = array(
                 ERROR_PAGER                   => 'unknown error',
-                ERROR_PAGER_INVALID           => '"fileName" format not valid. Use "%d" as placeholder.',
+                ERROR_PAGER_INVALID           => 'invalid format - use "%d" as placeholder.',
                 ERROR_PAGER_NOT_IMPLEMENTED   => 'can not create'
             );
         }

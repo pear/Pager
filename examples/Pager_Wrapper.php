@@ -217,4 +217,38 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
     }
     return $page;
 }
+
+/**
+ * @param object PEAR::DataObject instance
+ * @param array  PEAR::Pager options
+ * @param boolean Disable pagination (get all results)
+ * @return array with links and paged data
+ */
+function Pager_Wrapper_DBDO(&$db, $pager_options = array(), $disabled = false)
+{
+    if (!array_key_exists('totalItems', $pager_options)) {
+        // be smart and try to guess the total number of records
+        $totalItems = $db->count();
+        $pager_options['totalItems'] = $totalItems;
+    }
+    require_once 'Pager/Pager.php';
+    $pager = Pager::factory($pager_options);
+
+    $page = array();
+    $page['links'] = $pager->links;
+    $page['page_numbers'] = array(
+        'current' => $pager->getCurrentPageID(),
+        'total'   => $pager->numPages()
+    );
+    list($page['from'], $page['to']) = $pager->getOffsetByPageId();
+    $page['limit'] = $page['to'] - $page['from'] + 1;
+    if (!$disabled) {
+        $db->limit($page['from'] - 1, $pagerOpt['perPage']);
+    }
+    $db->find();
+    while ($db->fetch()) {
+        $page['data'][] = $db->toArray();
+    }
+    return $page;
+}
 ?>

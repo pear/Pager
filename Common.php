@@ -653,7 +653,7 @@ class Pager_Common
         if (!empty($link)) {
             $this->_prevImg = $link;
         }
-
+        $back = '';
         if ($this->_currentPage > 1) {
             $back = sprintf('<a href="%s" %s title="%s">%s</a>',
                             ( $this->_append ? $this->_url.$this->getPreviousPageID() :
@@ -662,10 +662,7 @@ class Pager_Common
                             $this->_altPrev,
                             $this->_prevImg)
                   . $this->_spacesBefore . $this->_spacesAfter;
-        } else {
-            $back = '';
         }
-
         return $back;
     }
 
@@ -708,7 +705,7 @@ class Pager_Common
         if (!empty($link)) {
             $this->_nextImg = $link;
         }
-
+        $next = '';
         if ($this->_currentPage < $this->_totalPages) {
             $next = $this->_spacesAfter
                  . sprintf('<a href="%s" %s title="%s">%s</a>',
@@ -718,8 +715,6 @@ class Pager_Common
                             $this->_altNext,
                             $this->_nextImg)
                  . $this->_spacesBefore . $this->_spacesAfter;
-        } else {
-            $next = '';
         }
         return $next;
     }
@@ -736,13 +731,12 @@ class Pager_Common
      */
     function _getPrevLinkTag()
     {
+        $prevLinkTag = '';
         if ($this->_currentPage > 1) {
             $prevLinkTag = sprintf('<link rel="previous" href="%s" title="%s" />',
                                    ($this->_append ? $this->_url.$this->getPreviousPageID() :
                                         $this->_url.sprintf($this->_fileName, $this->getPreviousPageID())),
                                    $this->_prevLinkTitle);
-        } else {
-            $prevLinkTag = '';
         }
         return $prevLinkTag;
     }
@@ -758,15 +752,14 @@ class Pager_Common
      */
     function _getNextLinkTag()
     {
+        $nextLinktag = '';
         if ($this->_currentPage < $this->_totalPages) {
-            $nextLinkTag = sprintf('<link rel="next" href="%s" title="%s" />',
+            $nextLinktag = sprintf('<link rel="next" href="%s" title="%s" />',
                                    ($this->_append ? $this->_url.$this->getNextPageID() :
                                         $this->_url.sprintf($this->_fileName, $this->getNextPageID())),
                                    $this->_nextLinkTitle);
-        } else {
-            $nextLinktag = '';
         }
-        return $nextLinkTag;
+        return $nextLinktag;
     }
 
     // }}}

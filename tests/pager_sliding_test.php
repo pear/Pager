@@ -15,7 +15,7 @@ class TestOfPagerSliding extends UnitTestCase {
             'perPage'  => 2,
             'mode'     => 'Sliding',
         );
-        $this->pager = new Pager($options);
+        $this->pager = Pager::factory($options);
     }
     function tearDown() {
         unset($this->pager);

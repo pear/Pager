@@ -15,7 +15,7 @@ class TestOfPagerJumpingNoData extends UnitTestCase {
             'perPage'  => 2,
             'mode'     => 'Jumping',
         );
-        $this->pager = new Pager($options);
+        $this->pager = Pager::factory($options);
     }
     function tearDown() {
         unset($this->pager);

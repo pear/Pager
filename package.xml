@@ -38,8 +38,10 @@
     the number of pages selected)
 - added showAllText option for alternate text in the $showAllData <option>
   (the default is the number of total items).
-- fixed getPageData() when $pageID is specified (thanks to Ian Eure)
+- fixed getPageData() when $pageID is specified (bug #1377) (thanks to Ian Eure)
 - added tests for getPageData()
+- avoid duplicate vars in querystring when using 'extraVars' option (bug #1383)
+  (thanks to pauluz at gazeta dot pl)
 ]]>
   </notes>
 
@@ -94,8 +96,10 @@
     the number of pages selected)
 - added showAllText option for alternate text in the $showAllData <option>
   (the default is the number of total items).
-- fixed getPageData() when $pageID is specified (thanks to Ian Eure)
+- fixed getPageData() when $pageID is specified (bug #1377) (thanks to Ian Eure)
 - added tests for getPageData()
+- avoid duplicate vars in querystring when using 'extraVars' option (bug #1383)
+  (thanks to pauluz at gazeta dot pl)
 ]]>
             </notes>
         </release>

@@ -90,6 +90,7 @@ class Pager {
         }
 
         $this->_totalItems = count($this->_itemData);
+        $this->_generatePageData();
     }
 
     /**
@@ -300,7 +301,7 @@ class Pager {
             $back = sprintf('<a href="%s%d" %s>%s</a>', 
                             $url,
                             $this->_currentPage - 1,
-                            $this->_linkClass != '' ? 'class="' . $this->_linkClass . '"' : '',
+                            !empty($this->_linkClass) ? 'class="' . $this->_linkClass . '"' : '',
                             $link);
         } else {
             $back = '';
@@ -322,9 +323,13 @@ class Pager {
         $pager =& new Pager($params);
         $links =  $pager->getPageData($pager->getPageIdByOffset($this->_currentPage));
 
-        for ($i=0; $i<count($links); $i++) {
-            if ($links[$i] != $this->_currentPage) {
-                $links[$i] = '<a href="' . $this->_getLinksUrl() . $links[$i] . '">' . $links[$i] . '</a>';
+        foreach ($links as $key => $value) {
+            if ($links[$key] != $this->_currentPage) {
+                $links[$key] = sprintf('<a href="%s%d" %s>%d</a>',
+                                       $url,
+                                       $links[$key],
+                                       !empty($this->_linkClass) ? 'class="' . $this->_linkClass . '"' : '',
+                                       $links[$key]);
             }
         }
 
@@ -344,7 +349,7 @@ class Pager {
             $next = sprintf('<a href="%s%d" %s>%s</a>', 
                             $url,
                             $this->_currentPage + 1,
-                            $this->_linkClass != '' ? 'class="' . $this->_linkClass . '"' : '',
+                            !empty($this->_linkClass) ? 'class="' . $this->_linkClass . '"' : '',
                             $link);
         } else {
             $next = '';

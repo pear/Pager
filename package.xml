@@ -21,16 +21,13 @@
         <role>lead</role>
       </maintainer>
   </maintainers>
-* No longer barfs with no querystring
-* Now works with associative data array
 
   <release>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <date>2002-05-31</date>
     <state>stable</state>
     <notes>
-      Applied patch from Christian Dickmann adding getCurrentPage(), numItems()
-	  and optional CSS class for links.
+      Couple of minor bugs
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="Pager">
@@ -41,6 +38,22 @@
   </release>
 
   <changelog>
+    <release>
+      <version>1.0.2</version>
+      <date>2002-05-31</date>
+      <state>stable</state>
+      <notes>
+        Applied patch from Christian Dickmann adding getCurrentPage(), numItems() 
+        and optional CSS class for links.
+      </notes>
+      <filelist>
+        <dir name="/" baseinstalldir="Pager">
+          <file role="php" name="Pager.php" />
+          <file role="php" name="example.php" />
+        </dir>
+      </filelist>
+    </release>
+
     <release>
       <version>1.0.1</version>
       <date>2002-05-27</date>

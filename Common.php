@@ -1072,7 +1072,10 @@ class Pager_Common
             $this->_fileName = CURRENT_FILENAME; //avoid easy-verified user error;
             $this->_url = $this->_path.'/'.$this->_fileName.$this->_getLinksUrl();
         } else {
-            $this->_url = $this->_path.'/';
+            $this->_url = $this->_path;
+            if (strncasecmp($this->_fileName, 'javascript', 10) != 0) {
+                $this->_url.'/';
+            }
             if (!strstr($this->_fileName, '%d')) {
                 trigger_error($this->errorMessage(ERROR_PAGER_INVALID_USAGE), E_USER_WARNING);
             }

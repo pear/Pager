@@ -355,8 +355,8 @@ class Pager_Common
     /**
      * Returns offsets for given pageID. Eg, if you
      * pass it pageID one and your perPage limit is 10
-     * it will return you 1 and 10. PageID of 2 would
-     * give you 11 and 20.
+     * it will return (1, 10). PageID of 2 would
+     * give you (11, 20).
      *
      * @param integer PageID to get offsets for
      * @return array  First and last offsets
@@ -535,7 +535,7 @@ class Pager_Common
     function _generatePageData()
     {
         // Been supplied an array of data?
-        if ($this->_itemData !== null) {
+        if (!is_null($this->_itemData)) {
             $this->_totalItems = count($this->_itemData);
         }
         $this->_totalPages = ceil((float)$this->_totalItems / (float)$this->_perPage);
@@ -570,7 +570,7 @@ class Pager_Common
         $querystring = array();
         $qs = array();
         if (!empty($_SERVER['QUERY_STRING'])) {
-            $qs = explode('&', $_SERVER['QUERY_STRING']);
+            $qs = explode('&', str_replace('&amp;', '&', $_SERVER['QUERY_STRING']));
             for ($i = 0, $cnt = count($qs); $i < $cnt; $i++) {
                 list($name, $value) = explode('=', $qs[$i]);
                 if ($name != $this->_urlVar) {
@@ -584,7 +584,7 @@ class Pager_Common
             $querystring[] = $name . '=' . $value;
         }
 
-        return '?' . implode('&', $querystring) . (!empty($querystring) ? '&' : '') . $this->_urlVar .'=';
+        return '?' . implode('&amp;', $querystring) . (!empty($querystring) ? '&amp;' : '') . $this->_urlVar .'=';
     }
 
     // }}}

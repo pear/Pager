@@ -1,5 +1,10 @@
 <?php
 // $Id$
+//
+// This testsuite requires SimpleTest.
+// You can find it here:
+// http://www.lastcraft.com/simple_test.php
+//
 if (!defined('SIMPLE_TEST')) {
     define('SIMPLE_TEST', '../simpletest/');
 }

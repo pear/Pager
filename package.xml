@@ -24,13 +24,13 @@
  </maintainers>
 
  <release>
-  <version>2.2.1</version>
-  <date>2004-04-15</date>
+  <version>2.2.2</version>
+  <date>2004-04-22</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- PHP5 compatibility (fixed bug #812)
-- Forced ucfirst() on filename too
+- set correct selected value for getPerPageSelectBox even when "useSession"
+  option is false (bug #1263).
 ]]>
   </notes>
 
@@ -70,6 +70,17 @@
 
 
  <changelog>
+        <release>
+            <version>2.2.2</version>
+            <date>2004-04-22</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- set correct selected value for getPerPageSelectBox even when "useSession"
+  option is false (bug #1263).
+]]>
+            </notes>
+        </release>
         <release>
             <version>2.2.1</version>
             <date>2004-04-15</date>

@@ -24,19 +24,22 @@
  </maintainers>
 
  <release>
-  <version>2.2.7</version>
-  <date>2005-03-18</date>
-  <state>stable</state>
+  <version>2.3.0RC1</version>
+  <date>2005-04-01</date>
+  <state>beta</state>
   <notes>
 <![CDATA[
-- added Pager_Wrapper_Eclipse() function in the /examples/Pager_Wrapper example
-  (thanks to Matte Edens)
-- added support for statements with subqueries in the Pager Wrappers 
-  (thanks to Tobias Kuckuck)
-- fixed bug #3451 (arrays in extraVars not handled correctly)
+- internal refactoring: added POST support: set the preferred http method
+  ('GET' or 'POST') with the 'httpMethod' option.
+- used $_GET instead of reparsing the querystring
+  [thanks to Nikolas 'Atrus' Coukouma]
+  (fixed bugs #3450, #3878 and #3451)
+- added 'importQuery' boolean option to ignore the url vars entirely (bug #3449)
+- added 'excludeVars' array option to selectively exclude some url vars (bug #2461)
+- countless code optimizations
+- added many new test cases to the testsuite
 ]]>
   </notes>
-
 
   <filelist>
    <dir name="/" baseinstalldir="Pager">
@@ -74,6 +77,24 @@
 
 
  <changelog>
+       <release>
+            <version>2.3.0RC1</version>
+            <date>2005-04-01</date>
+            <state>beta</state>
+            <notes>
+<![CDATA[
+- internal refactoring: added POST support: set the preferred http method
+  ('GET' or 'POST') with the 'httpMethod' option.
+- used $_GET instead of reparsing the querystring
+  [thanks to Nikolas 'Atrus' Coukouma]
+  (fixed bugs #3450, #3878 and #3451)
+- added 'importQuery' boolean option to ignore the url vars entirely (bug #3449)
+- added 'excludeVars' array option to selectively exclude some url vars (bug #2461)
+- countless code optimizations
+- added many new test cases to the testsuite
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.2.7</version>
             <date>2005-03-18</date>

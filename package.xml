@@ -24,17 +24,13 @@
  </maintainers>
 
  <release>
-  <version>2.2.5</version>
-  <date>2005-01-17</date>
+  <version>2.2.6</version>
+  <date>2005-01-27</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- allowed use of a javascript function in the fileName [bugs #2555 and #2754]
-- added Pager_Wrapper_DBDO() function in the /examples/Pager_Wrapper example
-  (thanks to garak AT studenti DOT it)
-- replaced urlencode() with htmlentities() because it was too aggressive
-  [bugs #2908, #3043 and #3212]
-- added 'currentPage' option (patch by Kendrick Vargas)
+- better 'currentPage' option support (thanks to Andrew Nagy)
+- fixed typo (thanks to Massimiliano Arione)
 ]]>
   </notes>
 
@@ -75,6 +71,17 @@
 
 
  <changelog>
+       <release>
+            <version>2.2.6</version>
+            <date>2005-01-27</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- better 'currentPage' option support (thanks to Andrew Nagy)
+- fixed typo (thanks to Massimiliano Arione)
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.2.5</version>
             <date>2005-01-17</date>

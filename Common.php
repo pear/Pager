@@ -1076,7 +1076,7 @@ class Pager_Common
         } else {
             $this->_url = $this->_path;
             if (strncasecmp($this->_fileName, 'javascript', 10) != 0) {
-                $this->_url.'/';
+                $this->_url .= '/';
             }
             if (!strstr($this->_fileName, '%d')) {
                 trigger_error($this->errorMessage(ERROR_PAGER_INVALID_USAGE), E_USER_WARNING);
@@ -1125,7 +1125,7 @@ class Pager_Common
             $this->_spacesAfter .= '&nbsp;';
         }
 
-        if (isset($_REQUEST[$this->_urlVar])) {
+        if (isset($_REQUEST[$this->_urlVar]) && (is_null($options['currentPage']))) {
             $this->_currentPage = (int)$_REQUEST[$this->_urlVar];
         }
         $this->_currentPage = max($this->_currentPage, 1);

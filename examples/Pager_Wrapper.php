@@ -41,13 +41,23 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
 {
    if (!array_key_exists('totalItems', $pager_options)) {
         //  be smart and try to guess the total number of records
-        $queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
-        list($queryCount, ) = spliti('GROUP BY ', $queryCount);
-        list($queryCount, ) = spliti('ORDER BY ', $queryCount);
-        list($queryCount, ) = spliti('LIMIT ', $queryCount);
-        $totalItems = $db->getOne($queryCount);
-        if (DB::isError($totalItems)) {
-            return $totalItems;
+        if (stristr($query, 'GROUP BY') === false) {
+            //no GROUP BY => do a fast COUNT(*) on the rewritten query
+            $queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
+            list($queryCount, ) = spliti('ORDER BY ', $queryCount);
+            list($queryCount, ) = spliti('LIMIT ', $queryCount);
+            $totalItems = $db->getOne($queryCount);
+            if (DB::isError($totalItems)) {
+                return $totalItems;
+            }
+        } else {
+            //GROUP BY => fetch the whole resultset and count the rows returned
+            $res =& $db->query($query);
+            if (DB::isError($res)) {
+                return $res;
+            }
+            $totalItems = (int)$res->numRows();
+            $res->free();
         }
         $pager_options['totalItems'] = $totalItems;
     }
@@ -88,13 +98,23 @@ function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = f
 {
     if (!array_key_exists('totalItems', $pager_options)) {
         //be smart and try to guess the total number of records
-        $queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
-        list($queryCount, ) = spliti('GROUP BY ', $queryCount);
-        list($queryCount, ) = spliti('ORDER BY ', $queryCount);
-        list($queryCount, ) = spliti('LIMIT ', $queryCount);
-        $totalItems = $db->queryOne($queryCount);
-        if (MDB::isError($totalItems)) {
-            return $totalItems;
+        if (stristr($query, 'GROUP BY') === false) {
+            //no GROUP BY => do a fast COUNT(*) on the rewritten query
+            $queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
+            list($queryCount, ) = spliti('ORDER BY ', $queryCount);
+            list($queryCount, ) = spliti('LIMIT ', $queryCount);
+            $totalItems = $db->queryOne($queryCount);
+            if (MDB::isError($totalItems)) {
+                return $totalItems;
+            }
+        } else {
+            //GROUP BY => fetch the whole resultset and count the rows returned
+            $res = $db->query($query);
+            if (MDB::isError($res)) {
+                return $res;
+            }
+            $totalItems = (int)$db->numRows($res);
+            $db->freeResult($res);
         }
         $pager_options['totalItems'] = $totalItems;
     }
@@ -134,13 +154,23 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
 {
     if (!array_key_exists('totalItems', $pager_options)) {
         //be smart and try to guess the total number of records
-        $queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
-        list($queryCount, ) = spliti('GROUP BY ', $queryCount);
-        list($queryCount, ) = spliti('ORDER BY ', $queryCount);
-        list($queryCount, ) = spliti('LIMIT ', $queryCount);
-        $totalItems = $db->queryOne($queryCount);
-        if (MDB2::isError($totalItems)) {
-            return $totalItems;
+        if (stristr($query, 'GROUP BY') === false) {
+            //no GROUP BY => do a fast COUNT(*) on the rewritten query
+            $queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
+            list($queryCount, ) = spliti('ORDER BY ', $queryCount);
+            list($queryCount, ) = spliti('LIMIT ', $queryCount);
+            $totalItems = $db->queryOne($queryCount);
+            if (MDB2::isError($totalItems)) {
+                return $totalItems;
+            }
+        } else {
+            //GROUP BY => fetch the whole resultset and count the rows returned
+            $res =& $db->query($query);
+            if (MDB2::isError($res)) {
+                return $res;
+            }
+            $totalItems = (int)$res->numRows();
+            $res->free();
         }
         $pager_options['totalItems'] = $totalItems;
     }

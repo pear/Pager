@@ -29,8 +29,9 @@
   <state>stable</state>
   <notes>
 <![CDATA[
-- fix Notice: Undefined property: _totalPages  (bug #2714)
+- fixed "Notice: Undefined property: _totalPages" (bug #2714)
 - enforce errors (which weren't displayed at all)
+- fixed Pager_Wrapper (examples dir) with GROUP BY queries
 ]]>
   </notes>
 
@@ -77,8 +78,9 @@
             <state>stable</state>
             <notes>
 <![CDATA[
-- fix Notice: Undefined property: _totalPages  (bug #2714)
+- fixed "Notice: Undefined property: _totalPages" (bug #2714)
 - enforce errors (which weren't displayed at all)
+- fixed Pager_Wrapper (examples dir) with GROUP BY queries
 ]]>
             </notes>
        </release>

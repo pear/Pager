@@ -30,6 +30,8 @@
   <notes>
 <![CDATA[
 - allowed use of a javascript function in the fileName [bugs #2555 and #2754]
+- added Pager_Wrapper_DBDO() function in the /examples/Pager_Wrapper example
+  (thanks to garak AT studenti DOT it)
 ]]>
   </notes>
 
@@ -77,6 +79,8 @@
             <notes>
 <![CDATA[
 - allowed use of a javascript function in the fileName [bugs #2555 and #2754]
+- added Pager_Wrapper_DBDO() function in the /examples/Pager_Wrapper example
+  (thanks to garak AT studenti DOT it)
 ]]>
             </notes>
        </release>

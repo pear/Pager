@@ -67,7 +67,10 @@ class Pager_Jumping extends Pager_Common
      */
     function Pager_Jumping($options = array())
     {
-        $this->_setOptions($options);
+        $err = $this->_setOptions($options);
+        if ($err !== PAGER_OK) {
+            return $this->raiseError($this->errorMessage($err), $err);
+        }
         $this->_generatePageData();
         $this->_setFirstLastText();
 
@@ -75,6 +78,10 @@ class Pager_Jumping extends Pager_Common
         $this->links .= $this->_getPageLinks();
         $this->links .= $this->_getNextLink();
 
+        $this->linkTags .= $this->_getFirstLinkTag()."\n";
+        $this->linkTags .= $this->_getPrevLinkTag()."\n";
+        $this->linkTags .= $this->_getNextLinkTag()."\n";
+        $this->linkTags .= $this->_getLastLinkTag();
     }
 
     // }}}
@@ -183,6 +190,7 @@ class Pager_Jumping extends Pager_Common
         $first = $this->_printFirstPage();
         $last  = $this->_printLastPage();
         $all   = $this->links;
+        $linkTags = $this->linkTags;
 
         if ($pageID != null) {
             $this->_currentPage = $_sav;
@@ -195,12 +203,14 @@ class Pager_Jumping extends Pager_Common
                     $first,
                     $last,
                     $all,
+                    $linkTags,
                     'back'  => $back,
                     'pages' => $pages,
                     'next'  => $next,
                     'first' => $first,
                     'last'  => $last,
-                    'all'   => $all
+                    'all'   => $all,
+                    'linktags' => $linkTags
                 );
     }
 

@@ -37,7 +37,7 @@
  * @param array  PEAR::Pager options
  * @param boolean Disable pagination (get all results)
  * @param integer fetch mode constant
- * @param array  parameters for query placeholders
+ * @param array  parameters for query placeholders (don't use placeholders in the SELECT clause)
  * @return array with links and paged data
  */
 function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = false, $fetchMode = DB_FETCHMODE_ASSOC, $dbparams = null)

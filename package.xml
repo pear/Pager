@@ -24,18 +24,13 @@
  </maintainers>
 
  <release>
-  <version>2.2.3</version>
-  <date>2004-08-17</date>
+  <version>2.2.4</version>
+  <date>2004-09-08</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- just the last one of a set of array values given as GET parameters
-  (i.e. site.php?foo[]=1&foo[]=2&foo[]=3) was carried on (bug #1904).
-- make 4th parameter of getPerPageSelectBox() an array, and add an
-  "attribute" parameter to allow extra attributes for the select tag.
-- added an example to show how this class can be used with big database
-  resultsets efficiently.
-- prevent XSS attacks (bug #2131), thanks to sou_sk at nifty dot com
+- fix Notice: Undefined property: _totalPages  (bug #2714)
+- enforce errors (which weren't displayed at all)
 ]]>
   </notes>
 
@@ -76,6 +71,17 @@
 
 
  <changelog>
+       <release>
+            <version>2.2.4</version>
+            <date>2004-09-08</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- fix Notice: Undefined property: _totalPages  (bug #2714)
+- enforce errors (which weren't displayed at all)
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.2.3</version>
             <date>2004-08-17</date>

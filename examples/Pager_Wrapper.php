@@ -249,7 +249,7 @@ function Pager_Wrapper_DBDO(&$db, $pager_options = array(), $disabled = false)
     list($page['from'], $page['to']) = $pager->getOffsetByPageId();
     $page['limit'] = $page['to'] - $page['from'] + 1;
     if (!$disabled) {
-        $db->limit($page['from'] - 1, $pagerOpt['perPage']);
+        $db->limit($page['from'] - 1, $pager_options['perPage']);
     }
     $db->find();
     while ($db->fetch()) {

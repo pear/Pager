@@ -99,5 +99,17 @@ class TestOfPager extends UnitTestCase {
         $selectBox .= '</select>';
         $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(3, 6, 1, true, '%d bugs'));
     }
+    function testSelectBoxWithShowAllWithExtraAttribs() {
+        $this->pager->_showAllText = 'Show All';
+        $selectBox  = '<select name="'.$this->pager->_sessionVar.'" onmouseover="doSth">';
+        $selectBox .= '<option value="3">3 bugs</option>';
+        $selectBox .= '<option value="4">4 bugs</option>';
+        $selectBox .= '<option value="5" selected="selected">5 bugs</option>';
+        $selectBox .= '<option value="6">6 bugs</option>';
+        $selectBox .= '<option value="10">Show All</option>';
+        $selectBox .= '</select>';
+        $params = array('optionText' => '%d bugs', 'attributes' => 'onmouseover="doSth"');
+        $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(3, 6, 1, true, $params));
+    }
 }
 ?>

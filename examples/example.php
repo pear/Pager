@@ -3,7 +3,7 @@ require_once 'Pager/Pager.php';
 
 //create dummy array of data
 $myData = array();
-for($i=0; $i<200; $i++) {
+for ($i=0; $i<200; $i++) {
     $myData[] = $i;
 }
 
@@ -21,7 +21,7 @@ $params = array(
     'mode'  => 'Jumping',
 
 );
-$pager = &new Pager($params);
+$pager = & Pager::factory($params);
 $page_data = $pager->getPageData();
 $links = $pager->getLinks();
 
@@ -37,7 +37,7 @@ $selectBox = $pager->getPerPageSelectBox();
 <table border="1" width="500" summary="example 1">
 	<tr>
 		<td colspan="3" align="center">
-			<?php echo $links['all']; ?>
+		<?php echo $links['all']; ?>
 		</td>
 	</tr>
 

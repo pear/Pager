@@ -25,15 +25,18 @@
 
  <release>
   <version>2.2.2</version>
-  <date>2004-04-28</date>
+  <date>2004-04-29</date>
   <state>stable</state>
   <notes>
 <![CDATA[
 - set correct selected value for getPerPageSelectBox even when "useSession"
   option is false (bug #1263).
-- added a 4th parameter to getPerPageSelectBox(): if true, an <option> to show
-  all the data is displayed in the generated <select>.
-- added showAllText option for alternate text in the above <option>
+- added two parameters to getPerPageSelectBox():
+  * $showAllData (if true, an <option> to show
+    all the data is displayed in the generated <select>);
+  * $optionText (text to show in each <option>; use '%d' where you want to see
+    the number of pages selected)
+- added showAllText option for alternate text in the $showAllData <option>
   (the default is the number of total items).
 ]]>
   </notes>
@@ -76,7 +79,7 @@
  <changelog>
         <release>
             <version>2.2.2</version>
-            <date>2004-04-28</date>
+            <date>2004-04-29</date>
             <state>stable</state>
             <notes>
 <![CDATA[

@@ -1,50 +1,76 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
 <package version="1.0">
+ <name>Pager</name>
+ <summary>Data paging class</summary>
+ <description>
+  It takes an array of data as input and page it according to various parameters. It also builds links within a specified range, and allows complete customization of the output (it even works with mod_rewrite).
+  Two modes available: "Jumping" and "Sliding" window style.
+ </description>
+ <license>PHP License</license>
+ <maintainers>
+  <maintainer>
+   <user>quipo</user>
+   <name>Lorenzo Alberton</name>
+   <email>l.alberton@quipo.it</email>
+   <role>lead</role>
+  </maintainer>
+  <maintainer>
+   <user>richard</user>
+   <name>Richard Heyes</name>
+   <email>richard@phpguru.org</email>
+   <role>lead</role>
+  </maintainer>
+ </maintainers>
 
-	<name>Pager</name>
-	<summary>Generic data paging class</summary>
-	<description>
-If you have data that needs paging (ie 1-10 on page one, 11-20 on page two)
-this class can help. Pass it an array of data and it will sort it into pages,
-picking up the current page id from the url. It can also give you back/next
-and page number links taking the current url and adding the correct page id
-to it.
-	</description>
+ <release>
+  <version>2.0</version>
+  <date>2003-09-10</date>
+  <state>stable</state>
+  <notes>
+<![CDATA[
+- New major version.
+- Pager and Pager_Sliding are now merged in the same package.
+  Every option available in Pager_Sliding is now also available
+  in Pager. The API is the same as the old one, BC is kept 100%.
+- Switch between "Jumping" and "Sliding" window mode just setting
+  an option.
+- Improved error handling.
+]]>
+  </notes>
 
-	<maintainers>
-		<maintainer>
-			<user>richard</user>
-			<name>Richard Heyes</name>
-			<email>richard@php.net</email>
-			<role>lead</role>
-		</maintainer>
-		<maintainer>
-			<user>quipo</user>
-			<name>Lorenzo Alberton</name>
-			<email>l.alberton@quipo.it</email>
-			<role>lead</role>
-		</maintainer>
-	</maintainers>
 
-	<release>
-    	<version>1.0.8</version>
-		<date>2003-09-10</date>
-		<license>BSD</license>
-		<state>stable</state>
-		<notes>
-- Minor patch for script_name vs php_self (not included in v.1.0.7)
-- Prevent URL modification
-		</notes>
-		<filelist>
-			<dir name="/" baseinstalldir="Pager">
-				<file role="php" name="Pager.php" />
-				<file role="php" name="example.php" />
-			</dir>
-		</filelist>
-	</release>
+  <filelist>
+   <dir name="/" baseinstalldir="Pager">
+    <file role="php" name="Common.php" />
+    <file role="php" name="Jumping.php" />
+    <file role="php" name="Pager.php" />
+   <file role="php" name="Sliding.php" />
+    <file role="doc" name="examples/example.php" />
+   </dir>
+  </filelist>
 
-	<changelog>
+ </release>
+
+
+ <changelog>
+        <release>
+			<version>2.0</version>
+			<date>2003-09-10</date>
+			<license>BSD</license>
+			<state>stable</state>
+			<notes>
+<![CDATA[
+- New major version.
+- Pager and Pager_Sliding are now merged in the same package.
+  Every option available in Pager_Sliding is now also available
+  in Pager. The API is the same as the old one, BC is kept 100%.
+- Switch between "Jumping" and "Sliding" window mode just setting
+  an option.
+- Improved error handling.
+]]>
+			</notes>
+		</release>
 		<release>
 			<version>1.0.8</version>
 			<date>2003-09-10</date>
@@ -137,5 +163,4 @@ This is the initial release of the Pager package.
 			</notes>
 		</release>
 	</changelog>
-
 </package>

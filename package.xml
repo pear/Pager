@@ -25,12 +25,13 @@
 
  <release>
   <version>2.2.7</version>
-  <date>2005-02-05</date>
+  <date>2005-02-16</date>
   <state>stable</state>
   <notes>
 <![CDATA[
 - added Pager_Wrapper_Eclipse() function in the /examples/Pager_Wrapper example
   (thanks to Matte Edens)
+- fixed bug #3451 (arrays in extraVars not handled correctly)
 ]]>
   </notes>
 
@@ -73,12 +74,13 @@
  <changelog>
        <release>
             <version>2.2.7</version>
-            <date>2005-02-05</date>
+            <date>2005-02-16</date>
             <state>stable</state>
             <notes>
 <![CDATA[
 - added Pager_Wrapper_Eclipse() function in the /examples/Pager_Wrapper example
   (thanks to Matte Edens)
+- fixed bug #3451 (arrays in extraVars not handled correctly)
 ]]>
             </notes>
        </release>

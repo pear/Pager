@@ -651,7 +651,13 @@ class Pager_Common
         }
         if (is_array($this->_extraVars)) {
             foreach ($this->_extraVars as $name => $value) {
-                $qs[$name] = $value; //eventually overwrite duplicate vars
+                if (is_array($value)) {
+                    foreach ($value as $k => $v) {
+                        $arrays[] = $name .'['.$k.']='.$v;
+                    }
+                } else {
+                    $qs[$name] = $value; //eventually overwrite duplicate vars
+                }
             }
         }
 

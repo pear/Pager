@@ -32,10 +32,13 @@
 // | Author: Richard Heyes <richard@phpguru.org>                           |
 // +-----------------------------------------------------------------------+
 
-include('Pager.php');
+include 'Pager.php';
 
-$params['totalItems'] = 1600;
-$pager = &new Pager($params);
+$params = array(
+    'totalItems' => 1600,
+    'mode' => 'Jumping',
+);
+$pager =& Pager::factory($params);
 $data  = $pager->getPageData();
 $links = $pager->getLinks();
 list($from, $to) = $pager->getOffsetByPageId();

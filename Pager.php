@@ -31,6 +31,8 @@
 // +-----------------------------------------------------------------------+
 // | Author: Richard Heyes <richard@phpguru.org>                           |
 // +-----------------------------------------------------------------------+
+//
+// $Id$
 
 /**
 * Pager class
@@ -165,7 +167,7 @@ class Pager {
     * it will return you 1 and 10. PageID of 2 would
     * give you 11 and 20.
     *
-    * @params pageID PageID to get offsets for
+    * @param pageID PageID to get offsets for
     * @return array  First and last offsets
     */
     function getOffsetByPageId($pageid = null)
@@ -208,7 +210,7 @@ class Pager {
     {
         return $this->_currentPage;
     }
-	
+
 	/**
     * Returns next page ID. If current page is last page
 	* this function returns FALSE
@@ -219,7 +221,7 @@ class Pager {
 	{
 		return ($this->getCurrentPageID() == $this->numPages() ? false : $this->getCurrentPageID() + 1);
 	}
-	
+
 	/**
     * Returns previous page ID. If current page is first page
 	* this function returns FALSE
@@ -230,7 +232,7 @@ class Pager {
 	{
 		return $this->isFirstPage() ? false : $this->getCurrentPageID() - 1;
 	}
-    
+
     /**
     * Returns number of items
     *
@@ -301,6 +303,9 @@ class Pager {
         } else {
             $this->_pageData = array();
         }
+
+        //prevent URL modification
+        $this->_currentPage = min($this->_currentPage, $this->_totalPages);
     }
 
     /**
@@ -344,7 +349,7 @@ class Pager {
     {
         // Back link
         if ($this->_currentPage > 1) {
-            $back = sprintf('<a href="%s%d" %s>%s</a>', 
+            $back = sprintf('<a href="%s%d" %s>%s</a>',
                             $url,
                             $this->_currentPage - 1,
                             !empty($this->_linkClass) ? 'class="' . $this->_linkClass . '"' : '',
@@ -352,7 +357,7 @@ class Pager {
         } else {
             $back = '';
         }
-        
+
         return $back;
     }
 
@@ -392,7 +397,7 @@ class Pager {
     function _getNextLink($url, $link = 'Next >>')
     {
         if ($this->_currentPage < $this->_totalPages) {
-            $next = sprintf('<a href="%s%d" %s>%s</a>', 
+            $next = sprintf('<a href="%s%d" %s>%s</a>',
                             $url,
                             $this->_currentPage + 1,
                             !empty($this->_linkClass) ? 'class="' . $this->_linkClass . '"' : '',

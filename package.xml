@@ -22,13 +22,14 @@ to it.
   </maintainers>
 
    <release>
-    <version>1.0.5</version>
-    <date>2002-07-27</date>
-    <license>PHP</license>
+    <version>1.0.6</version>
+    <date>2002-09-08</date>
+    <license>BSD</license>
     <state>stable</state>
     <notes>
-Changed getCurrentPage() to getCurrentPageID() and
-added getNextPageID() and getPreviousPageID()
+Updated to no longer require an array of data. Now
+can be used with just a number of items. Thanks to
+Christian Dickmann for the patch.
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="Pager">
@@ -39,6 +40,17 @@ added getNextPageID() and getPreviousPageID()
   </release>
 
   <changelog>
+     <release>
+      <version>1.0.5</version>
+      <date>2002-07-27</date>
+      <license>PHP</license>
+      <state>stable</state>
+      <notes>
+Changed getCurrentPage() to getCurrentPageID() and
+added getNextPageID() and getPreviousPageID()
+      </notes>
+    </release>
+  
     <release>
       <version>1.0.4</version>
       <date>2002-06-29</date>

@@ -72,9 +72,9 @@ class Pager_Sliding extends Pager_Common
         $this->links .= $this->_getPageLinks();
         $this->links .= $this->_getNextLink();
 
-        $this->linkTags .= $this->_getFirstLinkTag()."\n";
-        $this->linkTags .= $this->_getPrevLinkTag()."\n";
-        $this->linkTags .= $this->_getNextLinkTag()."\n";
+        $this->linkTags .= $this->_getFirstLinkTag();
+        $this->linkTags .= $this->_getPrevLinkTag();
+        $this->linkTags .= $this->_getNextLinkTag();
         $this->linkTags .= $this->_getLastLinkTag();
 
         if ($this->_totalPages > (2 * $this->_delta + 1)) {

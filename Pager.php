@@ -330,7 +330,7 @@ class Pager {
             $querystring[] = $name . '=' . $value;
         }
 
-        return $HTTP_SERVER_VARS['SCRIPT_NAME'] . '?' . implode('&', $querystring) . (!empty($querystring) ? '&' : '') . 'pageID=';
+        return $HTTP_SERVER_VARS['PHP_SELF'] . '?' . implode('&', $querystring) . (!empty($querystring) ? '&' : '') . 'pageID=';
     }
 
     /**

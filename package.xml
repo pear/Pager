@@ -24,20 +24,12 @@
  </maintainers>
 
  <release>
-  <version>2.3.0RC1</version>
-  <date>2005-04-01</date>
+  <version>2.3.0RC2</version>
+  <date>2005-04-06</date>
   <state>beta</state>
   <notes>
 <![CDATA[
-- internal refactoring: added POST support: set the preferred http method
-  ('GET' or 'POST') with the 'httpMethod' option.
-- used $_GET instead of reparsing the querystring
-  [thanks to Nikolas 'Atrus' Coukouma]
-  (fixed bugs #3450, #3878 and #3451)
-- added 'importQuery' boolean option to ignore the url vars entirely (bug #3449)
-- added 'excludeVars' array option to selectively exclude some url vars (bug #2461)
-- countless code optimizations
-- added many new test cases to the testsuite
+- fixed possible querystring duplication with front controllers
 ]]>
   </notes>
 
@@ -77,6 +69,16 @@
 
 
  <changelog>
+       <release>
+            <version>2.3.0RC2</version>
+            <date>2005-04-06</date>
+            <state>beta</state>
+            <notes>
+<![CDATA[
+- fixed possible querystring duplication with front controllers
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.0RC1</version>
             <date>2005-04-01</date>

@@ -825,11 +825,31 @@ class Pager_Common
      * @param boolean $showAllData If true, perPage is set equal to totalItems.
      * @param string  $optionText (text to show in each option.
      *                Use '%d' where you want to see the number of pages selected.
+     * @param array   (or string $optionText for BC reasons)
+     *                - 'optionText': text to show in each option.
+     *                  Use '%d' where you want to see the number of pages selected.
+     *                - 'attributes': (html attributes) Tag attributes or
+     *                  HTML attributes id="foo" pairs, will be inserted in the
+     *                  <select> tag
      * @return string xhtml select box
      * @access public
      */
-    function getPerPageSelectBox($start=5, $end=30, $step=5, $showAllData=false, $optionText='%d')
+    function getPerPageSelectBox($start=5, $end=30, $step=5, $showAllData=false, $extraParams=array())
     {
+        $optionText = '%d';
+        $attributes = '';
+        if (is_string($extraParams)) {
+            //old behavior, BC maintained
+            $optionText = $extraParams;
+        } else {
+            if (array_key_exists('optionText', $extraParams)) {
+                $optionText = $extraParams['optionText'];
+            }
+            if (array_key_exists('attributes', $extraParams)) {
+                $attributes = $extraParams['attributes'];
+            }
+        }
+
         if (!strstr($optionText, '%d')) {
             return ERROR_PAGER_INVALID;
         }
@@ -842,7 +862,11 @@ class Pager_Common
             $selected = $this->_perPage;
         }
 
-        $tmp = '<select name="'.$this->_sessionVar.'">';
+        $tmp = '<select name="'.$this->_sessionVar.'"';
+        if (!empty($attributes)) {
+            $tmp .= ' '.$attributes;
+        }
+        $tmp .= '>';
         for ($i=$start; $i<=$end; $i+=$step) {
             $tmp .= '<option value="'.$i.'"';
             if ($i == $selected) {

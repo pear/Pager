@@ -218,8 +218,8 @@ class Pager {
         $this->_totalPages = ceil((float)$this->_totalItems / (float)$this->_perPage);
         $i = 1;
         if (!empty($this->_itemData)) {
-            foreach ($this->_itemData as $value) {
-                $this->_pageData[$i][] = $value;
+            foreach ($this->_itemData as $key => $value) {
+                $this->_pageData[$i][$key] = $value;
                 if (count($this->_pageData[$i]) >= $this->_perPage) {
                     $i++;
                 }
@@ -240,6 +240,7 @@ class Pager {
 
         // Sort out query string to prevent messy urls
         $querystring = array();
+		$qs = array();
         if (!empty($HTTP_SERVER_VARS['QUERY_STRING'])) {
             $qs = explode('&', $HTTP_SERVER_VARS['QUERY_STRING']);
             for ($i = 0, $cnt = count($qs); $i < $cnt; $i++) {

@@ -87,12 +87,14 @@ class Pager {
     * Constructor
     *
     * Sets up the object and calculates the total number of items.
+	* One of either totalItems OR itemData MUST be supplied.
     *
     * @param $params An associative array of parameters This can contain:
     *                  currentPage   Current Page number (optional)
     *                  perPage       Items per page (optional)
     *                  linkClass     CSS class of the links (optional)
-    *                  itemData      Data to page
+    *                  itemData      Array of data to page
+	*                  totalItems    Total number of items
     */
     function pager($params = array())
     {
@@ -100,13 +102,16 @@ class Pager {
 
         $this->_currentPage = max((int)@$HTTP_GET_VARS['pageID'], 1);
         $this->_perPage     = 10;
-        $this->_itemData    = array();
+        $this->_itemData    = null;
 
         foreach ($params as $name => $value) {
             $this->{'_' . $name} = $value;
         }
 
-        $this->_totalItems = count($this->_itemData);
+		// Been supplied an array of data ?
+        if ($this->_itemData !== null) {
+            $this->_totalItems = count($this->_itemData);
+        }
         $this->_generatePageData();
     }
 
@@ -170,7 +175,7 @@ class Pager {
             $this->_generatePageData();
         }
 
-        if (isset($this->_pageData[$pageid])) {
+        if (isset($this->_pageData[$pageid]) OR $this->_itemData === null) {
             return array(($this->_perPage * ($pageid - 1)) + 1, min($this->_totalItems, $this->_perPage * $pageid));
         } else {
             return array(0,0);
@@ -281,7 +286,9 @@ class Pager {
     */
     function _generatePageData()
     {
-        $this->_totalItems = count($this->_itemData);
+        if ($this->_itemData !== null) {
+            $this->_totalItems = count($this->_itemData);
+        }
         $this->_totalPages = ceil((float)$this->_totalItems / (float)$this->_perPage);
         $i = 1;
         if (!empty($this->_itemData)) {

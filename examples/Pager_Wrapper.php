@@ -253,4 +253,64 @@ function Pager_Wrapper_DBDO(&$db, $pager_options = array(), $disabled = false)
     }
     return $page;
 }
+
+/**
+ * @param object PHP Eclipse instance
+ * @param string db query
+ * @param array  PEAR::Pager options
+ * @param boolean Disable pagination (get all results)
+ * @return array with links and paged data
+ * @author Matte Edens <matte@arubanetworks.com>
+ * @see http://sourceforge.net/projects/eclipselib/
+ */
+function Pager_Wrapper_Eclipse(&$db, $query, $pager_options = array(), $disabled = false)
+{
+    if (!$disabled) {
+        require_once(ECLIPSE_ROOT . 'PagedQuery.php');
+        $query =& new PagedQuery($db->query($query), $pager_options['perPage']);
+        $totalrows = $query->getRowCount();
+        $numpages  = $query->getPageCount();
+        $whichpage = isset($_GET[$pager_options['urlVar']]) ? (int)$_GET[$pager_options['urlVar']] - 1 : 0;
+        if ($whichpage >= $numpages) {
+            $whichpage = $numpages - 1;
+        }
+        $result = $query->getPage($whichpage);
+    } else {
+        $result = $db->query($query);
+        $totalrows = $result->getRowCount();
+        $numpages = 1;
+    }
+    if (!$result->isSuccess()) {
+        return PEAR::raiseError($result->getErrorMessage());
+    }
+    if (!array_key_exists('totalItems', $pager_options)) {
+        $pager_options['totalItems'] = $totalrows;
+    }
+
+    $page = array();
+    require_once(ECLIPSE_ROOT . 'QueryIterator.php');
+    for ($it =& new QueryIterator($result); $it->isValid(); $it->next()) {
+        $page['data'][] =& $it->getCurrent();
+    }
+    require_once 'Pager/Pager.php';
+    $pager = Pager::factory($pager_options);
+
+    $page['links'] = $pager->links;
+    $page['totalItems'] = $pager_options['totalItems'];
+    $page['page_numbers'] = array(
+        'current' => $pager->getCurrentPageID(),
+        'total'   => $numpages
+    );
+	$page['perPageSelectBox'] = $pager->getperpageselectbox();
+    list($page['from'], $page['to']) = $pager->getOffsetByPageId();
+    $page['limit'] = $page['to'] - $page['from'] +1;
+    if ($disabled) {
+        $page['links'] = '';
+        $page['page_numbers'] = array(
+            'current' => 1,
+            'total'   => 1
+        );
+    }
+    return $page;
+}
 ?>

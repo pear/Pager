@@ -24,13 +24,13 @@
  </maintainers>
 
  <release>
-  <version>2.2.6</version>
-  <date>2005-02-04</date>
+  <version>2.2.7</version>
+  <date>2005-02-05</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- better 'currentPage' option support (thanks to Andrew Nagy)
-- fixed typo (thanks to Massimiliano Arione)
+- added Pager_Wrapper_Eclipse() function in the /examples/Pager_Wrapper example
+  (thanks to Matte Edens)
 ]]>
   </notes>
 
@@ -71,6 +71,17 @@
 
 
  <changelog>
+       <release>
+            <version>2.2.7</version>
+            <date>2005-02-05</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- added Pager_Wrapper_Eclipse() function in the /examples/Pager_Wrapper example
+  (thanks to Matte Edens)
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.2.6</version>
             <date>2005-02-04</date>

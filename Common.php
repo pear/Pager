@@ -1058,6 +1058,7 @@ class Pager_Common
             'sessionVar',
             'pearErrorMode',
             'extraVars',
+            'currentPage',
         );
 
         foreach ($options as $key => $value) {
@@ -1125,10 +1126,9 @@ class Pager_Common
         }
 
         if (isset($_REQUEST[$this->_urlVar])) {
-            $this->_currentPage = max((int)@$_REQUEST[$this->_urlVar], 1);
-        } else {
-            $this->_currentPage = 1;
+            $this->_currentPage = (int)$_REQUEST[$this->_urlVar];
         }
+        $this->_currentPage = max($this->_currentPage, 1);
 
         return PAGER_OK;
     }

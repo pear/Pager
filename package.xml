@@ -34,6 +34,7 @@
   (thanks to garak AT studenti DOT it)
 - replaced urlencode() with htmlentities() because it was too aggressive
   [bugs #2908, #3043 and #3212]
+- added 'currentPage' option (patch by Kendrick Vargas)
 ]]>
   </notes>
 
@@ -85,6 +86,7 @@
   (thanks to garak AT studenti DOT it)
 - replaced urlencode() with htmlentities() because it was too aggressive
   [bugs #2908, #3043 and #3212]
+- added 'currentPage' option (patch by Kendrick Vargas)
 ]]>
             </notes>
        </release>

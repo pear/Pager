@@ -157,5 +157,16 @@ class TestOfPager extends UnitTestCase {
         $expected = '?request=cat/subcat&amp;pageID=';
         $this->assertEqual($expected, $this->pager->_getLinksUrl());
     }
+    function testCurrentPage() {
+        $options = array(
+            'itemData'    => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'     => 2,
+            'currentPage' => 2,
+        );
+        $this->pager =& Pager::factory($options);
+        $this->assertEqual(3, $this->pager->getNextPageID());
+        $this->assertEqual(1, $this->pager->getPreviousPageID());
+        $this->assertEqual(2, $this->pager->_currentPage);
+    }
 }
 ?>

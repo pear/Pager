@@ -46,8 +46,13 @@
  */
 define('CURRENT_FILENAME', basename($_SERVER['PHP_SELF']));
 define('CURRENT_PATHNAME', str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])));
-define('ERROR_PAGER_INVALID',         -1);
-define('ERROR_PAGER_NOT_IMPLEMENTED', -2);
+/**
+ * Error codes
+ */
+define('PAGER_OK',                     0);
+define('ERROR_PAGER',                 -1);
+define('ERROR_PAGER_INVALID',         -2);
+define('ERROR_PAGER_NOT_IMPLEMENTED', -3);
 /**
  * Pager_Common - Common base class for [Sliding|Jumping] Window Pager
  *
@@ -129,6 +134,11 @@ class Pager_Common
      */
     var $_url         = '';
 
+    /**
+     * @var array additional URL vars
+     * @access private
+     */
+    var $_extraVars   = array();
 
     /**
      * @var boolean TRUE => expanded mode (for Pager_Sliding)
@@ -251,6 +261,30 @@ class Pager_Common
     var $_spacesAfter   = '';
 
     /**
+     * @var string $_firstLinkTitle
+     * @access private
+     */
+    var $_firstLinkTitle = 'first page';
+
+    /**
+     * @var string $_nextLinkTitle
+     * @access private
+     */
+    var $_nextLinkTitle = 'next page';
+
+    /**
+     * @var string $_prevLinkTitle
+     * @access private
+     */
+    var $_prevLinkTitle = 'previous page';
+
+    /**
+     * @var string $_lastLinkTitle
+     * @access private
+     */
+    var $_lastLinkTitle = 'last page';
+
+    /**
      * @var array data to be paged
      * @access private
      */
@@ -297,6 +331,12 @@ class Pager_Common
      * @access public
      */
     var $links = '';
+
+    /**
+     * @var string Complete set of link tags
+     * @access public
+     */
+    var $linkTags = '';
 
     /**
      * @var array Array with a key => value pair representing
@@ -583,6 +623,11 @@ class Pager_Common
         foreach ($qs as $name => $value) {
             $querystring[] = $name . '=' . $value;
         }
+        if (is_array($this->_extraVars)) {
+            foreach ($this->_extraVars as $name => $value) {
+                $querystring[] = $name . '=' . $value;
+            }
+        }
 
         return '?' . implode('&amp;', $querystring) . (!empty($querystring) ? '&amp;' : '') . $this->_urlVar .'=';
     }
@@ -667,8 +712,8 @@ class Pager_Common
         if ($this->_currentPage < $this->_totalPages) {
             $next = $this->_spacesAfter
                  . sprintf('<a href="%s" %s title="%s">%s</a>',
-                            ( $this->_append ? $this->_url.$this->getNextPageID() :
-                                    $this->_url.sprintf($this->_fileName, $this->getNextPageID()) ),
+                            ($this->_append ? $this->_url.$this->getNextPageID() :
+                                $this->_url.sprintf($this->_fileName, $this->getNextPageID())),
                             $this->_classString,
                             $this->_altNext,
                             $this->_nextImg)
@@ -679,6 +724,88 @@ class Pager_Common
         return $next;
     }
 
+
+    // }}}
+    // {{{ _getPrevLinkTag()
+
+    /**
+     * Returns previous link tag
+     *
+     * @return string the link tag
+     * @access private
+     */
+    function _getPrevLinkTag()
+    {
+        if ($this->_currentPage > 1) {
+            $prevLinkTag = sprintf('<link rel="previous" href="%s" title="%s" />',
+                                   ($this->_append ? $this->_url.$this->getPreviousPageID() :
+                                        $this->_url.sprintf($this->_fileName, $this->getPreviousPageID())),
+                                   $this->_prevLinkTitle);
+        } else {
+            $prevLinkTag = '';
+        }
+        return $prevLinkTag;
+    }
+
+    // }}}
+    // {{{ _getNextLinkTag()
+
+    /**
+     * Returns next link tag
+     *
+     * @return string the link tag
+     * @access private
+     */
+    function _getNextLinkTag()
+    {
+        if ($this->_currentPage < $this->_totalPages) {
+            $nextLinkTag = sprintf('<link rel="next" href="%s" title="%s" />',
+                                   ($this->_append ? $this->_url.$this->getNextPageID() :
+                                        $this->_url.sprintf($this->_fileName, $this->getNextPageID())),
+                                   $this->_nextLinkTitle);
+        } else {
+            $nextLinktag = '';
+        }
+        return $nextLinkTag;
+    }
+
+    // }}}
+    // {{{ _getFirstLinkTag()
+
+    /**
+     * @return string
+     * @access private
+     */
+    function _getFirstLinkTag()
+    {
+        if ($this->isFirstPage()) {
+            return '';
+        } else {
+            return sprintf('<link rel="first" href="%s" title="%s" />',
+                           ($this->_append ? $this->_url.'1' :
+                                $this->_url.sprintf($this->_fileName, 1)),
+                           $this->_firstLinkTitle);
+        }
+    }
+
+    // }}}
+    // {{{ _getLastLinkTag()
+
+    /**
+     * @return string the link tag
+     * @access private
+     */
+    function _getLastLinkTag()
+    {
+        if ($this->isLastPage()) {
+            return '';
+        } else {
+            return sprintf('<link rel="last" href="%s" title="%s" />',
+                           ($this->_append ? $this->_url.$this->_totalPages :
+                                $this->_url.sprintf($this->_fileName, $this->_totalPages)),
+                           $this->_lastLinkTitle);
+        }
+    }
 
     // }}}
     // {{{ getPerPageSelectBox()
@@ -818,6 +945,7 @@ class Pager_Common
      *
      * @param mixed $options    An associative array of option names and
      *                          their values.
+     * @return integer error code (PAGER_OK on success)
      * @access private
      */
     function _setOptions($options)
@@ -847,13 +975,18 @@ class Pager_Common
             'lastPagePre',
             'lastPageText',
             'lastPagePost',
+            'firstLinkTitle',
+            'nextLinkTitle',
+            'prevLinkTitle',
+            'lastLinkTitle',
             'itemData',
             'clearIfVoid',
             'useSessions',
             'closeSession',
             'sessionVar',
-            'pearErrorMode'
-        );
+            'pearErrorMode',
+            'extraVars'
+       );
 
         foreach ($options as $key => $value) {
             if (in_array($key, $allowed_options) && ($value !== null)) {
@@ -864,15 +997,13 @@ class Pager_Common
         $this->_fileName = ltrim($this->_fileName, '/');  //strip leading slash
         $this->_path     = rtrim($this->_path, '/');      //strip trailing slash
 
-        if ($this->_append) {
+       if ($this->_append) {
             $this->_fileName = CURRENT_FILENAME; //avoid easy-verified user error;
             $this->_url = $this->_path.'/'.$this->_fileName.$this->_getLinksUrl();
         } else {
             $this->_url = $this->_path.'/';
             if (!strstr($this->_fileName, '%d')) {
-                $msg = '<b>PEAR::Pager Error:</b>'
-                      .' "fileName" format not valid. Use "%d" as placeholder.';
-                return $this->raiseError($msg, ERROR_PAGER_INVALID);
+                return ERROR_PAGER_INVALID;
             }
         }
 
@@ -890,7 +1021,6 @@ class Pager_Common
         if ($this->_perPage < 1) {   //avoid easy-verified user error
             $this->_perPage = 1;
         }
-
 
         if ($this->_useSessions && !isset($_SESSION)) {
             session_start();
@@ -924,6 +1054,33 @@ class Pager_Common
         } else {
             $this->_currentPage = 1;
         }
+
+        return PAGER_OK;
+    }
+
+    // }}}
+    // {{{ errorMessage()
+
+    /**
+     * Return a textual error message for a PAGER error code
+     *
+     * @param   int     $code error code
+     * @return  string  error message
+     * @access public
+     */
+    function errorMessage($code)
+    {
+        static $errorMessages;
+        if (!isset($errorMessages)) {
+            $errorMessages = array(
+                ERROR_PAGER                   => 'unknown error',
+                ERROR_PAGER_INVALID           => '"fileName" format not valid. Use "%d" as placeholder.',
+                ERROR_PAGER_NOT_IMPLEMENTED   => 'can not create'
+            );
+        }
+
+        return '<b>PEAR::Pager error:</b> '. (isset($errorMessages[$code]) ?
+            $errorMessages[$code] : $errorMessages[ERROR_PAGER]);
     }
 
     // }}}

@@ -8,6 +8,7 @@ class PagerSlidingTests extends GroupTest {
     function PagerSlidingTests() {
         $this->GroupTest('Pager_Sliding Tests');
         $this->addTestFile('pager_sliding_test.php');
+        $this->addTestFile('pager_sliding_notExpanded_test.php');
         $this->addTestFile('pager_sliding_noData_test.php');
     }
 }

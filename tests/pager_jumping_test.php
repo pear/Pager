@@ -12,31 +12,63 @@ class TestOfPagerJumping extends UnitTestCase {
     function setUp() {
         $options = array(
             'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
-            'perPage'  => 3,
+            'perPage'  => 5,
             'mode'     => 'Jumping',
+            'delta'    => 2
         );
         $this->pager = new Pager($options);
     }
     function tearDown() {
         unset($this->pager);
     }
-    function testOffsetByPageId() {
-        $this->assertEqual(array(1, 3), $this->pager->getOffsetByPageId(1));
-    }
-    function testOffsetByPageId2() {
-        $this->assertEqual(array(4, 6), $this->pager->getOffsetByPageId(2));
-    }
-    function testOffsetByPageId_outOfRange() {
-        $this->assertEqual(array(0, 0), $this->pager->getOffsetByPageId(6));
-    }
-    function testPageIdByOffset() {
+    function testPageIdByOffset1() {
         $this->assertEqual(1, $this->pager->getPageIdByOffset(1));
     }
-    function testPageIdByOffset2() {
-        $this->assertEqual(1, $this->pager->getPageIdByOffset(2));
+    function testPageIdByOffset5() {
+        $this->assertEqual(1, $this->pager->getPageIdByOffset(5));
     }
-    function testPageIdByOffset3() {
-        $this->assertEqual(2, $this->pager->getPageIdByOffset(5));
+    function testPageIdByOffset6() {
+        $this->assertEqual(2, $this->pager->getPageIdByOffset(6));
     }
+    function testPageRangeByPageId1() {
+        $this->assertEqual(array(1, 2), $this->pager->getPageRangeByPageId(1));
+    }
+    function testPageRangeByPageId2() {
+        $this->assertEqual(array(1, 2), $this->pager->getPageRangeByPageId(2));
+    }
+    function testPageRangeByPageId3() {
+        $this->assertEqual(array(3, 3), $this->pager->getPageRangeByPageId(3));
+    }
+    function testPageRangeByPageId_outOfRange() {
+        $this->assertEqual(array(0, 0), $this->pager->getPageRangeByPageId(20));
+    }
+    /**
+     * Returns offsets for given pageID. Eg, if you pass pageID=5 and your
+     * delta is 2, it will return 3 and 7. A pageID of 6 would give you 4 and 8
+     * If the method is called without parameter, pageID is set to currentPage#.
+     *
+     * Given a PageId, it returns the limits of the range of pages displayed.
+     * While getOffsetByPageId() returns the offset of the data within the current
+     * page, this method returns the offsets of the page numbers interval.
+     * E.g., if you have perPage=10 and pageId=3, it will return you 1 and 10.
+     * PageID of 8 would give you 1 and 10 as well, because 1 <= 8 <= 10.
+     * PageID of 11 would give you 11 and 20.
+     *
+     * @param pageID PageID to get offsets for
+     * @return array  First and last offsets
+     * @access public
+     */
+    /**
+     * Given a PageId, it returns the limits of the range of pages displayed.
+     * While getOffsetByPageId() returns the offset of the data within the
+     * current page, this method returns the offsets of the page numbers interval.
+     * E.g., if you have perPage=10 and pageId=3, it will return you 1 and 10.
+     * PageID of 8 would give you 1 and 10 as well, because 1 <= 8 <= 10.
+     * PageID of 11 would give you 11 and 20.
+     *
+     * @param pageID PageID to get offsets for
+     * @return array  First and last offsets
+     * @access public
+     */
 }
 ?>

@@ -44,5 +44,14 @@ class TestOfPager extends UnitTestCase {
     function testLastPageComplete () {
         $this->assertEqual(true, $this->pager->isLastPageComplete());
     }
+    function testOffsetByPageId1() {
+        $this->assertEqual(array(1, 5), $this->pager->getOffsetByPageId(1));
+    }
+    function testOffsetByPageId2() {
+        $this->assertEqual(array(6, 10), $this->pager->getOffsetByPageId(2));
+    }
+    function testOffsetByPageId_outOfRange() {
+        $this->assertEqual(array(0, 0), $this->pager->getOffsetByPageId(20));
+    }
 }
 ?>

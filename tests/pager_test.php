@@ -133,5 +133,30 @@ class TestOfPager extends UnitTestCase {
         $err =& Pager::factory($options);
         $this->assertNoErrors();
     }
+    function testUrlencode() {
+        //encode special chars
+        $options = array(
+            'extraVars' => array(
+                'request[]' => 'aRequest',
+                'escape'    => 'дц',
+            ),
+            'perPage' => 5,
+        );
+        $this->pager =& Pager::factory($options);
+        $expected = '?request%5B%5D=aRequest&amp;escape=%E4%F6&amp;pageID=';
+        $this->assertEqual($expected, $this->pager->_getLinksUrl());
+
+        //don't encode slashes
+        $options = array(
+            'extraVars' => array(
+                'request' => 'cat/subcat',
+            ),
+            'perPage' => 5,
+        );
+        $this->pager =& Pager::factory($options);
+        //$expected = '?request=cat%2Fsubcat&amp;pageID=';
+        $expected = '?request=cat/subcat&amp;pageID=';
+        $this->assertEqual($expected, $this->pager->_getLinksUrl());
+    }
 }
 ?>

@@ -25,7 +25,7 @@
 
  <release>
   <version>2.2.5</version>
-  <date>2004-12-06</date>
+  <date>2005-01-11</date>
   <state>stable</state>
   <notes>
 <![CDATA[
@@ -33,6 +33,7 @@
 - added Pager_Wrapper_DBDO() function in the /examples/Pager_Wrapper example
   (thanks to garak AT studenti DOT it)
 - fixed bug #2908: Invalid GET returning array values with urlencoded brackets
+- slashes in the querystring are not urlencoded [bug #3043]
 ]]>
   </notes>
 
@@ -75,7 +76,7 @@
  <changelog>
        <release>
             <version>2.2.5</version>
-            <date>2004-12-06</date>
+            <date>2005-01-11</date>
             <state>stable</state>
             <notes>
 <![CDATA[
@@ -83,6 +84,7 @@
 - added Pager_Wrapper_DBDO() function in the /examples/Pager_Wrapper example
   (thanks to garak AT studenti DOT it)
 - fixed bug #2908: Invalid GET returning array values with urlencoded brackets
+- slashes in the querystring are not urlencoded [bug #3043]
 ]]>
             </notes>
        </release>

@@ -1,6 +1,6 @@
 <?php
 // +-----------------------------------------------------------------------+
-// | Copyright (c) 2002-2004, Richard Heyes, Lorenzo Alberton              |
+// | Copyright (c) 2002-2005, Richard Heyes, Lorenzo Alberton              |
 // | All rights reserved.                                                  |
 // |                                                                       |
 // | Redistribution and use in source and binary forms, with or without    |
@@ -656,7 +656,8 @@ class Pager_Common
         }
 
         foreach ($qs as $name => $value) {
-            $querystring[] = rawurlencode($name) . '=' . rawurlencode($value);
+            $param = rawurlencode($name) . '=' . rawurlencode($value);
+            $querystring[] = str_replace('%2F', '/', $param); //restore slashes
         }
         $querystring = array_merge($querystring, array_unique($arrays));
         //$querystring = array_map('rawurlencode', $querystring);
@@ -1057,7 +1058,7 @@ class Pager_Common
             'closeSession',
             'sessionVar',
             'pearErrorMode',
-            'extraVars'
+            'extraVars',
         );
 
         foreach ($options as $key => $value) {
@@ -1093,7 +1094,7 @@ class Pager_Common
             $this->_curPageSpanPost = '</span>';
         }
 
-        if ($this->_perPage < 1) {   //avoid easy-verified user error
+        if ($this->_perPage < 1) {   //avoid possible user errors
             $this->_perPage = 1;
         }
 

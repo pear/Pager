@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE package SYSTEM "../package.dtd">
 <package version="1.0">
+
   <name>Pager</name>
+  <license>PHP</license>
   <summary>Generic data paging class</summary>
   <description>
   If you have data that needs paging (ie 1-10 on page one, 11-20 on page two)
@@ -10,26 +12,65 @@
   and page number links taking the current url and adding the correct page id
   to it.
   </description>
+
   <maintainers>
       <maintainer>
-        <user>heyesr</user>
+        <user>richard</user>
         <name>Richard Heyes</name>
-        <email>heyesr@php.net</email>
+        <email>richard@php.net</email>
         <role>lead</role>
       </maintainer>
   </maintainers>
+* No longer barfs with no querystring
+* Now works with associative data array
+
   <release>
-    <version>1.0</version>
-    <date>2002-02-09</date>
+    <version>1.0.2</version>
+    <date>2002-05-31</date>
     <state>stable</state>
     <notes>
-      This is the initial release of the Pager package.
+      Applied patch from Christian Dickmann adding getCurrentPage(), numItems()
+	  and optional CSS class for links.
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="Pager">
-        <file role="php">Pager.php</file>
-        <file role="php">example.php</file>
+        <file role="php" name="Pager.php" />
+        <file role="php" name="example.php" />
       </dir>
     </filelist>
   </release>
+
+  <changelog>
+    <release>
+      <version>1.0.1</version>
+      <date>2002-05-27</date>
+      <state>stable</state>
+      <notes>
+        o No longer barfs with no querystring
+        o Now works with associative data array
+      </notes>
+      <filelist>
+        <dir name="/" baseinstalldir="Pager">
+          <file role="php" name="Pager.php" />
+          <file role="php" name="example.php" />
+        </dir>
+      </filelist>
+    </release>
+
+    <release>
+      <version>1.0</version>
+      <date>2002-02-09</date>
+      <state>stable</state>
+      <notes>
+        This is the initial release of the Pager package.
+      </notes>
+      <filelist>
+        <dir name="/" baseinstalldir="Pager">
+          <file role="php" name="Pager.php" />
+          <file role="php" name="example.php" />
+        </dir>
+      </filelist>
+    </release>
+  </changelog>
+
 </package>

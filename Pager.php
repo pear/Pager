@@ -25,6 +25,12 @@
 class Pager {
 
     /**
+    * CSS class of the links
+    * @var string
+    */
+    var $_linkClass;
+
+    /**
     * Current page
     * @var integer
     */
@@ -68,6 +74,7 @@ class Pager {
     * @param $params An associative array of parameters This can contain:
     *                  currentPage   Current Page number (optional)
     *                  perPage       Items per page (optional)
+    *                  linkClass     CSS class of the links (optional)
     *                  itemData      Data to page
     */
     function pager($params = array())
@@ -170,6 +177,26 @@ class Pager {
     }
 
     /**
+    * Returns number of current page
+    *
+    * @return int Number of current page
+    */
+    function getCurrentPage()
+    {
+        return $this->_currentPage;
+    }
+    
+    /**
+    * Returns number of items
+    *
+    * @return int Number of items
+    */
+    function numItems()
+    {
+        return $this->_totalItems;
+    }
+
+    /**
     * Returns number of pages
     *
     * @return int Number of pages
@@ -240,7 +267,7 @@ class Pager {
 
         // Sort out query string to prevent messy urls
         $querystring = array();
-		$qs = array();
+        $qs = array();
         if (!empty($HTTP_SERVER_VARS['QUERY_STRING'])) {
             $qs = explode('&', $HTTP_SERVER_VARS['QUERY_STRING']);
             for ($i = 0, $cnt = count($qs); $i < $cnt; $i++) {
@@ -270,7 +297,11 @@ class Pager {
     {
         // Back link
         if ($this->_currentPage > 1) {
-            $back = '<a href="' . $url . ($this->_currentPage - 1) . '">' . $link . '</a>';
+            $back = sprintf('<a href="%s%d" %s>%s</a>', 
+                            $url,
+                            $this->_currentPage - 1,
+                            $this->_linkClass != '' ? 'class="' . $this->_linkClass . '"' : '',
+                            $link);
         } else {
             $back = '';
         }
@@ -310,7 +341,11 @@ class Pager {
     function _getNextLink($url, $link = 'Next >>')
     {
         if ($this->_currentPage < $this->_totalPages) {
-            $next = '<a href="' . $url . ($this->_currentPage + 1) . '">' . $link . '</a>';
+            $next = sprintf('<a href="%s%d" %s>%s</a>', 
+                            $url,
+                            $this->_currentPage + 1,
+                            $this->_linkClass != '' ? 'class="' . $this->_linkClass . '"' : '',
+                            $link);
         } else {
             $next = '';
         }

@@ -111,5 +111,27 @@ class TestOfPager extends UnitTestCase {
         $params = array('optionText' => '%d bugs', 'attributes' => 'onmouseover="doSth"');
         $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(3, 6, 1, true, $params));
     }
+    function testSelectBoxInvalid() {
+        $err = $this->pager->getPerPageSelectBox(5, 15, 5, false, '%s bugs');
+        $this->assertEqual(ERROR_PAGER_INVALID_PLACEHOLDER, $err->getCode());
+    }
+    function testAppendInvalid() {
+        $options = array(
+            'totalItems' => 10,
+            'append'     => false,
+            'fileName'   => 'invalidFileName'
+        );
+        $err =& Pager::factory($options);  //ERROR_PAGER_INVALID_USAGE
+        $this->assertError();
+    }
+    function testAppendValid() {
+        $options = array(
+            'totalItems' => 10,
+            'append'     => false,
+            'fileName'   => 'valid_%d_FileName'
+        );
+        $err =& Pager::factory($options);
+        $this->assertNoErrors();
+    }
 }
 ?>

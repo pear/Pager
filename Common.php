@@ -1,6 +1,6 @@
 <?php
 // +-----------------------------------------------------------------------+
-// | Copyright (c) 2002-2003, Richard Heyes, Lorenzo Alberton              |
+// | Copyright (c) 2002-2004, Richard Heyes, Lorenzo Alberton              |
 // | All rights reserved.                                                  |
 // |                                                                       |
 // | Redistribution and use in source and binary forms, with or without    |
@@ -49,10 +49,12 @@ define('CURRENT_PATHNAME', str_replace('\\', '/', dirname($_SERVER['PHP_SELF']))
 /**
  * Error codes
  */
-define('PAGER_OK',                     0);
-define('ERROR_PAGER',                 -1);
-define('ERROR_PAGER_INVALID',         -2);
-define('ERROR_PAGER_NOT_IMPLEMENTED', -3);
+define('PAGER_OK',                         0);
+define('ERROR_PAGER',                     -1);
+define('ERROR_PAGER_INVALID',             -2);
+define('ERROR_PAGER_INVALID_PLACEHOLDER', -3);
+define('ERROR_PAGER_INVALID_USAGE',       -4);
+define('ERROR_PAGER_NOT_IMPLEMENTED',     -5);
 /**
  * Pager_Common - Common base class for [Sliding|Jumping] Window Pager
  *
@@ -864,7 +866,10 @@ class Pager_Common
         }
 
         if (!strstr($optionText, '%d')) {
-            return ERROR_PAGER_INVALID;
+            return $this->raiseError(
+                $this->errorMessage(ERROR_PAGER_INVALID_PLACEHOLDER),
+                ERROR_PAGER_INVALID_PLACEHOLDER
+            );
         }
         $start = (int)$start;
         $end   = (int)$end;
@@ -894,7 +899,7 @@ class Pager_Common
             }
             $tmp .= '>';
             if (empty($this->_showAllText)) {
-                $tmp .= sprintf($optionText, $this->_totalItems);
+                $tmp .= str_replace('%d', $this->_totalItems, $optionText);
             } else {
                 $tmp .= $this->_showAllText;
             }
@@ -992,7 +997,7 @@ class Pager_Common
         if (empty($this->_pearErrorMode)) {
             $this->_pearErrorMode = PEAR_ERROR_RETURN;
         }
-        PEAR::raiseError($msg, $code, $this->_pearErrorMode);
+        return PEAR::raiseError($msg, $code, $this->_pearErrorMode);
     }
 
     // }}}
@@ -1064,7 +1069,7 @@ class Pager_Common
         } else {
             $this->_url = $this->_path.'/';
             if (!strstr($this->_fileName, '%d')) {
-                return ERROR_PAGER_INVALID;
+                trigger_error($this->errorMessage(ERROR_PAGER_INVALID_USAGE), E_USER_WARNING);
             }
         }
 
@@ -1134,9 +1139,12 @@ class Pager_Common
         static $errorMessages;
         if (!isset($errorMessages)) {
             $errorMessages = array(
-                ERROR_PAGER                   => 'unknown error',
-                ERROR_PAGER_INVALID           => 'invalid format - use "%d" as placeholder.',
-                ERROR_PAGER_NOT_IMPLEMENTED   => 'can not create'
+                ERROR_PAGER                     => 'unknown error',
+                ERROR_PAGER_INVALID             => 'invalid',
+                ERROR_PAGER_INVALID_PLACEHOLDER => 'invalid format - use "%d" as placeholder.',
+                ERROR_PAGER_INVALID_USAGE       => 'if $options[\'append\'] is set to false, '
+                                                  .' $options[\'fileName\'] MUST contain the "%d" placeholder.',
+                ERROR_PAGER_NOT_IMPLEMENTED     => 'can not create'
             );
         }
 

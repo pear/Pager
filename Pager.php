@@ -140,14 +140,15 @@ class Pager
             // assign factoried method to this for PHP 4
             eval('$this = Pager::factory($options);');
         } else { //php5 is case sensitive
-            $msg = 'In PHP5 you must use the "Pager::factory($params)" method'
+            $msg = 'Pager constructor is deprecated.'
+                  .' You must use the "Pager::factory($params)" method'
                   .' instead of "new Pager($params)"';
-            trigger_error($msg, E_USER_WARNING);
+            trigger_error($msg, E_USER_ERROR);
         }
     }
 
     // }}}
-    // {{{ _factory()
+    // {{{ factory()
 
     /**
      * Return a pager based on $mode and $options

@@ -485,19 +485,19 @@ class Pager_Common
 	 *
 	 * @return mixed Next page ID
      */
-	function getNextPageID()
-	{
-		return ($this->getCurrentPageID() == $this->numPages() ? false : $this->getCurrentPageID() + 1);
-	}
+    function getNextPageID()
+    {
+        return ($this->getCurrentPageID() == $this->numPages() ? false : $this->getCurrentPageID() + 1);
+    }
 
-	// }}}
+    // }}}
     // {{{ getPreviousPageID()
 
     /**
      * Returns previous page ID. If current page is first page
-	 * this function returns FALSE
-	 *
-	 * @return mixed Previous pages' ID
+     * this function returns FALSE
+     *
+     * @return mixed Previous pages' ID
      */
 	function getPreviousPageID()
 	{
@@ -1020,6 +1020,8 @@ class Pager_Common
             'spacesBeforeSeparator',
             'spacesAfterSeparator',
             'curPageLinkClassName',
+            'curPageSpanPre',
+            'curPageSpanPost',
             'firstPagePre',
             'firstPageText',
             'firstPagePost',

@@ -25,14 +25,15 @@
 
  <release>
   <version>2.2.4</version>
-  <date>2004-10-18</date>
+  <date>2004-10-26</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- fixed "Notice: Undefined property: _totalPages" (bug #2714)
+- fixed "Notice: Undefined property: _totalPages" [bug #2714]
 - enforce errors (which weren't displayed at all)
 - fixed Pager_Wrapper (examples dir) with GROUP BY queries
 - changed $_GET to $_REQUEST. POST values should be valid too, now.
+- Pager can be used on a DirectoryIndex script, now (patch by ieure)  [bug #2617]
 ]]>
   </notes>
 
@@ -75,14 +76,15 @@
  <changelog>
        <release>
             <version>2.2.4</version>
-            <date>2004-10-18</date>
+            <date>2004-10-26</date>
             <state>stable</state>
             <notes>
 <![CDATA[
-- fixed "Notice: Undefined property: _totalPages" (bug #2714)
+- fixed "Notice: Undefined property: _totalPages" [bug #2714]
 - enforce errors (which weren't displayed at all)
 - fixed Pager_Wrapper (examples dir) with GROUP BY queries
 - changed $_GET to $_REQUEST. POST values should be valid too, now.
+- Pager can be used on a DirectoryIndex script, now (patch by ieure)  [bug #2617]
 ]]>
             </notes>
        </release>

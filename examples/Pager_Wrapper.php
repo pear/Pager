@@ -51,13 +51,13 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
             list($queryCount, ) = spliti('ORDER BY ', $queryCount);
             list($queryCount, ) = spliti('LIMIT ', $queryCount);
             $totalItems = $db->getOne($queryCount, $dbparams);
-            if (DB::isError($totalItems)) {
+            if (PEAR::isError($totalItems)) {
                 return $totalItems;
             }
         } else {
             //GROUP BY => fetch the whole resultset and count the rows returned
             $res =& $db->query($query, $dbparams);
-            if (DB::isError($res)) {
+            if (PEAR::isError($res)) {
                 return $res;
             }
             $totalItems = (int)$res->numRows();
@@ -81,7 +81,7 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
         ? $db->limitQuery($query, 0, $totalItems, $dbparams)
         : $db->limitQuery($query, $page['from']-1, $pager_options['perPage'], $dbparams);
 
-    if (DB::isError($res)) {
+    if (PEAR::isError($res)) {
         return $res;
     }
     $page['data'] = array();
@@ -117,13 +117,13 @@ function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = f
             list($queryCount, ) = spliti('ORDER BY ', $queryCount);
             list($queryCount, ) = spliti('LIMIT ', $queryCount);
             $totalItems = $db->queryOne($queryCount);
-            if (MDB::isError($totalItems)) {
+            if (PEAR::isError($totalItems)) {
                 return $totalItems;
             }
         } else {
             //GROUP BY => fetch the whole resultset and count the rows returned
             $res = $db->query($query);
-            if (MDB::isError($res)) {
+            if (PEAR::isError($res)) {
                 return $res;
             }
             $totalItems = (int)$db->numRows($res);
@@ -147,7 +147,7 @@ function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = f
         ? $db->limitQuery($query, null, 0, $totalItems)
         : $db->limitQuery($query, null, $page['from']-1, $pager_options['perPage']);
 
-    if (MDB::isError($res)) {
+    if (PEAR::isError($res)) {
         return $res;
     }
     $page['data'] = array();
@@ -183,17 +183,16 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
             list($queryCount, ) = spliti('ORDER BY ', $queryCount);
             list($queryCount, ) = spliti('LIMIT ', $queryCount);
             $totalItems = $db->queryOne($queryCount);
-            if (MDB2::isError($totalItems)) {
+            if (PEAR::isError($totalItems)) {
                 return $totalItems;
             }
         } else {
             //GROUP BY => fetch the whole resultset and count the rows returned
-            $res =& $db->query($query);
-            if (MDB2::isError($res)) {
+            $res =& $db->queryCol($query);
+            if (PEAR::isError($res)) {
                 return $res;
             }
-            $totalItems = (int)$res->numRows();
-            $res->free();
+            $totalItems = count($res);
         }
         $pager_options['totalItems'] = $totalItems;
     }
@@ -213,7 +212,7 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
         $db->setLimit($pager_options['perPage'], $page['from']-1);
     }
     $page['data'] = $db->queryAll($query, null, $fetchMode);
-    if (MDB2::isError($page['data'])) {
+    if (PEAR::isError($page['data'])) {
         return $page['data'];
     }
     if ($disabled) {

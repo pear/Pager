@@ -44,7 +44,11 @@
  * Two constants used to guess the path- and file-name of the page
  * when the user doesn't set any pther value
  */
-define('CURRENT_FILENAME', basename($_SERVER['PHP_SELF']));
+if (substr($_SERVER['PHP_SELF'], -1) == '/') {
+    define('CURRENT_FILENAME', '');
+} else {
+    define('CURRENT_FILENAME', basename($_SERVER['PHP_SELF']));
+}
 define('CURRENT_PATHNAME', str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])));
 /**
  * Error codes

@@ -828,7 +828,7 @@ class Pager_Common
         if (!empty($_SESSION[$this->_sessionVar])) {
             $selected = (int)$_SESSION[$this->_sessionVar];
         } else {
-            $selected = $start;
+            $selected = $this->_perPage;
         }
 
         $tmp = '<select name="'.$this->_sessionVar.'">';

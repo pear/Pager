@@ -613,13 +613,21 @@ class Pager_Common
         // Sort out query string to prevent messy urls
         $querystring = array();
         $qs = array();
+        $arrays = array();
         if (!empty($_SERVER['QUERY_STRING'])) {
             $qs = explode('&', str_replace('&amp;', '&', $_SERVER['QUERY_STRING']));
             for ($i = 0, $cnt = count($qs); $i < $cnt; $i++) {
                 if (strstr($qs[$i], '=') !== false){ // check first if exist a pair
                     list($name, $value) = explode('=', $qs[$i]);
                     if ($name != $this->_urlVar) {
-                        $qs[$name] = $value;
+                        //check for arrays in parameters: site.php?foo[]=1&foo[]=2&foo[]=3
+                        if ((strpos($name, '[') !== false) &&
+                            (strpos($name, ']') !== false)
+                        ) {
+                            $arrays[] = $qs[$i];
+                        } else {
+                            $qs[$name] = $value;
+                        }
                     }
                 } else {
                     $qs[$qs[$i]] = '';
@@ -627,7 +635,6 @@ class Pager_Common
                 unset($qs[$i]);
             }
         }
-
         if (is_array($this->_extraVars)) {
             foreach ($this->_extraVars as $name => $value) {
                 $qs[$name] = $value; //eventually overwrite duplicate vars
@@ -637,6 +644,7 @@ class Pager_Common
         foreach ($qs as $name => $value) {
             $querystring[] = $name . '=' . $value;
         }
+        $querystring = array_merge($querystring, array_unique($arrays));
 
         return '?' . implode('&amp;', $querystring) . (!empty($querystring) ? '&amp;' : '') . $this->_urlVar .'=';
     }

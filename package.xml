@@ -24,17 +24,14 @@
  </maintainers>
 
  <release>
-  <version>2.1.0</version>
-  <date>2003-12-22</date>
+  <version>2.2.0</version>
+  <date>2004-01-XX</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- Added getPageRangeByPageId()
-- Fix getOffsetByPageId() in Pager_Jumping when totalItems == 0.
-- Fix getOffsetByPageId() in Pager_Sliding for BC with Pager 1.x and Pager_Jumping.
-  N.B.: its previous (not-indended) behaviour is now provided by the new getPageRangeByPageId() method.
-- Fix isFirstPage() when totalItems == 0
-- Added test suite.
+- Fixed handling of errors raised in common base class
+- Added an 'extraVars' option to add vars to the querystring
+- Added <link> tags building (patch by Joerg Bruckmann)
 ]]>
   </notes>
 
@@ -74,6 +71,18 @@
 
 
  <changelog>
+        <release>
+            <version>2.2.0</version>
+            <date>2004-01-XX</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- Fixed handling of errors raised in common base class
+- Added an 'extraVars' option to add vars to the querystring
+- Added <link> tags building (patch by Joerg Bruckmann)
+]]>
+            </notes>
+        </release>
         <release>
 			<version>2.1.0</version>
 			<date>2003-12-22</date>

@@ -65,7 +65,7 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
     $pager = Pager::factory($pager_options);
 
     $page = array();
-    $page['totalItems'] = $totalItems;
+    $page['totalItems'] = $pager_options['totalItems'];
     $page['links'] = $pager->links;
     $page['page_numbers'] = array(
         'current' => $pager->getCurrentPageID(),
@@ -129,6 +129,7 @@ function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = f
     $pager = Pager::factory($pager_options);
 
     $page = array();
+    $page['totalItems'] = $pager_options['totalItems'];
     $page['links'] = $pager->links;
     $page['page_numbers'] = array(
         'current' => $pager->getCurrentPageID(),
@@ -193,6 +194,7 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
 
     $page = array();
     $page['links'] = $pager->links;
+    $page['totalItems'] = $pager_options['totalItems'];
     $page['page_numbers'] = array(
         'current' => $pager->getCurrentPageID(),
         'total'   => $pager->numPages()

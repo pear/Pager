@@ -83,7 +83,7 @@ class Pager_Sliding extends Pager_Common
      * @deprecated
      * @access public
      */
-    function getPageIdByOffset($index) { }
+    function getPageIdByOffset($index=null) { }
 
     // }}}
     // {{{ getOffsetByPageId()
@@ -97,7 +97,7 @@ class Pager_Sliding extends Pager_Common
      * @return array  First and last offsets
      * @access public
      */
-    function getOffsetByPageId($pageid = null)
+    function getOffsetByPageId($pageid=null)
     {
         $pageid = isset($pageid) ? (int)$pageid : $this->_currentPage;
         if (!isset($this->_pageData)) {

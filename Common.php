@@ -415,7 +415,7 @@ class Pager_Common
      * Returns next page ID. If current page is last page
 	 * this function returns FALSE
 	 *
-	 * @return mixed Next pages' ID
+	 * @return mixed Next page ID
      */
 	function getNextPageID()
 	{
@@ -472,7 +472,7 @@ class Pager_Common
      */
     function isFirstPage()
     {
-        return ($this->_currentPage == 1);
+        return ($this->_currentPage < 2);
     }
 
     // }}}

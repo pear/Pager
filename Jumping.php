@@ -97,7 +97,6 @@ class Pager_Jumping extends Pager_Common
         } else {
             $pageID = $index / $this->_perPage;
         }
-
         return $pageID;
     }
 
@@ -120,9 +119,9 @@ class Pager_Jumping extends Pager_Common
             $this->_generatePageData();
         }
 
-        if (isset($this->_pageData[$pageid]) OR $this->_itemData === null) {
+        if (isset($this->_pageData[$pageid]) || $this->_itemData === null) {
             return array(
-                        ($this->_perPage * ($pageid - 1)) + 1,
+                        max(($this->_perPage * ($pageid - 1)) + 1, 1),
                         min($this->_totalItems, $this->_perPage * $pageid)
                    );
         } else {
@@ -155,7 +154,7 @@ class Pager_Jumping extends Pager_Common
         //but this formula works so I'm using it
         //until I find something simpler.
         $start = ((($pageid + (($this->_delta - ($pageid % $this->_delta))) % $this->_delta) / $this->_delta) - 1) * $this->_delta +1;
-        return array($start, $start+$this->_delta-1);
+        return array(max($start, 1), $start+$this->_delta-1);
     }
 
     // }}}

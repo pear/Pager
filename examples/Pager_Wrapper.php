@@ -84,6 +84,13 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
     while ($res->fetchInto($row, DB_FETCHMODE_ASSOC)) {
        $page['data'][] = $row;
     }
+    if ($disabled) {
+        $page['links'] = '';
+        $page['page_numbers'] = array(
+            'current' => 1,
+            'total'   => 1
+        );
+    }
     return $page;
 }
 
@@ -140,6 +147,13 @@ function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = f
     while ($row = $db->fetchInto($res, MDB_FETCHMODE_ASSOC)) {
         $page['data'][] = $row;
     }
+    if ($disabled) {
+        $page['links'] = '';
+        $page['page_numbers'] = array(
+            'current' => 1,
+            'total'   => 1
+        );
+    }
     return $page;
 }
 
@@ -191,6 +205,13 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
     $page['data'] = $db->queryAll($query, null, MDB2_FETCHMODE_ASSOC);
     if (MDB2::isError($page['data'])) {
         return $page['data'];
+    }
+    if ($disabled) {
+        $page['links'] = '';
+        $page['page_numbers'] = array(
+            'current' => 1,
+            'total'   => 1
+        );
     }
     return $page;
 }

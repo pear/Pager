@@ -823,8 +823,6 @@ class Pager_Common
      * @param integer $end
      * @param integer $step
      * @param boolean $showAllData If true, perPage is set equal to totalItems.
-     * @param string  $optionText (text to show in each option.
-     *                Use '%d' where you want to see the number of pages selected.
      * @param array   (or string $optionText for BC reasons)
      *                - 'optionText': text to show in each option.
      *                  Use '%d' where you want to see the number of pages selected.

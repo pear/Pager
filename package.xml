@@ -25,13 +25,15 @@
 
  <release>
   <version>2.2.0</version>
-  <date>2004-01-XX</date>
+  <date>2004-01-23</date>
   <state>stable</state>
   <notes>
 <![CDATA[
 - Fixed handling of errors raised in common base class
 - Added an 'extraVars' option to add vars to the querystring
 - Added <link> tags building (patch by Joerg Bruckmann)
+- Fixed Bug #589 (common.php raise a notice if the querystring has no '=' character)
+- Use '&amp;' instead of '&' in urls for better XHTML conformance
 ]]>
   </notes>
 
@@ -73,13 +75,15 @@
  <changelog>
         <release>
             <version>2.2.0</version>
-            <date>2004-01-XX</date>
+            <date>2004-01-23</date>
             <state>stable</state>
             <notes>
 <![CDATA[
 - Fixed handling of errors raised in common base class
 - Added an 'extraVars' option to add vars to the querystring
 - Added <link> tags building (patch by Joerg Bruckmann)
+- Fixed Bug #589 (common.php raise a notice if the querystring has no '=' character)
+- Use '&amp;' instead of '&' in urls for better XHTML conformance
 ]]>
             </notes>
         </release>

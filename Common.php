@@ -364,8 +364,32 @@ class Pager_Common
      */
     function getOffsetByPageId($pageid = null)
     {
+        $pageid = isset($pageid) ? $pageid : $this->_currentPage;
+        if (!isset($this->_pageData)) {
+            $this->_generatePageData();
+        }
+
+        if (isset($this->_pageData[$pageid]) || is_null($this->_itemData)) {
+            return array(
+                        max(($this->_perPage * ($pageid - 1)) + 1, 1),
+                        min($this->_totalItems, $this->_perPage * $pageid)
+                   );
+        } else {
+            return array(0, 0);
+        }
+    }
+
+    // }}}
+    // {{{ getPageRangeByPageId()
+
+    /**
+     * @param integer PageID to get offsets for
+     * @return array  First and last offsets
+     */
+    function getPageRangeByPageId($pageID)
+    {
         $msg = '<b>PEAR::Pager Error:</b>'
-              .' function "getOffsetByPageId()" not implemented.';
+              .' function "getPageRangeByPageId()" not implemented.';
         return $this->raiseError($msg, ERROR_PAGER_NOT_IMPLEMENTED);
     }
 

@@ -101,60 +101,35 @@ class Pager_Jumping extends Pager_Common
     }
 
     // }}}
-    // {{{ getOffsetByPageId()
+    // {{{ getPageRangeByPageId()
 
     /**
-     * Returns offsets for given pageID. Eg, if you
-     * pass it pageID one and your perPage limit is 10
-     * it will return you 1 and 10. PageID of 2 would
-     * give you 11 and 20.
+     * Given a PageId, it returns the limits of the range of pages displayed.
+     * While getOffsetByPageId() returns the offset of the data within the
+     * current page, this method returns the offsets of the page numbers interval.
+     * E.g., if you have pageId=3 and delta=10, it will return (1, 10).
+     * PageID of 8 would give you (1, 10) as well, because 1 <= 8 <= 10.
+     * PageID of 11 would give you (11, 20).
+     * If the method is called without parameter, pageID is set to currentPage#.
      *
-     * @param pageID PageID to get offsets for
+     * @param integer PageID to get offsets for
      * @return array  First and last offsets
+     * @access public
      */
-    function getOffsetByPageId($pageid = null)
+    function getPageRangeByPageId($pageid = null)
     {
-        $pageid = isset($pageid) ? $pageid : $this->_currentPage;
-        if (!isset($this->_pageData)) {
-            $this->_generatePageData();
-        }
-
-        if (isset($this->_pageData[$pageid]) || $this->_itemData === null) {
+        $pageid = isset($pageid) ? (int)$pageid : $this->_currentPage;
+        if (isset($this->_pageData[$pageid]) || is_null($this->_itemData)) {
+            // I'm sure I'm missing something here, but this formula works
+            // so I'm using it until I find something simpler.
+            $start = ((($pageid + (($this->_delta - ($pageid % $this->_delta))) % $this->_delta) / $this->_delta) - 1) * $this->_delta +1;
             return array(
-                        max(($this->_perPage * ($pageid - 1)) + 1, 1),
-                        min($this->_totalItems, $this->_perPage * $pageid)
-                   );
+                max($start, 1),
+                min($start+$this->_delta-1, $this->_totalPages)
+            );
         } else {
             return array(0, 0);
         }
-    }
-
-    // }}}
-    // {{{ _getPageRangeByPageId()
-
-    /**
-     * Internal method. Given a PageId, it returns the
-     * limits of the range of pages displayed.
-     * While getOffsetByPageId() returns the offset of
-     * the data within the current page, this method
-     * returns the offsets of the page numbers interval.
-     * E.g., if you have perPage=10 and pageId=3,
-     * it will return you 1 and 10. PageID of 8 would
-     * give you 1 and 10 as well, because 1 <= 8 <= 10.
-     * PageID of 11 would give you 11 and 20.
-     *
-     * @param pageID PageID to get offsets for
-     * @return array  First and last offsets
-     * @access private
-     */
-    function _getPageRangeByPageId($pageid = null)
-    {
-        $pageid = isset($pageid) ? $pageid : $this->_currentPage;
-        //I'm sure I'm missing something here,
-        //but this formula works so I'm using it
-        //until I find something simpler.
-        $start = ((($pageid + (($this->_delta - ($pageid % $this->_delta))) % $this->_delta) / $this->_delta) - 1) * $this->_delta +1;
-        return array(max($start, 1), $start+$this->_delta-1);
     }
 
     // }}}
@@ -168,12 +143,14 @@ class Pager_Jumping extends Pager_Common
      * $back_html and $next_html. Now the only parameter accepted is
      * an integer ($pageID), since the html text for prev/next links can
      * be set in the constructor. If a second parameter is provided, then
-     * the method act as it previously did. This hack was done to mantain
-     * backward compatibility only.
+     * the method act as it previously did. This hack's only purpose is to
+     * mantain backward compatibility.
      *
      * @param integer $pageID Optional pageID. If specified, links
-     *                for that page are provided instead of current one.  [ADDED IN NEW PAGER VERSION]
-     * @param  string $next_html HTML to put inside the next link [deprecated: use the constructor instead]
+     *                for that page are provided instead of current one.
+     *                [ADDED IN NEW PAGER VERSION]
+     * @param  string $next_html HTML to put inside the next link
+     *                [deprecated: use the constructor instead]
      * @return array Back/pages/next links
      */
     function getLinks($pageID=null, $next_html='')
@@ -233,7 +210,8 @@ class Pager_Jumping extends Pager_Common
     /**
      * Returns pages link
      *
-     * @param $url  URL to use in the link [deprecated: use the constructor instead]
+     * @param $url  URL to use in the link
+     *              [deprecated: use the constructor instead]
      * @return string Links
      * @access private
      */
@@ -247,7 +225,7 @@ class Pager_Jumping extends Pager_Common
 
         $links = '';
 
-        $limits = $this->_getPageRangeByPageId($this->_currentPage);
+        $limits = $this->getPageRangeByPageId($this->_currentPage);
 
         for ($i=$limits[0]; $i<=min($limits[1], $this->_totalPages); $i++) {
             if ($i != $this->_currentPage) {

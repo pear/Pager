@@ -24,13 +24,16 @@
  </maintainers>
 
  <release>
-  <version>2.0.1</version>
+  <version>2.1.0</version>
   <date>2003-12-XX</date>
   <state>stable</state>
   <notes>
 <![CDATA[
+- Added getPageRangeByPageId()
+- Fix getOffsetByPageId() in Pager_Jumping when totalItems == 0.
+- Fix getOffsetByPageId() in Pager_Sliding for BC with Pager 1.x and Pager_Jumping.
+  N.B.: its previous (not-indended) behaviour is now provided by the new getPageRangeByPageId() method.
 - Fix isFirstPage() when totalItems == 0
-- Fix getOffsetByPageId() in Pager_Jumping when totalItems == 0
 - Added test suite.
 ]]>
   </notes>
@@ -55,6 +58,7 @@
       <file role="test" name="pager_jumping_tests.php" />
       <file role="test" name="pager_noData_test.php" />
       <file role="test" name="pager_sliding_noData_test.php" />
+      <file role="test" name="pager_sliding_notExpanded_test.php" />
       <file role="test" name="pager_sliding_test.php" />
       <file role="test" name="pager_sliding_tests.php" />
       <file role="test" name="pager_test.php" />
@@ -71,14 +75,17 @@
 
  <changelog>
         <release>
-			<version>2.0.1</version>
+			<version>2.1.0</version>
 			<date>2003-12-XX</date>
 			<license>BSD</license>
 			<state>stable</state>
 			<notes>
 <![CDATA[
+- Added getPageRangeByPageId()
+- Fix getOffsetByPageId() in Pager_Jumping when totalItems == 0.
+- Fix getOffsetByPageId() in Pager_Sliding for BC with Pager 1.x and Pager_Jumping.
+  N.B.: its previous (not-indended) behaviour is now provided by the new getPageRangeByPageId() method.
 - Fix isFirstPage() when totalItems == 0
-- Fix getOffsetByPageId() in Pager_Jumping when totalItems == 0
 - Added test suite.
 ]]>
 			</notes>

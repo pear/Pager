@@ -47,14 +47,14 @@ class Pager_Sliding extends Pager_Common
     function Pager_Sliding($options = array())
     {
         //set default Pager_Sliding options
-        $this->_delta = 2;
-        $this->_prevImg = '&laquo;';
-        $this->_nextImg = '&raquo;';
-        $this->_separator = '|';
+        $this->_delta                 = 2;
+        $this->_prevImg               = '&laquo;';
+        $this->_nextImg               = '&raquo;';
+        $this->_separator             = '|';
         $this->_spacesBeforeSeparator = 3;
         $this->_spacesAfterSeparator  = 3;
-        $this->_curPageSpanPre  = '<b><u>';
-        $this->_curPageSpanPost = '</u></b>';
+        $this->_curPageSpanPre        = '<b><u>';
+        $this->_curPageSpanPost       = '</u></b>';
 
         //set custom options
         $this->_setOptions($options);
@@ -85,25 +85,28 @@ class Pager_Sliding extends Pager_Common
      */
     function getPageIdByOffset($index=null) { }
 
-    // }}}
-    // {{{ getOffsetByPageId()
+   // }}}
+    // {{{ getPageRangeByPageId()
 
     /**
-     * Returns offsets for given pageID. Eg, if you pass pageID=5 and your
-     * delta is 2, it will return 3 and 7. A pageID of 6 would give you 4 and 8
+     * Given a PageId, it returns the limits of the range of pages displayed.
+     * While getOffsetByPageId() returns the offset of the data within the
+     * current page, this method returns the offsets of the page numbers interval.
+     * E.g., if you have pageId=5 and delta=2, it will return (3, 7).
+     * PageID of 9 would give you (4, 8).
      * If the method is called without parameter, pageID is set to currentPage#.
      *
-     * @param integer $pageid PageID to get offsets for
+     * @param integer PageID to get offsets for
      * @return array  First and last offsets
      * @access public
      */
-    function getOffsetByPageId($pageid=null)
+    function getPageRangeByPageId($pageid = null)
     {
         $pageid = isset($pageid) ? (int)$pageid : $this->_currentPage;
         if (!isset($this->_pageData)) {
             $this->_generatePageData();
         }
-        if (isset($this->_pageData[$pageid]) || $this->_itemData === null) {
+        if (isset($this->_pageData[$pageid]) || is_null($this->_itemData)) {
             if ($this->_expanded) {
                 $min_surplus = ($pageid <= $this->_delta) ? ($this->_delta - $pageid + 1) : 0;
                 $max_surplus = ($pageid >= ($this->_totalPages - $this->_delta)) ?
@@ -217,7 +220,6 @@ class Pager_Sliding extends Pager_Common
                            . ($_print_separator_flag ? $this->_separator.$this->_spacesAfter : '');
                 }
             }
-
 
             $_expansion_after = 0;
             for ($i = $this->_currentPage - $this->_delta; ($i <= $this->_currentPage + $this->_delta) && ($i <= $this->_totalPages); $i++) {

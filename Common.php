@@ -650,10 +650,10 @@ class Pager_Common
         }
 
         foreach ($qs as $name => $value) {
-            $querystring[] = $name . '=' . $value;
+            $querystring[] = rawurlencode($name) . '=' . rawurlencode($value);
         }
         $querystring = array_merge($querystring, array_unique($arrays));
-        $querystring = array_map('rawurlencode', $querystring);
+        //$querystring = array_map('rawurlencode', $querystring);
 
         return '?' . implode('&amp;', $querystring) . (!empty($querystring) ? '&amp;' : '') . $this->_urlVar .'=';
     }

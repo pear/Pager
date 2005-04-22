@@ -24,12 +24,12 @@
  </maintainers>
 
  <release>
-  <version>2.3.0RC2</version>
-  <date>2005-04-06</date>
-  <state>beta</state>
+  <version>2.3.0</version>
+  <date>2005-04-22</date>
+  <state>stable</state>
   <notes>
 <![CDATA[
-- fixed possible querystring duplication with front controllers
+- tweaked Pager_Wrapper query rewriting function
 ]]>
   </notes>
 
@@ -69,6 +69,16 @@
 
 
  <changelog>
+       <release>
+            <version>2.3.0</version>
+            <date>2005-04-22</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- tweaked Pager_Wrapper query rewriting function
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.0RC2</version>
             <date>2005-04-06</date>

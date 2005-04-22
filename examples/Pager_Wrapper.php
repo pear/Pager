@@ -1,4 +1,5 @@
 <?php
+// CVS: $Id$
 //
 // Pager_Wrapper
 // -------------
@@ -21,15 +22,32 @@
 // $query = 'SELECT this, that FROM mytable';
 // require_once 'Pager_Wrapper.php'; //this file
 // $pagerOptions = array(
-//     'mode'     => 'Sliding',
-//     'delta'    => 2,
-//     'perPage'  => 15,
+//     'mode'    => 'Sliding',
+//     'delta'   => 2,
+//     'perPage' => 15,
 // );
 // $paged_data = Pager_Wrapper_MDB2($db, $query, $pagerOptions);
-// //$paged_data['data'];   //paged data
-// //$paged_data['links'];   //xhtml links for page navigation
-// //$paged_data['page_numbers'];   //array('current', 'total');
+// //$paged_data['data'];  //paged data
+// //$paged_data['links']; //xhtml links for page navigation
+// //$paged_data['page_numbers']; //array('current', 'total');
 //
+
+/**
+ * Helper method - Rewrite the query into a "SELECT COUNT(*)" query.
+ * @param string $sql query
+ * @return string rewritten query OR false if the query can't be rewritten
+ * @access private
+ */
+function rewriteCountQuery($sql)
+{
+    if (preg_match("/^\s*SELECT\s+DISTINCT/is", $sql) || preg_match('/\s+GROUP\s+BY\s+/is', $sql)) {
+        return false;
+    }
+    $queryCount = preg_replace('/(.|\n)*?FROM/', 'SELECT COUNT(*) FROM', $sql, 1);
+    list($queryCount, ) = spliti('ORDER BY ', $queryCount);
+    list($queryCount, ) = spliti('LIMIT ',    $queryCount);
+    return trim($queryCount);
+}
 
 /**
  * @param object PEAR::DB instance
@@ -47,18 +65,12 @@ function Pager_Wrapper_DB(&$db, $query, $pager_options = array(), $disabled = fa
 {
    if (!array_key_exists('totalItems', $pager_options)) {
         //  be smart and try to guess the total number of records
-        if (stristr($query, 'GROUP BY') === false) {
-            //no GROUP BY => do a fast COUNT(*) on the rewritten query
-            //$queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
-            $queryCount = preg_replace('/(.|\n)*?FROM/', 'SELECT COUNT(*) FROM', $query, 1);
-            list($queryCount, ) = spliti('ORDER BY ', $queryCount);
-            list($queryCount, ) = spliti('LIMIT ', $queryCount);
-            $totalItems = $db->getOne($queryCount, $dbparams);
+        if ($countQuery = rewriteCountQuery($query)) {
+            $totalItems = $db->getOne($countQuery, $dbparams);
             if (PEAR::isError($totalItems)) {
                 return $totalItems;
             }
         } else {
-            //GROUP BY => fetch the whole resultset and count the rows returned
             $res =& $db->query($query, $dbparams);
             if (PEAR::isError($res)) {
                 return $res;
@@ -113,18 +125,12 @@ function Pager_Wrapper_MDB(&$db, $query, $pager_options = array(), $disabled = f
 {
     if (!array_key_exists('totalItems', $pager_options)) {
         //be smart and try to guess the total number of records
-        if (stristr($query, 'GROUP BY') === false) {
-            //no GROUP BY => do a fast COUNT(*) on the rewritten query
-            //$queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
-            $queryCount = preg_replace('/(.|\n)*?FROM/', 'SELECT COUNT(*) FROM', $query, 1);
-            list($queryCount, ) = spliti('ORDER BY ', $queryCount);
-            list($queryCount, ) = spliti('LIMIT ', $queryCount);
-            $totalItems = $db->queryOne($queryCount);
+        if ($countQuery = rewriteCountQuery($query)) {
+            $totalItems = $db->queryOne($countQuery);
             if (PEAR::isError($totalItems)) {
                 return $totalItems;
             }
         } else {
-            //GROUP BY => fetch the whole resultset and count the rows returned
             $res = $db->query($query);
             if (PEAR::isError($res)) {
                 return $res;
@@ -179,13 +185,8 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
 {
     if (!array_key_exists('totalItems', $pager_options)) {
         //be smart and try to guess the total number of records
-        if (stristr($query, 'GROUP BY') === false) {
-            //no GROUP BY => do a fast COUNT(*) on the rewritten query
-            //$queryCount = 'SELECT COUNT(*)'.stristr($query, ' FROM ');
-            $queryCount = preg_replace('/(.|\n)*?FROM/', 'SELECT COUNT(*) FROM', $query, 1);
-            list($queryCount, ) = spliti('ORDER BY ', $queryCount);
-            list($queryCount, ) = spliti('LIMIT ', $queryCount);
-            $totalItems = $db->queryOne($queryCount);
+        if ($countQuery = rewriteCountQuery($query)) {
+            $totalItems = $db->queryOne($countQuery);
             if (PEAR::isError($totalItems)) {
                 return $totalItems;
             }
@@ -238,7 +239,6 @@ function Pager_Wrapper_MDB2(&$db, $query, $pager_options = array(), $disabled = 
 function Pager_Wrapper_DBDO(&$db, $pager_options = array(), $disabled = false)
 {
     if (!array_key_exists('totalItems', $pager_options)) {
-        // be smart and try to guess the total number of records
         $totalItems = $db->count();
         $pager_options['totalItems'] = $totalItems;
     }
@@ -285,7 +285,7 @@ function Pager_Wrapper_Eclipse(&$db, $query, $pager_options = array(), $disabled
         }
         $result = $query->getPage($whichpage);
     } else {
-        $result = $db->query($query);
+        $result    = $db->query($query);
         $totalrows = $result->getRowCount();
         $numpages  = 1;
     }
@@ -304,15 +304,15 @@ function Pager_Wrapper_Eclipse(&$db, $query, $pager_options = array(), $disabled
     require_once 'Pager/Pager.php';
     $pager = Pager::factory($pager_options);
 
-    $page['links'] = $pager->links;
-    $page['totalItems'] = $pager_options['totalItems'];
+    $page['links']        = $pager->links;
+    $page['totalItems']   = $pager_options['totalItems'];
     $page['page_numbers'] = array(
         'current' => $pager->getCurrentPageID(),
         'total'   => $numpages
     );
 	$page['perPageSelectBox'] = $pager->getperpageselectbox();
     list($page['from'], $page['to']) = $pager->getOffsetByPageId();
-    $page['limit'] = $page['to'] - $page['from'] + 1;
+    $page['limit'] = $page['to'] - $page['from'] +1;
     if ($disabled) {
         $page['links'] = '';
         $page['page_numbers'] = array(

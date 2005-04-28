@@ -40,12 +40,12 @@
  */
 function rewriteCountQuery($sql)
 {
-    if (preg_match("/^\s*SELECT\s+DISTINCT/is", $sql) || preg_match('/\s+GROUP\s+BY\s+/is', $sql)) {
+    if (preg_match('/^\s*SELECT\s+DISTINCT/is', $sql) || preg_match('/\s+GROUP\s+BY\s+/is', $sql)) {
         return false;
     }
-    $queryCount = preg_replace('/(.|\n)*?FROM/', 'SELECT COUNT(*) FROM', $sql, 1);
-    list($queryCount, ) = spliti('ORDER BY ', $queryCount);
-    list($queryCount, ) = spliti('LIMIT ',    $queryCount);
+    $queryCount = preg_replace('/(.|\n)*?\s+FROM\s+/is', 'SELECT COUNT(*) FROM ', $sql, 1);
+    list($queryCount, ) = preg_split('/\s+ORDER\s+BY\s+/is', $queryCount);
+    list($queryCount, ) = preg_split('/\s+LIMIT\s+/is', $queryCount);
     return trim($queryCount);
 }
 

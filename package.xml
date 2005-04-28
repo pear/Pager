@@ -25,12 +25,12 @@
  </maintainers>
 
  <release>
-  <version>2.3.0</version>
-  <date>2005-04-22</date>
+  <version>2.3.1</version>
+  <date>2005-04-29</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- tweaked Pager_Wrapper query rewriting function
+- tweaked Pager_Wrapper query rewriting function, now it is case insensitive
 ]]>
   </notes>
 
@@ -70,6 +70,16 @@
 
 
  <changelog>
+       <release>
+            <version>2.3.1</version>
+            <date>2005-04-29</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- tweaked Pager_Wrapper query rewriting function
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.0</version>
             <date>2005-04-22</date>

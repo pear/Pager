@@ -632,7 +632,7 @@ class Pager_Common
                 $href = sprintf($this->_fileName, $this->_linkData[$this->_urlVar]);
             }
             return sprintf('<a href="%s"%s title="%s">%s</a>',
-                           htmlentities($this->_url . $href, ENT_COMPAT),
+                           htmlentities($this->_url . $href),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            $altText,
                            $linkText
@@ -726,7 +726,7 @@ class Pager_Common
             $escapedData = str_replace($search, $replace, $data);
             // am I forgetting any dangerous whitespace?
             // would a regex be faster?
-            $escapedData = htmlentities($escapedData, ENT_COMPAT);
+            $escapedData = htmlentities($escapedData);
 
             $str .= 'input = document.createElement("input"); ';
             $str .= 'input.type = "hidden"; ';
@@ -756,6 +756,9 @@ class Pager_Common
                 $qs = $_GET;
             }
         }
+        if (count($this->_extraVars)){
+            $this->_recursive_urldecode($this->_extraVars);
+        }
         $qs = array_merge($qs, $this->_extraVars);
         foreach ($this->_excludeVars as $exclude) {
             if (array_key_exists($exclude, $qs)) {
@@ -784,6 +787,26 @@ class Pager_Common
             }
         } else {
             $var = stripslashes($var);
+        }
+    }
+
+    // }}}
+    // {{{ _recursive_urldecode()
+
+    /**
+     * Helper method
+     * @param mixed $var
+     * @access private
+     */
+    function _recursive_urldecode(&$var)
+    {
+        if (is_array($var)) {
+            foreach (array_keys($var) as $k) {
+                $this->_recursive_urldecode($var[$k]);
+            }
+        } else {
+            $trans_tbl = array_flip(get_html_translation_table(HTML_ENTITIES));
+            $var = strtr($var, $trans_tbl);
         }
     }
 
@@ -1112,37 +1135,37 @@ class Pager_Common
     // {{{ _http_build_query_wrapper()
     
     /**
-     * http_build_query(). If the function exists,
-     * it is used, if not, it is emulated.
+     * This is a slightly modified version of the http_build_query() function;
+     * it heavily borrows code from PHP_Compat's http_build_query().
+     * The main change is the usage of htmlentities instead of urlencode,
+     * since it's too aggressive
+     *
      * @author Stephan Schmidt <schst@php.net>
      * @author Aidan Lister <aidan@php.net>
+     * @author Lorenzo Alberton <l dot alberton at quipo dot it>
      * @param array $data
      * @return string
      * @access private
      */
     function _http_build_query_wrapper($data)
     {
-        if (function_exists('http_build_query')) {
-            return http_build_query($data);
-        }
-        //require_once 'PHP/Compat.php';
-        //PHP_Compat::loadFunction('http_build_query');
-        ////require_once 'PHP/Compat/Function/http_build_query.php';
-        
         $data = (array)$data;
         if (empty($data)) {
             return '';
         }
         $separator = ini_get('arg_separator.output');
+        if ($separator == '&amp;') {
+            $separator = '&'; //the string is escaped by htmlentities anyway...
+        }
         $tmp = array ();
         foreach ($data as $key => $val) {
             if (is_scalar($val)) {
-                array_push($tmp, urlencode($key).'='.urlencode($val));
+                array_push($tmp, $key.'='.$val);
                 continue;
             }
             // If the value is an array, recursively parse it
             if (is_array($val)) {
-                array_push($tmp, $this->__http_build_query($val, urlencode($key)));
+                array_push($tmp, $this->__http_build_query($val, htmlentities($key)));
                 continue;
             }
         }
@@ -1165,7 +1188,7 @@ class Pager_Common
             if (is_array($value)) {
                 array_push($tmp, $this->__http_build_query($value, sprintf('%s[%s]', $name, $key)));
             } elseif (is_scalar($value)) {
-                array_push($tmp, sprintf('%s[%s]=%s', $name, urlencode($key), urlencode($value)));
+                array_push($tmp, sprintf('%s[%s]=%s', $name, htmlentities($key), htmlentities($value)));
             } elseif (is_object($value)) {
                 array_push($tmp, $this->__http_build_query(get_object_vars($value), sprintf('%s[%s]', $name, $key)));
             }

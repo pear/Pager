@@ -30,7 +30,9 @@
   <state>stable</state>
   <notes>
 <![CDATA[
-- tweaked Pager_Wrapper query rewriting function, now it is case insensitive
+- fixed various issues with __http_build_query() and escaped entities
+- if the value of "arg_separator.output" in php.ini is "&amp;", don't encode it again
+- tweaked Pager_Wrapper query rewriting function, now it is fully case insensitive
 ]]>
   </notes>
 
@@ -76,7 +78,9 @@
             <state>stable</state>
             <notes>
 <![CDATA[
-- tweaked Pager_Wrapper query rewriting function
+- fixed various issues with __http_build_query() and escaped entities
+- if the value of "arg_separator.output" in php.ini is "&amp;", don't encode it again
+- tweaked Pager_Wrapper query rewriting function, now it is fully case insensitive
 ]]>
             </notes>
        </release>

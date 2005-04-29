@@ -224,6 +224,23 @@ class TestOfPager extends UnitTestCase {
         $actual = $this->pager->_renderLink('', '');
         $this->assertEqual($expected, $actual);
     }
+    function testArgSeparator() {
+        $bkp_arg_separator = ini_get('arg_separator.output');
+        ini_set('arg_separator.output', '&amp;');
+
+        $options = array(
+            'itemData'    => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'     => 5,
+            'extraVars'   => array('apple'  => 1),
+        );
+        $this->pager =& Pager::factory($options);
+
+        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?apple=1&amp;pageID=2" title=""></a>';
+        $actual = $this->pager->_renderLink('', '');
+        $this->assertEqual($expected, $actual);
+
+        ini_set('arg_separator.output', $bkp_arg_separator);
+    }
     function testImportQuery() {
         //add some fake url vars
         $_GET['arr'] = array(

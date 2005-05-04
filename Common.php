@@ -752,7 +752,7 @@ class Pager_Common
         if ($this->_importQuery) {
             if ($this->_httpMethod == 'POST') {
                 $qs = $_POST;
-            } else if ($this->_httpMethod == 'GET') {
+            } elseif ($this->_httpMethod == 'GET') {
                 $qs = $_GET;
             }
         }
@@ -1272,11 +1272,21 @@ class Pager_Common
             'excludeVars',
             'currentPage',
         );
-
+        
         foreach ($options as $key => $value) {
             if (in_array($key, $allowed_options) && (!is_null($value))) {
                 $this->{'_' . $key} = $value;
             }
+        }
+
+        //autodetect http method
+        if (!isset($options['httpMethod'])
+            && !isset($_GET[$this->_urlVar])
+            && isset($_POST[$this->_urlVar])
+        ) {
+            $this->_httpMethod = 'POST';
+        } else {
+            $this->_httpMethod = strtoupper($this->_httpMethod);
         }
 
         $this->_fileName = ltrim($this->_fileName, '/');  //strip leading slash
@@ -1328,9 +1338,8 @@ class Pager_Common
         $this->_spacesBefore = str_repeat('&nbsp;', $this->_spacesBeforeSeparator);
         $this->_spacesAfter  = str_repeat('&nbsp;', $this->_spacesAfterSeparator);
 
-        $request = ($this->_httpMethod == 'POST') ? $_POST : $_GET;
-        if (isset($request[$this->_urlVar]) && empty($options['currentPage'])) {
-            $this->_currentPage = (int)$request[$this->_urlVar];
+        if (isset($_REQUEST[$this->_urlVar]) && empty($options['currentPage'])) {
+            $this->_currentPage = (int)$_REQUEST[$this->_urlVar];
         }
         $this->_currentPage = max($this->_currentPage, 1);
         $this->_linkData = $this->_getLinksData();

@@ -25,14 +25,13 @@
  </maintainers>
 
  <release>
-  <version>2.3.1</version>
-  <date>2005-05-02</date>
+  <version>2.3.2</version>
+  <date>2005-05-04</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- fixed various issues with __http_build_query() and escaped entities
-- if the value of "arg_separator.output" in php.ini is "&amp;", don't encode it again
-- tweaked Pager_Wrapper query rewriting function, now it is fully case insensitive
+- autodetect HTTP method used, when not specified,
+  instead of forcing "GET"  (bug #4277)
 ]]>
   </notes>
 
@@ -72,6 +71,17 @@
 
 
  <changelog>
+       <release>
+            <version>2.3.2</version>
+            <date>2005-05-04</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- autodetect HTTP method used, when not specified,
+  instead of forcing "GET"  (bug #4277)
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.1</version>
             <date>2005-05-02</date>

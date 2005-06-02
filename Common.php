@@ -162,6 +162,12 @@ class Pager_Common
     var $_expanded    = true;
 
     /**
+     * @var string alt text for "first page" (use "%d" placeholder for page number)
+     * @access private
+     */
+    var $_altFirst     = 'first page';
+
+    /**
      * @var string alt text for "previous page"
      * @access private
      */
@@ -172,6 +178,12 @@ class Pager_Common
      * @access private
      */
     var $_altNext     = 'next page';
+
+    /**
+     * @var string alt text for "last page" (use "%d" placeholder for page number)
+     * @access private
+     */
+    var $_altLast     = 'last page';
 
     /**
      * @var string alt text for "page"
@@ -1085,7 +1097,7 @@ class Pager_Common
         }
         $this->_linkData[$this->_urlVar] = 1;
         return $this->_renderLink(
-                $this->_altPage.' 1',
+                str_replace('%d', 1, $this->_altFirst),
                 $this->_firstPagePre . $this->_firstPageText . $this->_firstPagePost
         ) . $this->_spacesBefore . $this->_spacesAfter;
     }
@@ -1107,7 +1119,7 @@ class Pager_Common
         }
         $this->_linkData[$this->_urlVar] = $this->_totalPages;
         return $this->_renderLink(
-                $this->_altPage.' '.$this->_totalPages,
+                str_replace('%d', $this->_totalPages, $this->_altLast),
                 $this->_lastPagePre . $this->_lastPageText . $this->_lastPagePost
         );
     }
@@ -1239,8 +1251,10 @@ class Pager_Common
             'httpMethod',
             'importQuery',
             'urlVar',
+            'altFirst',
             'altPrev',
             'altNext',
+            'altLast',
             'altPage',
             'prevImg',
             'nextImg',

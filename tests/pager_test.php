@@ -370,11 +370,33 @@ class TestOfPager extends UnitTestCase {
             'currentPage' => 2,
         );
         $this->pager = Pager::factory($options);
+        $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=1" title="first page">[1]</a>&nbsp;';
+        $this->assertEqual($expected, $this->pager->_printFirstPage());
+
+        $this->pager->_firstPageText = 'FIRST';
+        $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=1" title="first page">[FIRST]</a>&nbsp;';
+        $this->assertEqual($expected, $this->pager->_printFirstPage());
+
+        $options = array(
+            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'  => 5,
+            'currentPage' => 2,
+            'altFirst' => 'page %d',
+        );
+        $this->pager = Pager::factory($options);
         $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=1" title="page 1">[1]</a>&nbsp;';
         $this->assertEqual($expected, $this->pager->_printFirstPage());
     }
     function testPrintLastPage() {
-        $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="page 2">[2]</a>';
+        $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="last page">[2]</a>';
+        $this->assertEqual($expected, $this->pager->_printLastPage());
+
+        $this->pager->_lastPageText = 'LAST';
+        $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="last page">[LAST]</a>';
+        $this->assertEqual($expected, $this->pager->_printLastPage());
+
+        $this->pager->_altLast = 'page %d';
+        $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="page 2">[LAST]</a>';
         $this->assertEqual($expected, $this->pager->_printLastPage());
     }
     function testGetBackLink() {
@@ -400,6 +422,40 @@ class TestOfPager extends UnitTestCase {
         $this->pager = Pager::factory($options);
         $expected = '&nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="next page">'.$img.'</a>&nbsp;';
         $this->assertEqual($expected, $this->pager->_getNextLink());
+    }
+    function testHttpMethodAutoDetect() {
+        $_POST['pageID'] = 3;
+        $options = array(
+            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'  => 5,
+        );
+        $this->pager = Pager::factory($options);
+        $this->assertEqual('POST', $this->pager->_httpMethod);
+
+        $options = array(
+            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'  => 5,
+            'httpMethod' => 'GET',
+        );
+        $this->pager = Pager::factory($options);
+        $this->assertEqual('GET', $this->pager->_httpMethod);
+
+        unset($_POST['pageID']);
+
+        $options = array(
+            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'  => 5,
+            'httpMethod' => 'POST',
+        );
+        $this->pager = Pager::factory($options);
+        $this->assertEqual('POST', $this->pager->_httpMethod);
+
+        $options = array(
+            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'  => 5,
+        );
+        $this->pager = Pager::factory($options);
+        $this->assertEqual('GET', $this->pager->_httpMethod);
     }
 }
 ?>

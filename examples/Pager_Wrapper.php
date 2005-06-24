@@ -43,7 +43,7 @@ function rewriteCountQuery($sql)
     if (preg_match('/^\s*SELECT\s+\bDISTINCT\b/is', $sql) || preg_match('/\s+GROUP\s+BY\s+/is', $sql)) {
         return false;
     }
-    $queryCount = preg_replace('/(.*)\bFROM\b\s+/Uims', 'SELECT COUNT(*) FROM ', $sql, 1);
+    $queryCount = preg_replace('/(?:.*)\bFROM\b\s+/Uims', 'SELECT COUNT(*) FROM ', $sql, 1);
     list($queryCount, ) = preg_split('/\s+ORDER\s+BY\s+/is', $queryCount);
     list($queryCount, ) = preg_split('/\bLIMIT\b/is', $queryCount);
     return trim($queryCount);

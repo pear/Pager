@@ -247,6 +247,7 @@ function Pager_Wrapper_DBDO(&$db, $pager_options = array(), $disabled = false)
 
     $page = array();
     $page['links'] = $pager->links;
+    $page['totalItems'] = $pager_options['totalItems'];
     $page['page_numbers'] = array(
         'current' => $pager->getCurrentPageID(),
         'total'   => $pager->numPages()
@@ -258,7 +259,7 @@ function Pager_Wrapper_DBDO(&$db, $pager_options = array(), $disabled = false)
     }
     $db->find();
     while ($db->fetch()) {
-        $page['data'][] = $db->toArray();
+        $page['data'][] = $db->toArray('%s', true);
     }
     return $page;
 }

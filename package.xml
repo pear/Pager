@@ -25,15 +25,15 @@
  </maintainers>
 
  <release>
-  <version>2.3.2</version>
-  <date>2005-06-03</date>
+  <version>2.3.3</version>
+  <date>2005-07-04</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- autodetect HTTP method used, when not specified,
-  instead of forcing "GET"  (bug #4277)
-- added "altFirst" and "altLast" options to set the 
-  "title" attribute of the first and last page links
+- improved Pager_Wrapper and added tests
+- urlencoded square brackets (bug #4337)
+NB: We recommend that users of Pager < 2.3.0 immediately upgrade the package,
+otherwise they might be susceptible to XSS attacks
 ]]>
   </notes>
 
@@ -61,7 +61,10 @@
       <file name="pager_sliding_test.php" />
       <file name="pager_sliding_tests.php" />
       <file name="pager_test.php" />
+      <file name="pager_test_xss.php" />
       <file name="pager_tests.php" />
+      <file name="pager_wrapper_include.php" />
+      <file name="pager_wrapper_test.php" />
       <file name="simple_include.php" />
       <file name="README" />
     </dir>
@@ -73,6 +76,19 @@
 
 
  <changelog>
+       <release>
+            <version>2.3.3</version>
+            <date>2005-07-04</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- improved Pager_Wrapper and added tests
+- urlencoded square brackets (bug #4337)
+NB: We recommend that users of Pager < 2.3.0 immediately upgrade the package,
+otherwise they might be susceptible to XSS attacks
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.2</version>
             <date>2005-06-03</date>

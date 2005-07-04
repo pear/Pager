@@ -1198,11 +1198,11 @@ class Pager_Common
         $tmp = array ();
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                array_push($tmp, $this->__http_build_query($value, sprintf('%s[%s]', $name, $key)));
+                array_push($tmp, $this->__http_build_query($value, $name.'%5B'.$key.'%5D'));
             } elseif (is_scalar($value)) {
-                array_push($tmp, sprintf('%s[%s]=%s', $name, htmlentities($key), htmlentities($value)));
+                array_push($tmp, $name.'%5B'.htmlentities($key).'%5D='.htmlentities($value));
             } elseif (is_object($value)) {
-                array_push($tmp, $this->__http_build_query(get_object_vars($value), sprintf('%s[%s]', $name, $key)));
+                array_push($tmp, $this->__http_build_query(get_object_vars($value), $name.'%5B'.$key.'%5D'));
             }
         }
         return implode(ini_get('arg_separator.output'), $tmp);

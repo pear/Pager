@@ -147,7 +147,7 @@ class TestOfPager extends UnitTestCase {
         //$expected = '?request[]=aRequest&amp;escape=&auml;&ouml;%&lt;&gt;+&amp;pageID=';
         //$this->assertEqual($expected, $this->pager->_getLinksUrl());
 
-        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?request[0]=aRequest&amp;escape=&auml;&ouml;%&lt;&gt;+" title=""></a>';
+        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?request%5B0%5D=aRequest&amp;escape=&auml;&ouml;%&lt;&gt;+" title=""></a>';
         $actual = $this->pager->_renderLink('', '');
         $this->assertEqual($expected, $actual);
 
@@ -195,7 +195,7 @@ class TestOfPager extends UnitTestCase {
         $expected = $options['extraVars'];
         $this->assertEqual($expected, $this->pager->_getLinksData());
 
-        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?arr[0]=apple&amp;arr[1]=orange&amp;no=test&amp;pageID=2" title=""></a>';
+        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?arr%5B0%5D=apple&amp;arr%5B1%5D=orange&amp;no=test&amp;pageID=2" title=""></a>';
         $actual = $this->pager->_renderLink('', '');
         $this->assertEqual($expected, $actual);
     }
@@ -220,7 +220,7 @@ class TestOfPager extends UnitTestCase {
         $actual = $this->pager->_getLinksData();
         $this->assertEqual($expected, $this->pager->_getLinksData());
 
-        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?arr[0]=apple&amp;arr[1]=orange&amp;pageID=2" title=""></a>';
+        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?arr%5B0%5D=apple&amp;arr%5B1%5D=orange&amp;pageID=2" title=""></a>';
         $actual = $this->pager->_renderLink('', '');
         $this->assertEqual($expected, $actual);
     }

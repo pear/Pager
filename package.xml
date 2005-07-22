@@ -8,7 +8,7 @@
   It also builds links within a specified range, and allows complete customization of the output (it even works with front controllers and mod_rewrite).
   Two operating modes available: "Jumping" and "Sliding" window style.
  </description>
- <license>PHP License</license>
+ <license>BSD License</license>
  <maintainers>
   <maintainer>
    <user>quipo</user>
@@ -25,15 +25,12 @@
  </maintainers>
 
  <release>
-  <version>2.3.3</version>
-  <date>2005-07-04</date>
+  <version>2.3.4</version>
+  <date>2005-07-22</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- improved Pager_Wrapper and added tests
-- urlencoded square brackets (bug #4337)
-NB: We recommend that users of Pager < 2.3.0 immediately upgrade the package,
-otherwise they might be susceptible to XSS attacks
+- changed license to BSD
 ]]>
   </notes>
 
@@ -76,6 +73,16 @@ otherwise they might be susceptible to XSS attacks
 
 
  <changelog>
+       <release>
+            <version>2.3.4</version>
+            <date>2005-07-22</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- changed license to BSD
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.3</version>
             <date>2005-07-04</date>

@@ -26,11 +26,12 @@
 
  <release>
   <version>2.3.4</version>
-  <date>2005-07-22</date>
+  <date>2005-09-27</date>
   <state>stable</state>
   <notes>
 <![CDATA[
 - changed license to BSD
+- fixed bug #4897 (multibyte chars not handled correctly)
 ]]>
   </notes>
 
@@ -75,11 +76,12 @@
  <changelog>
        <release>
             <version>2.3.4</version>
-            <date>2005-07-22</date>
+            <date>2005-09-27</date>
             <state>stable</state>
             <notes>
 <![CDATA[
 - changed license to BSD
+- fixed bug #4897 (multibyte chars not handled correctly)
 ]]>
             </notes>
        </release>

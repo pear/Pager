@@ -1187,7 +1187,9 @@ class Pager_Common
         $tmp = array ();
         foreach ($data as $key => $val) {
             if (is_scalar($val)) {
-                array_push($tmp, $key.'='.$val);
+                //array_push($tmp, $key.'='.$val);
+                $val = urlencode($val);
+                array_push($tmp, $key .'='. str_replace('%2F', '/', $val));
                 continue;
             }
             // If the value is an array, recursively parse it

@@ -147,8 +147,10 @@ class TestOfPager extends UnitTestCase {
         //$expected = '?request[]=aRequest&amp;escape=&auml;&ouml;%&lt;&gt;+&amp;pageID=';
         //$this->assertEqual($expected, $this->pager->_getLinksUrl());
 
-        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?request%5B0%5D=aRequest&amp;escape=&auml;&ouml;%&lt;&gt;+" title=""></a>';
-        $actual = $this->pager->_renderLink('', '');
+        $expected = 'request%5B0%5D=aRequest&amp;escape=%E4%F6%25%3C%3E%2B';
+        $rendered = $this->pager->_renderLink('', '');
+        preg_match('/href="(.*)"/U', $rendered, $matches);
+        $actual = str_replace($_SERVER['PHP_SELF'].'?', '', $matches[1]);
         $this->assertEqual($expected, $actual);
 
         //don't encode slashes
@@ -164,6 +166,20 @@ class TestOfPager extends UnitTestCase {
         $expected = '<a href="'.$_SERVER['PHP_SELF'].'?request=cat/subcat" title=""></a>';
         $actual = $this->pager->_renderLink('', '');
         $this->assertEqual($expected, $actual);
+    }
+    function testMultibyteStrings() {
+        $options = array(
+            'extraVars' => array(
+                'test' => '&#27979;&#35797;',
+            ),
+            'perPage' => 5,
+        );
+        $this->pager =& Pager::factory($options);
+        //$expected = '<a href="'.$_SERVER['PHP_SELF'].'?test=&#27979;&#35797;" title=""></a>';
+        $rendered = $this->pager->_renderLink('', '');
+        preg_match('/href="(.*)"/U', $rendered, $matches);
+        $actual = str_replace($_SERVER['PHP_SELF'].'?test=', '', $matches[1]);
+        $this->assertEqual(urlencode($options['extraVars']['test']), $actual);
     }
     function testCurrentPage() {
         $options = array(

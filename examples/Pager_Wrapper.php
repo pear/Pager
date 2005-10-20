@@ -259,6 +259,7 @@ function Pager_Wrapper_DBDO(&$db, $pager_options = array(), $disabled = false)
     }
     $db->find();
     while ($db->fetch()) {
+        $db->getLinks();
         $page['data'][] = $db->toArray('%s', true);
     }
     return $page;

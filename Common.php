@@ -666,7 +666,7 @@ class Pager_Common
             );
         }
         if ($this->_httpMethod == 'POST') {
-            return sprintf('<a onclick=\'%s\' href="#"%s title="%s">%s</a>',
+            return sprintf('<a onclick=\'%s\' href="javascript:void(0);"%s title="%s">%s</a>',
                            $this->_generateFormOnClick($this->_url, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            $altText,

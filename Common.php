@@ -672,7 +672,7 @@ class Pager_Common
             );
         }
         if ($this->_httpMethod == 'POST') {
-            return sprintf('<a onclick=\'%s\' href="javascript:void(0);"%s title="%s">%s</a>',
+            return sprintf("<a href='javascript:%s'%s title='%s'>%s</a>",
                            $this->_generateFormOnClick($this->_url, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            $altText,
@@ -719,7 +719,7 @@ class Pager_Common
         }
         
         if (!empty($this->_formID)) {
-            $str = 'var form = document.getElementById("'.$this->_formID.'"); var input = "" ';
+            $str = 'var form = document.getElementById("'.$this->_formID.'"); var input = ""; ';
         } else {
             $str = 'var form = document.createElement("form"); var input = ""; ';
         }

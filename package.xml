@@ -30,8 +30,7 @@
   <state>stable</state>
   <notes>
 <![CDATA[
-- during POST request, use href="javascript:void(0);" instead of href="#"
-  (request #6005)
+- remove flicker (caused by href="#") during POST requests (request #6005)
 - added "formID" option to reuse an existing form in POST requests 
   (thanks to Marc Veldman)
 ]]>
@@ -82,8 +81,7 @@
             <state>stable</state>
             <notes>
 <![CDATA[
-- during POST request, use href="javascript:void(0);" instead of href="#"
-  (request #6005)
+- remove flicker (caused by href="#") during POST requests (request #6005)
 - added "formID" option to reuse an existing form in POST requests 
   (thanks to Marc Veldman)
 ]]>

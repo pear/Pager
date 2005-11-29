@@ -25,13 +25,15 @@
  </maintainers>
 
  <release>
-  <version>2.3.4</version>
-  <date>2005-09-28</date>
+  <version>2.3.5</version>
+  <date>2005-11-29</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- changed license to BSD
-- fixed bug #4897 (multibyte chars not handled correctly)
+- during POST request, use href="javascript:void(0);" instead of href="#"
+  (request #6005)
+- added "formID" option to reuse an existing form in POST requests 
+  (thanks to Marc Veldman)
 ]]>
   </notes>
 
@@ -74,6 +76,19 @@
 
 
  <changelog>
+       <release>
+            <version>2.3.5</version>
+            <date>2005-11-29</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- during POST request, use href="javascript:void(0);" instead of href="#"
+  (request #6005)
+- added "formID" option to reuse an existing form in POST requests 
+  (thanks to Marc Veldman)
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.4</version>
             <date>2005-09-28</date>

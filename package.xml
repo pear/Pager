@@ -26,13 +26,14 @@
 
  <release>
   <version>2.3.5</version>
-  <date>2005-11-29</date>
+  <date>2006-01-20</date>
   <state>stable</state>
   <notes>
 <![CDATA[
 - remove flicker (caused by href="#") during POST requests (request #6005)
 - added "formID" option to reuse an existing form in POST requests 
   (thanks to Marc Veldman)
+- fixed bug #6529: problem with fields with quotes during POST requests
 ]]>
   </notes>
 
@@ -77,13 +78,14 @@
  <changelog>
        <release>
             <version>2.3.5</version>
-            <date>2005-11-29</date>
+            <date>2006-01-20</date>
             <state>stable</state>
             <notes>
 <![CDATA[
 - remove flicker (caused by href="#") during POST requests (request #6005)
 - added "formID" option to reuse an existing form in POST requests 
   (thanks to Marc Veldman)
+- fixed bug #6529: problem with fields with quotes during POST requests
 ]]>
             </notes>
        </release>

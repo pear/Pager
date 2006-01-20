@@ -31,7 +31,7 @@
  * @package    Pager
  * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
  * @author     Richard Heyes <richard@phpguru.org>
- * @copyright  2003-2005 Lorenzo Alberton, Richard Heyes
+ * @copyright  2003-2006 Lorenzo Alberton, Richard Heyes
  * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Pager
@@ -672,7 +672,7 @@ class Pager_Common
             );
         }
         if ($this->_httpMethod == 'POST') {
-            return sprintf("<a href='javascript:%s'%s title='%s'>%s</a>",
+            return sprintf("<a href='javascript:void(0)' onClick='%s'%s title='%s'>%s</a>",
                            $this->_generateFormOnClick($this->_url, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            $altText,
@@ -736,7 +736,7 @@ class Pager_Common
             $str .= 'document.getElementsByTagName("body")[0].appendChild(form);';
         }
         
-        $str .= 'form.submit();';
+        $str .= 'form.submit(); return false;';
         return $str;
     }
 
@@ -770,7 +770,7 @@ class Pager_Common
             $escapedData = str_replace($search, $replace, $data);
             // am I forgetting any dangerous whitespace?
             // would a regex be faster?
-            $escapedData = htmlentities($escapedData);
+            $escapedData = htmlentities($escapedData, ENT_QUOTES);
 
             $str .= 'input = document.createElement("input"); ';
             $str .= 'input.type = "hidden"; ';

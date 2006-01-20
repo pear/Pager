@@ -30,7 +30,7 @@
  * @category   HTML
  * @package    Pager
  * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @copyright  2003-2005 Lorenzo Alberton
+ * @copyright  2003-2006 Lorenzo Alberton
  * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Pager

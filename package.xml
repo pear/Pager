@@ -25,15 +25,12 @@
  </maintainers>
 
  <release>
-  <version>2.3.5</version>
-  <date>2006-01-20</date>
+  <version>2.3.6</version>
+  <date>2006-02-03</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- remove flicker (caused by href="#") during POST requests (request #6005)
-- added "formID" option to reuse an existing form in POST requests 
-  (thanks to Marc Veldman)
-- fixed bug #6529: problem with fields with quotes during POST requests
+- fixed bug #6680: error with fileName parameter having an extra "%" character
 ]]>
   </notes>
 
@@ -76,6 +73,16 @@
 
 
  <changelog>
+       <release>
+            <version>2.3.6</version>
+            <date>2006-02-03</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- fixed bug #6680: error with fileName parameter having an extra "%" character
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.5</version>
             <date>2006-01-20</date>

@@ -662,7 +662,7 @@ class Pager_Common
             if ($this->_append) {
                 $href = '?' . $this->_http_build_query_wrapper($this->_linkData);
             } else {
-                $href = sprintf($this->_fileName, $this->_linkData[$this->_urlVar]);
+                $href = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_fileName);
             }
             return sprintf('<a href="%s"%s title="%s">%s</a>',
                            htmlentities($this->_url . $href),
@@ -1023,7 +1023,7 @@ class Pager_Common
         if ($this->_append) {
             $href = '?' . $this->_http_build_query_wrapper($this->_linkData);
         } else {
-            $href = sprintf($this->_fileName, $this->_linkData[$this->_urlVar]);
+            $href = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_fileName);
         }
         return htmlentities($this->_url . $href);
     }

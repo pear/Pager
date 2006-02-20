@@ -181,7 +181,7 @@ class Pager_Common
      * @access private
      */
     var $_expanded    = true;
-
+    
     /**
      * @var boolean TRUE => show accesskey attribute on <a> tags
      * @access private
@@ -725,13 +725,13 @@ class Pager_Common
             );
             return false;
         }
-        
+
         if (!empty($this->_formID)) {
             $str = 'var form = document.getElementById("'.$this->_formID.'"); var input = ""; ';
         } else {
             $str = 'var form = document.createElement("form"); var input = ""; ';
         }
-
+        
         // We /shouldn't/ need to escape the URL ...
         $str .= sprintf('form.action = "%s"; ', htmlentities($formAction));
         $str .= sprintf('form.method = "%s"; ', $this->_httpMethod);
@@ -777,7 +777,12 @@ class Pager_Common
             $escapedData = str_replace($search, $replace, $data);
             // am I forgetting any dangerous whitespace?
             // would a regex be faster?
-            $escapedData = htmlentities($escapedData, ENT_QUOTES);
+            // if it's already encoded, don't encode it again
+            if (!$this->_isEncoded($escapedData)) {
+                $escapedData = urlencode($escapedData);
+            }
+            $escapedData = htmlentities($escapedData, ENT_QUOTES, 'UTF-8');
+
 
             $str .= 'input = document.createElement("input"); ';
             $str .= 'input.type = "hidden"; ';
@@ -1250,6 +1255,23 @@ class Pager_Common
             }
         }
         return implode(ini_get('arg_separator.output'), $tmp);
+    }
+
+    // }}}
+    // {{{ _isEncoded()
+
+    /**
+     * Helper function
+     * Check if a string is an encoded multibyte string
+     * @param string $string
+     * @return boolean
+     * @access private
+     */
+    
+    function _isEncoded($string)
+    {
+        $hexchar = '&#[\dA-Fx]{2,};';
+        return preg_match("/^(\s|($hexchar))*$/Uims", $string) ? true : false;
     }
 
     // }}}

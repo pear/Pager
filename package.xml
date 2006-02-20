@@ -50,11 +50,14 @@
 
     <dir name="tests" role="test">
       <file name="all_tests.php" />
+      <file name="multibyte_post.php" />
       <file name="pager_include.php" />
       <file name="pager_jumping_noData_test.php" />
       <file name="pager_jumping_test.php" />
       <file name="pager_jumping_tests.php" />
       <file name="pager_noData_test.php" />
+      <file name="pager_post_test.php" />
+      <file name="pager_post_tests.php" />
       <file name="pager_sliding_noData_test.php" />
       <file name="pager_sliding_notExpanded_test.php" />
       <file name="pager_sliding_test.php" />

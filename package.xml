@@ -25,12 +25,14 @@
  </maintainers>
 
  <release>
-  <version>2.3.6</version>
-  <date>2006-02-03</date>
+  <version>2.4.0</version>
+  <date>2006-02-20</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- fixed bug #6680: error with fileName parameter having an extra "%" character
+- added host to CURRENT_PATHNAME constant
+- added accesskey option (if true, accesskey attributes are added to the links)
+- fixed multibyte string issues with httpMethod==POST (bug #6812)
 ]]>
   </notes>
 
@@ -73,6 +75,18 @@
 
 
  <changelog>
+       <release>
+            <version>2.4.0</version>
+            <date>2006-02-20</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- added host to CURRENT_PATHNAME constant
+- added accesskey option (if true, accesskey attributes are added to the links)
+- fixed multibyte string issues with httpMethod==POST (bug #6812)
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.3.6</version>
             <date>2006-02-03</date>

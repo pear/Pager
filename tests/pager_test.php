@@ -473,5 +473,41 @@ class TestOfPager extends UnitTestCase {
         $this->pager = Pager::factory($options);
         $this->assertEqual('GET', $this->pager->_httpMethod);
     }
+    function testAccesskey() {
+        $options = array(
+            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'  => 5,
+            'accesskey' => true,
+        );
+        $this->pager = Pager::factory($options);
+        $this->assertWantedPattern('/accesskey="\d"/i', $this->pager->links);
+        //var_dump($this->pager->links);
+    }
+    function testIsEncoded() {
+    //var_dump(urlencode('&#50504;&#45397;'));
+        $test_strings_encoded = array(
+            'encoded0' => '&#35797;',
+            'encoded1' => '&#27979;&#35797;',
+            'encoded2' => '&#50504;&#45397;',
+            'encoded3' => '&#50504; &#45397;',
+            'encoded4' => '&#50504;
+&#45397;',
+        );
+        $test_strings_plain = array(
+            'plain1' => '??',
+            'plain2' => '???',
+//          'plain3' => '?? ???
+//? ?? ??',
+            'plain4' => 'abcde',    //not multibyte
+            'plain5' => '&#abcfg;', //invalid hex-encoded char
+        );
+        foreach ($test_strings_encoded as $string) {
+            //echo '<hr />'.str_replace('&', '&amp;', $string);
+            $this->assertTrue($this->pager->_isEncoded($string));
+        }
+        foreach ($test_strings_plain as $string) {
+            $this->assertFalse($this->pager->_isEncoded($string));
+        }
+    }
 }
 ?>

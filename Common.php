@@ -183,6 +183,12 @@ class Pager_Common
     var $_expanded    = true;
 
     /**
+     * @var boolean TRUE => show accesskey attribute on <a> tags
+     * @access private
+     */
+    var $_accesskey   = false;
+
+    /**
      * @var string alt text for "first page" (use "%d" placeholder for page number)
      * @access private
      */
@@ -664,17 +670,19 @@ class Pager_Common
             } else {
                 $href = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_fileName);
             }
-            return sprintf('<a href="%s"%s title="%s">%s</a>',
+            return sprintf('<a href="%s"%s%s title="%s">%s</a>',
                            htmlentities($this->_url . $href),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
+                           empty($this->_accesskey) ?   '' : ' accesskey="'.$this->_linkData[$this->_urlVar].'"',
                            $altText,
                            $linkText
             );
         }
         if ($this->_httpMethod == 'POST') {
-            return sprintf("<a href='javascript:void(0)' onClick='%s'%s title='%s'>%s</a>",
+            return sprintf("<a href='javascript:void(0)' onClick='%s'%s%s title='%s'>%s</a>",
                            $this->_generateFormOnClick($this->_url, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
+                           empty($this->_accesskey) ?   '' : ' accesskey=\''.$this->_linkData[$this->_urlVar].'\'',
                            $altText,
                            $linkText
             );
@@ -723,8 +731,7 @@ class Pager_Common
         } else {
             $str = 'var form = document.createElement("form"); var input = ""; ';
         }
-        
-        
+
         // We /shouldn't/ need to escape the URL ...
         $str .= sprintf('form.action = "%s"; ', htmlentities($formAction));
         $str .= sprintf('form.method = "%s"; ', $this->_httpMethod);
@@ -1297,6 +1304,7 @@ class Pager_Common
             'prevImg',
             'nextImg',
             'expanded',
+            'accesskey',
             'separator',
             'spacesBeforeSeparator',
             'spacesAfterSeparator',

@@ -61,7 +61,7 @@ class TestOfPager extends UnitTestCase {
         $this->assertEqual(array(5=>6, 6=>7, 7=>8, 8=>9, 9=>10), $this->pager->getPageData(2));
     }
     function testGetPageData_OutOfRange() {
-        $this->assertEqual(false, $this->pager->getPageData(3));
+        $this->assertEqual(array(), $this->pager->getPageData(3));
     }
     function testSelectBox() {
         $selectBox  = '<select name="'.$this->pager->_sessionVar.'">';
@@ -500,6 +500,7 @@ class TestOfPager extends UnitTestCase {
 //? ?? ??',
             'plain4' => 'abcde',    //not multibyte
             'plain5' => '&#abcfg;', //invalid hex-encoded char
+            'plain5' => '&#50504; nasty &#45397;', //mixed plain/encoded text
         );
         foreach ($test_strings_encoded as $string) {
             //echo '<hr />'.str_replace('&', '&amp;', $string);

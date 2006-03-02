@@ -426,7 +426,7 @@ class Pager_Common
         if (!empty($this->_pageData[$pageID])) {
             return $this->_pageData[$pageID];
         }
-        return false;
+        return array();
     }
 
     // }}}

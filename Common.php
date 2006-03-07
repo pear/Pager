@@ -129,6 +129,12 @@ class Pager_Common
     var $_fileName    = CURRENT_FILENAME;
 
     /**
+     * @var boolean If false, don't override the fileName option. Use at your own risk.
+     * @access private
+     */
+    var $_fixFileName = true;
+
+    /**
      * @var boolean you have to use FALSE with mod_rewrite
      * @access private
      */
@@ -677,8 +683,7 @@ class Pager_Common
                            $altText,
                            $linkText
             );
-        }
-        if ($this->_httpMethod == 'POST') {
+        } elseif ($this->_httpMethod == 'POST') {
             return sprintf("<a href='javascript:void(0)' onClick='%s'%s%s title='%s'>%s</a>",
                            $this->_generateFormOnClick($this->_url, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
@@ -703,9 +708,9 @@ class Pager_Common
      * and _generateFormOnClick('foo.php', $arr)
      * will yield
      * $_REQUEST['array'][0][0] === 'hello'
-     * $_REQUEST['array'][0][0] === 'world'
+     * $_REQUEST['array'][0][1] === 'world'
      * $_REQUEST['array']['things'][0] === 'stuff'
-     * $_REQUEST['array']['things'][0] === 'junk'
+     * $_REQUEST['array']['things'][1] === 'junk'
      *
      * However, instead of  generating a query string, it generates
      * Javascript to create and submit a form.
@@ -782,7 +787,6 @@ class Pager_Common
                 $escapedData = urlencode($escapedData);
             }
             $escapedData = htmlentities($escapedData, ENT_QUOTES, 'UTF-8');
-
 
             $str .= 'input = document.createElement("input"); ';
             $str .= 'input.type = "hidden"; ';
@@ -1058,7 +1062,7 @@ class Pager_Common
      *                - 'optionText': text to show in each option.
      *                  Use '%d' where you want to see the number of pages selected.
      *                - 'attributes': (html attributes) Tag attributes or
-     *                  HTML attributes id="foo" pairs, will be inserted in the
+     *                  HTML attributes (id="foo" pairs), will be inserted in the
      *                  <select> tag
      * @return string xhtml select box
      * @access public
@@ -1313,6 +1317,7 @@ class Pager_Common
             'linkClass',
             'path',
             'fileName',
+            'fixFileName',
             'append',
             'httpMethod',
             'formID',
@@ -1375,7 +1380,9 @@ class Pager_Common
         $this->_path     = rtrim($this->_path, '/');      //strip trailing slash
 
         if ($this->_append) {
-            $this->_fileName = CURRENT_FILENAME; //avoid possible user error;
+            if ($this->_fixFileName) {
+                $this->_fileName = CURRENT_FILENAME; //avoid possible user error;
+            }
             $this->_url = $this->_path.'/'.$this->_fileName;
         } else {
             $this->_url = $this->_path;

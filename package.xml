@@ -43,6 +43,7 @@
   <filelist>
    <dir name="/" baseinstalldir="Pager">
     <file role="php" name="Common.php" />
+    <file role="php" name="HtmlWidgets.php" />
     <file role="php" name="Jumping.php" />
     <file role="php" name="Pager.php" />
     <file role="php" name="Sliding.php" />

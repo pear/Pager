@@ -127,7 +127,7 @@ class Pager_Common
      * @access private
      */
     var $_fileName    = CURRENT_FILENAME;
-
+    
     /**
      * @var boolean If false, don't override the fileName option. Use at your own risk.
      * @access private
@@ -684,7 +684,7 @@ class Pager_Common
                            $linkText
             );
         } elseif ($this->_httpMethod == 'POST') {
-            return sprintf("<a href='javascript:void(0)' onClick='%s'%s%s title='%s'>%s</a>",
+            return sprintf("<a href='javascript:void(0)' onclick='%s'%s%s title='%s'>%s</a>",
                            $this->_generateFormOnClick($this->_url, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_accesskey) ?   '' : ' accesskey=\''.$this->_linkData[$this->_urlVar].'\'',
@@ -1069,63 +1069,33 @@ class Pager_Common
      */
     function getPerPageSelectBox($start=5, $end=30, $step=5, $showAllData=false, $extraParams=array())
     {
-        // FIXME: needs POST support
-        $optionText = '%d';
-        $attributes = '';
-        if (is_string($extraParams)) {
-            //old behavior, BC maintained
-            $optionText = $extraParams;
-        } else {
-            if (array_key_exists('optionText', $extraParams)) {
-                $optionText = $extraParams['optionText'];
-            }
-            if (array_key_exists('attributes', $extraParams)) {
-                $attributes = $extraParams['attributes'];
-            }
-        }
+        require_once 'Pager/HtmlWidgets.php';
+        $widget =& new Pager_HtmlWidgets($this);
+        return $widget->getPerPageSelectBox($start, $end, $step, $showAllData, $extraParams);
+    }
 
-        if (!strstr($optionText, '%d')) {
-            return $this->raiseError(
-                $this->errorMessage(ERROR_PAGER_INVALID_PLACEHOLDER),
-                ERROR_PAGER_INVALID_PLACEHOLDER
-            );
-        }
-        $start = (int)$start;
-        $end   = (int)$end;
-        $step  = (int)$step;
-        if (!empty($_SESSION[$this->_sessionVar])) {
-            $selected = (int)$_SESSION[$this->_sessionVar];
-        } else {
-            $selected = $this->_perPage;
-        }
+    // }}}
+    // {{{ getPageSelectBox()
 
-        $tmp = '<select name="'.$this->_sessionVar.'"';
-        if (!empty($attributes)) {
-            $tmp .= ' '.$attributes;
-        }
-        $tmp .= '>';
-        for ($i=$start; $i<=$end; $i+=$step) {
-            $tmp .= '<option value="'.$i.'"';
-            if ($i == $selected) {
-                $tmp .= ' selected="selected"';
-            }
-            $tmp .= '>'.sprintf($optionText, $i).'</option>';
-        }
-        if ($showAllData && $end < $this->_totalItems) {
-            $tmp .= '<option value="'.$this->_totalItems.'"';
-            if ($this->_totalItems == $selected) {
-                $tmp .= ' selected="selected"';
-            }
-            $tmp .= '>';
-            if (empty($this->_showAllText)) {
-                $tmp .= str_replace('%d', $this->_totalItems, $optionText);
-            } else {
-                $tmp .= $this->_showAllText;
-            }
-            $tmp .= '</option>';
-        }
-        $tmp .= '</select>';
-        return $tmp;
+    /**
+     * Returns a string with a XHTML SELECT menu with the page numbers,
+     * useful as an alternative to the links
+     *
+     * @param array   - 'optionText': text to show in each option.
+     *                  Use '%d' where you want to see the number of pages selected.
+     *                - 'autoSubmit': if TRUE, add some js code to submit the
+     *                  form on the onChange event
+     * @param string   $extraAttributes (html attributes) Tag attributes or
+     *                  HTML attributes (id="foo" pairs), will be inserted in the
+     *                  <select> tag
+     * @return string xhtml select box
+     * @access public
+     */
+    function getPageSelectBox($params = array(), $extraAttributes = '')
+    {
+        require_once 'Pager/HtmlWidgets.php';
+        $widget =& new Pager_HtmlWidgets($this);
+        return $widget->getPageSelectBox($params, $extraAttributes);
     }
 
     // }}}

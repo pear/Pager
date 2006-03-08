@@ -26,7 +26,7 @@
 
  <release>
   <version>2.4.0</version>
-  <date>2006-03-02</date>
+  <date>2006-03-08</date>
   <state>stable</state>
   <notes>
 <![CDATA[
@@ -34,6 +34,9 @@
 - added accesskey option (if true, accesskey attributes are added to the links)
 - fixed multibyte string issues with httpMethod==POST (bug #6812)
 - return empty array instead of FALSE in getPageData() on bad pageID (request #6986)
+- added Pager_HtmlWidgets class containing the methods getPerPageSelectBox()
+  (moved from Pager_Common) and getPageSelectBox() (new, request #6998).
+  The class is lazy-loaded when calling one of the two above methods from Pager.
 ]]>
   </notes>
 
@@ -81,7 +84,7 @@
  <changelog>
        <release>
             <version>2.4.0</version>
-            <date>2006-03-02</date>
+            <date>2006-03-08</date>
             <state>stable</state>
             <notes>
 <![CDATA[
@@ -89,6 +92,9 @@
 - added accesskey option (if true, accesskey attributes are added to the links)
 - fixed multibyte string issues with httpMethod==POST (bug #6812)
 - return empty array instead of FALSE in getPageData() on bad pageID (request #6986)
+- added Pager_HtmlWidgets class containing the methods getPerPageSelectBox()
+  (moved from Pager_Common) and getPageSelectBox() (new, request #6998).
+  The class is lazy-loaded when calling one of the two above methods from Pager.
 ]]>
             </notes>
        </release>

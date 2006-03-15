@@ -26,7 +26,7 @@
 
  <release>
   <version>2.4.0</version>
-  <date>2006-03-08</date>
+  <date>2006-03-15</date>
   <state>stable</state>
   <notes>
 <![CDATA[
@@ -37,6 +37,7 @@
 - added Pager_HtmlWidgets class containing the methods getPerPageSelectBox()
   (moved from Pager_Common) and getPageSelectBox() (new, request #6998).
   The class is lazy-loaded when calling one of the two above methods from Pager.
+- Improved rewriteCountQuery() function in the Pager Wrapper.
 ]]>
   </notes>
 
@@ -85,7 +86,7 @@
  <changelog>
        <release>
             <version>2.4.0</version>
-            <date>2006-03-08</date>
+            <date>2006-03-15</date>
             <state>stable</state>
             <notes>
 <![CDATA[
@@ -96,6 +97,7 @@
 - added Pager_HtmlWidgets class containing the methods getPerPageSelectBox()
   (moved from Pager_Common) and getPageSelectBox() (new, request #6998).
   The class is lazy-loaded when calling one of the two above methods from Pager.
+- Improved rewriteCountQuery() function in the Pager Wrapper.
 ]]>
             </notes>
        </release>

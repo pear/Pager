@@ -43,6 +43,18 @@ function rewriteCountQuery($sql)
     if (preg_match('/^\s*SELECT\s+\bDISTINCT\b/is', $sql) || preg_match('/\s+GROUP\s+BY\s+/is', $sql)) {
         return false;
     }
+    $open_parenthesis = '(?:\()';
+    $close_parenthesis = '(?:\))';
+    $subquery_in_select = $open_parenthesis.'.*\bFROM\b.*'.$close_parenthesis;
+    $pattern = '/(?:.*'.$subquery_in_select.'.*)\bFROM\b\s+/Uims';
+    if (preg_match($pattern, $sql)) {
+        return false;
+    }
+    $subquery_with_limit_order = $open_parenthesis.'.*\b(LIMIT|ORDER)\b.*'.$close_parenthesis;
+    $pattern = '/.*\bFROM\b.*(?:.*'.$subquery_with_limit_order.'.*).*/Uims';
+    if (preg_match($pattern, $sql)) {
+        return false;
+    }
     $queryCount = preg_replace('/(?:.*)\bFROM\b\s+/Uims', 'SELECT COUNT(*) FROM ', $sql, 1);
     list($queryCount, ) = preg_split('/\s+ORDER\s+BY\s+/is', $queryCount);
     list($queryCount, ) = preg_split('/\bLIMIT\b/is', $queryCount);

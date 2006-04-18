@@ -412,6 +412,60 @@ class Pager_Common
      */
     var $range = array();
 
+    /**
+     * @var array list of available options (safety check)
+     * @access private
+     */
+    var $_allowed_options = array(
+        'totalItems',
+        'perPage',
+        'delta',
+        'linkClass',
+        'path',
+        'fileName',
+        'fixFileName',
+        'append',
+        'httpMethod',
+        'formID',
+        'importQuery',
+        'urlVar',
+        'altFirst',
+        'altPrev',
+        'altNext',
+        'altLast',
+        'altPage',
+        'prevImg',
+        'nextImg',
+        'expanded',
+        'accesskey',
+        'separator',
+        'spacesBeforeSeparator',
+        'spacesAfterSeparator',
+        'curPageLinkClassName',
+        'curPageSpanPre',
+        'curPageSpanPost',
+        'firstPagePre',
+        'firstPageText',
+        'firstPagePost',
+        'lastPagePre',
+        'lastPageText',
+        'lastPagePost',
+        'firstLinkTitle',
+        'nextLinkTitle',
+        'prevLinkTitle',
+        'lastLinkTitle',
+        'showAllText',
+        'itemData',
+        'clearIfVoid',
+        'useSessions',
+        'closeSession',
+        'sessionVar',
+        'pearErrorMode',
+        'extraVars',
+        'excludeVars',
+        'currentPage',
+    );
+
     // }}}
     // {{{ getPageData()
 
@@ -1268,7 +1322,7 @@ class Pager_Common
     }
 
     // }}}
-    // {{{ _setOptions()
+    // {{{ setOptions()
 
     /**
      * Set and sanitize options
@@ -1276,62 +1330,12 @@ class Pager_Common
      * @param mixed $options    An associative array of option names and
      *                          their values.
      * @return integer error code (PAGER_OK on success)
-     * @access private
+     * @access public
      */
-    function _setOptions($options)
+    function setOptions($options)
     {
-        $allowed_options = array(
-            'totalItems',
-            'perPage',
-            'delta',
-            'linkClass',
-            'path',
-            'fileName',
-            'fixFileName',
-            'append',
-            'httpMethod',
-            'formID',
-            'importQuery',
-            'urlVar',
-            'altFirst',
-            'altPrev',
-            'altNext',
-            'altLast',
-            'altPage',
-            'prevImg',
-            'nextImg',
-            'expanded',
-            'accesskey',
-            'separator',
-            'spacesBeforeSeparator',
-            'spacesAfterSeparator',
-            'curPageLinkClassName',
-            'curPageSpanPre',
-            'curPageSpanPost',
-            'firstPagePre',
-            'firstPageText',
-            'firstPagePost',
-            'lastPagePre',
-            'lastPageText',
-            'lastPagePost',
-            'firstLinkTitle',
-            'nextLinkTitle',
-            'prevLinkTitle',
-            'lastLinkTitle',
-            'showAllText',
-            'itemData',
-            'clearIfVoid',
-            'useSessions',
-            'closeSession',
-            'sessionVar',
-            'pearErrorMode',
-            'extraVars',
-            'excludeVars',
-            'currentPage',
-        );
-        
         foreach ($options as $key => $value) {
-            if (in_array($key, $allowed_options) && (!is_null($value))) {
+            if (in_array($key, $this->_allowed_options) && (!is_null($value))) {
                 $this->{'_' . $key} = $value;
             }
         }
@@ -1404,6 +1408,42 @@ class Pager_Common
         $this->_linkData = $this->_getLinksData();
 
         return PAGER_OK;
+    }
+
+    // }}}
+    // {{{ getOption()
+
+    /**
+     * Return the current value of a given option
+     *
+     * @param string option name
+     * @return mixed option value
+     */
+    function getOption($name)
+    {
+        if (!in_array($name, $this->_allowed_options)) {
+            $msg = '<b>PEAR::Pager Error:</b>'
+                  .' invalid option: '.$name;
+            return $this->raiseError($msg, ERROR_PAGER_INVALID);
+        }
+        return $this->{'_' . $name};
+    }
+
+    // }}}
+    // {{{ getOptions()
+
+    /**
+     * Return an array with all the current pager options
+     *
+     * @return array list of all the pager options
+     */
+    function getOptions()
+    {
+        $options = array();
+        foreach ($this->_allowed_options as $option) {
+            $options[$option] = $this->{'_' . $option};
+        }
+        return $options;
     }
 
     // }}}

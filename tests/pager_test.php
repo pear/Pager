@@ -139,7 +139,7 @@ class TestOfPager extends UnitTestCase {
         $options = array(
             'extraVars' => array(
                 'request' => array('aRequest'),
-                'escape'    => '��%<>+',
+                'escape'    => 'äö%<>+',
             ),
             'perPage' => 5,
         );
@@ -494,10 +494,10 @@ class TestOfPager extends UnitTestCase {
 &#45397;',
         );
         $test_strings_plain = array(
-            'plain1' => '??',
-            'plain2' => '???',
-//          'plain3' => '?? ???
-//? ?? ??',
+            'plain1' => '안녕',
+            'plain2' => '더보기',
+//          'plain3' => '이젠 전화도
+//로 걸면 무료',
             'plain4' => 'abcde',    //not multibyte
             'plain5' => '&#abcfg;', //invalid hex-encoded char
             'plain5' => '&#50504; nasty &#45397;', //mixed plain/encoded text
@@ -509,6 +509,16 @@ class TestOfPager extends UnitTestCase {
         foreach ($test_strings_plain as $string) {
             $this->assertFalse($this->pager->_isEncoded($string));
         }
+    }
+    function testGetOption() {
+        $this->assertEqual(5, $this->pager->getOption('perPage'));
+        $err = $this->pager->getOption('non_existent_option');
+        $this->assertEqual(ERROR_PAGER_INVALID, $err->getCode());
+    }
+    function testGetOptions() {
+        $options = $this->pager->getOptions();
+        $this->assertTrue(is_array($options));
+        $this->assertEqual(5, $options['perPage']);
     }
 }
 ?>

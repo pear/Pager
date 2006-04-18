@@ -59,7 +59,7 @@ class Pager_Sliding extends Pager_Common
     /**
      * Constructor
      *
-     * @param mixed $options    An associative array of option names
+     * @param array $options    An associative array of option names
      *                          and their values
      * @access public
      */
@@ -76,7 +76,7 @@ class Pager_Sliding extends Pager_Common
         $this->_curPageSpanPost       = '</u></b>';
 
         //set custom options
-        $err = $this->_setOptions($options);
+        $err = $this->setOptions($options);
         if ($err !== PAGER_OK) {
             return $this->raiseError($this->errorMessage($err), $err);
         }

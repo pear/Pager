@@ -45,10 +45,8 @@ class TestOfPager extends UnitTestCase {
     function testLastPageComplete () {
         $this->assertEqual(true, $this->pager->isLastPageComplete());
     }
-    function testOffsetByPageId1() {
+    function testOffsetByPageId() {
         $this->assertEqual(array(1, 5), $this->pager->getOffsetByPageId(1));
-    }
-    function testOffsetByPageId2() {
         $this->assertEqual(array(6, 10), $this->pager->getOffsetByPageId(2));
     }
     function testOffsetByPageId_outOfRange() {
@@ -56,8 +54,6 @@ class TestOfPager extends UnitTestCase {
     }
     function testGetPageData() {
         $this->assertEqual(array(0=>1, 1=>2, 2=>3, 3=>4, 4=>5), $this->pager->getPageData());
-    }
-    function testGetPageData2() {
         $this->assertEqual(array(5=>6, 6=>7, 7=>8, 8=>9, 9=>10), $this->pager->getPageData(2));
     }
     function testGetPageData_OutOfRange() {
@@ -519,6 +515,26 @@ class TestOfPager extends UnitTestCase {
         $options = $this->pager->getOptions();
         $this->assertTrue(is_array($options));
         $this->assertEqual(5, $options['perPage']);
+    }
+    function testSetOptionsAndBuild() {
+        $options = array(
+            'perPage'  => 2,
+        );
+        $this->pager->setOptions($options);
+        $this->pager->build();
+        $this->assertEqual(2, $this->pager->getOption('perPage'));
+        $this->assertEqual(array(0=>1, 1=>2), $this->pager->getPageData());
+        $this->assertEqual(array(2=>3, 3=>4), $this->pager->getPageData(2));
+
+        $options = array(
+            'currentPage' => 2,
+            'append'   => false,
+            'fileName' => 'myfile.%d.php',
+        );
+        $this->pager->setOptions($options);
+        $this->pager->build();
+        $expected = '<link rel="previous" href="'.$this->baseurl.'/myfile.1.php" title="previous page" />'."\n";
+        $this->assertEqual($expected, $this->pager->_getPrevLinkTag());
     }
 }
 ?>

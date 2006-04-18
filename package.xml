@@ -38,8 +38,9 @@
   (moved from Pager_Common) and getPageSelectBox() (new, request #6998).
   The class is lazy-loaded when calling one of the two above methods from Pager.
 - Improved rewriteCountQuery() function in the Pager Wrapper.
-- changed _setOptions() [private] to setOptions() [public]
 - added getOption($name) and getOptions() methods (request #7413)
+- changed _setOptions() [private] to setOptions() [public]
+- added build() to refresh the links and the paged data after a new call to setOptions()
 ]]>
   </notes>
 
@@ -100,8 +101,9 @@
   (moved from Pager_Common) and getPageSelectBox() (new, request #6998).
   The class is lazy-loaded when calling one of the two above methods from Pager.
 - Improved rewriteCountQuery() function in the Pager Wrapper.
-- changed _setOptions() [private] to setOptions() [public]
 - added getOption($name) and getOptions() methods (request #7413)
+- changed _setOptions() [private] to setOptions() [public]
+- added build() to refresh the links and the paged data after a new call to setOptions()
 ]]>
             </notes>
        </release>

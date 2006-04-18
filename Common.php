@@ -411,7 +411,7 @@ class Pager_Common
      * @access public
      */
     var $range = array();
-
+    
     /**
      * @var array list of available options (safety check)
      * @access private
@@ -465,6 +465,21 @@ class Pager_Common
         'excludeVars',
         'currentPage',
     );
+
+    // }}}
+    // {{{ build()
+    
+    /**
+     * Generate or refresh the links and paged data after a call to setOptions()
+     *
+     * @access public
+     */
+    function build()
+    {
+        $msg = '<b>PEAR::Pager Error:</b>'
+              .' function "build()" not implemented.';
+        return $this->raiseError($msg, ERROR_PAGER_NOT_IMPLEMENTED);
+    }
 
     // }}}
     // {{{ getPageData()
@@ -967,9 +982,8 @@ class Pager_Common
     function _getPageLinks($url='')
     {
         $msg = '<b>PEAR::Pager Error:</b>'
-              .' function "getOffsetByPageId()" not implemented.';
+              .' function "_getPageLinks()" not implemented.';
         return $this->raiseError($msg, ERROR_PAGER_NOT_IMPLEMENTED);
-
     }
 
     // }}}
@@ -1412,7 +1426,7 @@ class Pager_Common
 
     // }}}
     // {{{ getOption()
-
+    
     /**
      * Return the current value of a given option
      *

@@ -195,6 +195,12 @@ class Pager_Common
     var $_accesskey   = false;
 
     /**
+     * @var string extra attributes for the <a> tag
+     * @access private
+     */
+    var $_attributes  = '';
+
+    /**
      * @var string alt text for "first page" (use "%d" placeholder for page number)
      * @access private
      */
@@ -438,6 +444,7 @@ class Pager_Common
         'nextImg',
         'expanded',
         'accesskey',
+        'attributes',
         'separator',
         'spacesBeforeSeparator',
         'spacesAfterSeparator',
@@ -745,18 +752,20 @@ class Pager_Common
             } else {
                 $href = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_fileName);
             }
-            return sprintf('<a href="%s"%s%s title="%s">%s</a>',
+            return sprintf('<a href="%s"%s%s%s title="%s">%s</a>',
                            htmlentities($this->_url . $href),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
-                           empty($this->_accesskey) ?   '' : ' accesskey="'.$this->_linkData[$this->_urlVar].'"',
+                           empty($this->_attributes)  ? '' : ' '.$this->_attributes,
+                           empty($this->_accesskey)   ? '' : ' accesskey="'.$this->_linkData[$this->_urlVar].'"',
                            $altText,
                            $linkText
             );
         } elseif ($this->_httpMethod == 'POST') {
-            return sprintf("<a href='javascript:void(0)' onclick='%s'%s%s title='%s'>%s</a>",
+            return sprintf("<a href='javascript:void(0)' onclick='%s'%s%s%s title='%s'>%s</a>",
                            $this->_generateFormOnClick($this->_url, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
-                           empty($this->_accesskey) ?   '' : ' accesskey=\''.$this->_linkData[$this->_urlVar].'\'',
+                           empty($this->_attributes)  ? '' : ' '.$this->_attributes,
+                           empty($this->_accesskey)   ? '' : ' accesskey=\''.$this->_linkData[$this->_urlVar].'\'',
                            $altText,
                            $linkText
             );

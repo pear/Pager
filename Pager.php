@@ -170,9 +170,22 @@ class Pager
         $mode = (isset($options['mode']) ? ucfirst($options['mode']) : 'Jumping');
         $classname = 'Pager_' . $mode;
         $classfile = 'Pager' . DIRECTORY_SEPARATOR . $mode . '.php';
-        require_once $classfile;
-        $pager =& new $classname($options);
-        return $pager;
+
+        // Attempt to include a custom version of the named class, but don't treat
+        // a failure as fatal.  The caller may have already included their own
+        // version of the named class.
+        if (!class_exists($classname)) {
+            include_once $classfile;
+        }
+
+        // If the class exists, return a new instance of it.
+        if (class_exists($classname)) {
+            $pager =& new $classname($options);
+            return $pager;
+        }
+
+        $null = null;
+        return $null;
     }
 
     // }}}

@@ -174,7 +174,7 @@ class Pager
         // Attempt to include a custom version of the named class, but don't treat
         // a failure as fatal.  The caller may have already included their own
         // version of the named class.
-        if (!class_exists($classname)) {
+        if (!class_exists($classname, false)) {
             include_once $classfile;
         }
 

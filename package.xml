@@ -25,13 +25,12 @@
  </maintainers>
 
  <release>
-  <version>2.4.1</version>
-  <date>2006-05-06</date>
+  <version>2.4.2</version>
+  <date>2006-05-20</date>
   <state>stable</state>
   <notes>
 <![CDATA[
-- more flexible implementation of the factory pattern allowing people to use custom
-  renderer classes that are not part of the Pager package (thanks to Martin Jansen)
+- fixed bug #7657: Pager not compatible with __autoload()
 ]]>
   </notes>
 
@@ -78,6 +77,16 @@
 
 
  <changelog>
+       <release>
+            <version>2.4.2</version>
+            <date>2006-05-20</date>
+            <state>stable</state>
+            <notes>
+<![CDATA[
+- fixed bug #7657: Pager not compatible with __autoload()
+]]>
+            </notes>
+       </release>
        <release>
             <version>2.4.1</version>
             <date>2006-05-06</date>

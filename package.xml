@@ -30,7 +30,6 @@
   <state>stable</state>
   <notes>
 <![CDATA[
-- fixed bug #7657: Pager not compatible with __autoload()
 ]]>
   </notes>
 
@@ -83,7 +82,6 @@
             <state>stable</state>
             <notes>
 <![CDATA[
-- fixed bug #7657: Pager not compatible with __autoload()
 ]]>
             </notes>
        </release>

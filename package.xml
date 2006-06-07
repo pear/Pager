@@ -26,10 +26,11 @@
 
  <release>
   <version>2.4.2</version>
-  <date>2006-05-20</date>
+  <date>2006-06-07</date>
   <state>stable</state>
   <notes>
 <![CDATA[
+- fix double escaping of arg_separator when php.ini's arg_separator.output = "&amp;"
 ]]>
   </notes>
 
@@ -78,10 +79,11 @@
  <changelog>
        <release>
             <version>2.4.2</version>
-            <date>2006-05-20</date>
+            <date>2006-06-07</date>
             <state>stable</state>
             <notes>
 <![CDATA[
+- fix double escaping of arg_separator when php.ini's arg_separator.output = "&amp;"
 ]]>
             </notes>
        </release>

@@ -1293,6 +1293,10 @@ class Pager_Common
     function __http_build_query($array, $name)
     {
         $tmp = array ();
+        $separator = ini_get('arg_separator.output');
+        if ($separator == '&amp;') {
+            $separator = '&'; //the string is escaped by htmlentities anyway...
+        }
         foreach ($array as $key => $value) {
             if (is_array($value)) {
                 //array_push($tmp, $this->__http_build_query($value, sprintf('%s[%s]', $name, $key)));
@@ -1305,7 +1309,7 @@ class Pager_Common
                 array_push($tmp, $this->__http_build_query(get_object_vars($value), $name.'%5B'.$key.'%5D'));
             }
         }
-        return implode(ini_get('arg_separator.output'), $tmp);
+        return implode($separator, $tmp);
     }
 
     // }}}

@@ -42,8 +42,9 @@
  * when the user doesn't set any other value
  */
 if (substr($_SERVER['PHP_SELF'], -1) == '/') {
+    $http = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
     define('CURRENT_FILENAME', '');
-    define('CURRENT_PATHNAME', 'http://'.$_SERVER['HTTP_HOST'].str_replace('\\', '/', $_SERVER['PHP_SELF']));
+    define('CURRENT_PATHNAME', $http.$_SERVER['HTTP_HOST'].str_replace('\\', '/', $_SERVER['PHP_SELF']));
 } else {
     define('CURRENT_FILENAME', preg_replace('/(.*)\?.*/', '\\1', basename($_SERVER['PHP_SELF'])));
     define('CURRENT_PATHNAME', str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])));

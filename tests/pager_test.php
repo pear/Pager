@@ -232,6 +232,7 @@ class TestOfPager extends UnitTestCase {
                 0 => 'apple',
                 1 => 'orange'
             ),
+            'no' => 'test',
         );
         $actual = $this->pager->_getLinksData();
         $this->assertEqual($expected, $this->pager->_getLinksData());
@@ -239,7 +240,7 @@ class TestOfPager extends UnitTestCase {
         if ($separator == '&') {
             $separator = '&amp;';
         }
-        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?arr%5B0%5D=apple'.$separator.'arr%5B1%5D=orange'.$separator.'pageID=2" title=""></a>';
+        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?arr%5B0%5D=apple'.$separator.'arr%5B1%5D=orange'.$separator.'no=test'.$separator.'pageID=2" title=""></a>';
         $actual = $this->pager->_renderLink('', '');
         $this->assertEqual($expected, $actual);
     }

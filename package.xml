@@ -21,16 +21,19 @@
    <name>Richard Heyes</name>
    <email>richard@phpguru.org</email>
    <role>lead</role>
+   <inactive/>
   </maintainer>
  </maintainers>
 
  <release>
   <version>2.4.3</version>
-  <date>2006-06-19</date>
+  <date>2006-10-11</date>
   <state>stable</state>
   <notes>
 <![CDATA[
 - fixed issue with SSL (bug #7936)
+- items set in 'excludeVars' array were removed from the URL even if they were
+  also set in the 'extraVars' array (bug #8969)
 ]]>
   </notes>
 
@@ -79,11 +82,13 @@
  <changelog>
        <release>
             <version>2.4.3</version>
-            <date>2006-06-19</date>
+            <date>2006-10-11</date>
             <state>stable</state>
             <notes>
 <![CDATA[
 - fixed issue with SSL (bug #7936)
+- items set in 'excludeVars' array were removed from the URL even if they were
+  also set in the 'extraVars' array (bug #8969)
 ]]>
             </notes>
        </release>

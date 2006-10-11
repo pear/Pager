@@ -895,14 +895,14 @@ class Pager_Common
                 $qs = $_GET;
             }
         }
-        if (count($this->_extraVars)){
-            $this->_recursive_urldecode($this->_extraVars);
-        }
-        $qs = array_merge($qs, $this->_extraVars);
         foreach ($this->_excludeVars as $exclude) {
             if (array_key_exists($exclude, $qs)) {
                 unset($qs[$exclude]);
             }
+        }
+        if (count($this->_extraVars)){
+            $this->_recursive_urldecode($this->_extraVars);
+            $qs = array_merge($qs, $this->_extraVars);
         }
         if (count($qs) && get_magic_quotes_gpc()){
             $this->_recursive_stripslashes($qs);

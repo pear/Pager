@@ -12,7 +12,7 @@ class TestOfPager extends UnitTestCase {
     }
     function setUp() {
         $options = array(
-            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'itemData' => range(1, 10),
             'perPage'  => 5,
         );
         $this->pager = Pager::factory($options);
@@ -92,21 +92,28 @@ class TestOfPager extends UnitTestCase {
         $selectBox .= '<option value="4">4 bugs</option>';
         $selectBox .= '<option value="5" selected="selected">5 bugs</option>';
         $selectBox .= '<option value="6">6 bugs</option>';
-        $selectBox .= '<option value="10">Show All</option>';
+        $selectBox .= '<option value="'.max($this->pager->_itemData).'">Show All</option>';
         $selectBox .= '</select>';
         $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(3, 6, 1, true, '%d bugs'));
     }
     function testSelectBoxWithShowAllWithExtraAttribs() {
+        $options = array(
+            'itemData' => range(1, 14),
+            'perPage'  => 5,
+        );
+        $this->pager = Pager::factory($options);
         $this->pager->_showAllText = 'Show All';
         $selectBox  = '<select name="'.$this->pager->_sessionVar.'" onmouseover="doSth">';
-        $selectBox .= '<option value="3">3 bugs</option>';
-        $selectBox .= '<option value="4">4 bugs</option>';
         $selectBox .= '<option value="5" selected="selected">5 bugs</option>';
-        $selectBox .= '<option value="6">6 bugs</option>';
-        $selectBox .= '<option value="10">Show All</option>';
+        $selectBox .= '<option value="10">10 bugs</option>';
+        $selectBox .= '<option value="'.max($this->pager->_itemData).'">Show All</option>';
         $selectBox .= '</select>';
-        $params = array('optionText' => '%d bugs', 'attributes' => 'onmouseover="doSth"');
-        $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(3, 6, 1, true, $params));
+        $params = array(
+            'optionText'    => '%d bugs',
+            'attributes'    => 'onmouseover="doSth"',
+            'checkMaxLimit' => true,
+        );
+        $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(5, 15, 5, true, $params));
     }
     function testSelectBoxInvalid() {
         $err = $this->pager->getPerPageSelectBox(5, 15, 5, false, '%s bugs');

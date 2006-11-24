@@ -27,13 +27,15 @@
 
  <release>
   <version>2.4.3</version>
-  <date>2006-10-11</date>
+  <date>2006-11-24</date>
   <state>stable</state>
   <notes>
 <![CDATA[
 - fixed issue with SSL (bug #7936)
 - items set in 'excludeVars' array were removed from the URL even if they were
   also set in the 'extraVars' array (bug #8969)
+- added new option 'checkMaxLimit' to getPerPageSelectBox(): if true, Pager checks
+  if $end is bigger than $totalItems, and doesn't show the extra select options
 ]]>
   </notes>
 
@@ -82,13 +84,15 @@
  <changelog>
        <release>
             <version>2.4.3</version>
-            <date>2006-10-11</date>
+            <date>2006-11-24</date>
             <state>stable</state>
             <notes>
 <![CDATA[
 - fixed issue with SSL (bug #7936)
 - items set in 'excludeVars' array were removed from the URL even if they were
   also set in the 'extraVars' array (bug #8969)
+- added new option 'checkMaxLimit' to getPerPageSelectBox(): if true, Pager checks
+  if $end is bigger than $totalItems, and doesn't show the extra select options
 ]]>
             </notes>
        </release>

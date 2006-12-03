@@ -1,129 +1,165 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<package version="1.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.5.0a1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+http://pear.php.net/dtd/tasks-1.0.xsd
+http://pear.php.net/dtd/package-2.0
+http://pear.php.net/dtd/package-2.0.xsd">
  <name>Pager</name>
+ <channel>pear.php.net</channel>
  <summary>Data paging class</summary>
- <description>
-  It takes an array of data as input and pages it according to various parameters.
-  It also builds links within a specified range, and allows complete customization of the output (it even works with front controllers and mod_rewrite).
-  Two operating modes available: "Jumping" and "Sliding" window style.
+ <description>It takes an array of data as input and pages it according to various parameters.
+It also builds links within a specified range, and allows complete customization of the output (it even works with front controllers and mod_rewrite).
+Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; window style.
  </description>
- <license>BSD License</license>
- <maintainers>
-  <maintainer>
-   <user>quipo</user>
-   <name>Lorenzo Alberton</name>
-   <email>l.alberton@quipo.it</email>
-   <role>lead</role>
-  </maintainer>
-  <maintainer>
-   <user>richard</user>
-   <name>Richard Heyes</name>
-   <email>richard@phpguru.org</email>
-   <role>lead</role>
-   <inactive/>
-  </maintainer>
- </maintainers>
-
- <release>
-  <version>2.4.3</version>
-  <date>2006-11-24</date>
-  <state>stable</state>
-  <notes>
-<![CDATA[
-- fixed issue with SSL (bug #7936)
-- items set in 'excludeVars' array were removed from the URL even if they were
-  also set in the 'extraVars' array (bug #8969)
-- added new option 'checkMaxLimit' to getPerPageSelectBox(): if true, Pager checks
-  if $end is bigger than $totalItems, and doesn't show the extra select options
-]]>
-  </notes>
-
+ <lead>
+  <name>Lorenzo Alberton</name>
+  <user>quipo</user>
+  <email>l.alberton@quipo.it</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Richard Heyes</name>
+  <user>richard</user>
+  <email>richard@phpguru.org</email>
+  <active>no</active>
+ </lead>
+ <date>2006-12-03</date>
+ <time>10:44:27</time>
+ <version>
+  <release>2.4.3</release>
+  <api>2.4.3</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+ <notes>- fixed issue with SSL (bug #7936)
+- items set in &apos;excludeVars&apos; array were removed from the URL even if they were
+  also set in the &apos;extraVars&apos; array (bug #8969)
+- added new option &apos;checkMaxLimit&apos; to getPerPageSelectBox(): if true, Pager checks
+  if $end is bigger than $totalItems, and doesn&apos;t show the extra select options
+- moved Pager.php to the pear root and added a wrapper in the old location
+  to adhere to PEAR policies (bug #2169)
+- switched to package.xml v2
+ </notes>
+ <contents>
+  <dir name="/">
+   <file name="Pager.php" role="php" />
+   <file baseinstalldir="Pager" name="Common.php" role="php" />
+   <file baseinstalldir="Pager" name="HtmlWidgets.php" role="php" />
+   <file baseinstalldir="Pager" name="Jumping.php" role="php" />
+   <file baseinstalldir="Pager" name="Pager_savebc.php" role="php" />
+   <file baseinstalldir="Pager" name="Sliding.php" role="php" />
+   <dir baseinstalldir="Pager" name="examples">
+    <file name="example.php" role="doc" />
+    <file name="Pager_Wrapper.php" role="doc" />
+   </dir> <!-- /examples -->
+   <dir baseinstalldir="Pager" name="tests">
+    <file name="all_tests.php" role="test" />
+    <file name="multibyte_post.php" role="test" />
+    <file name="pager_include.php" role="test" />
+    <file name="pager_jumping_noData_test.php" role="test" />
+    <file name="pager_jumping_test.php" role="test" />
+    <file name="pager_jumping_tests.php" role="test" />
+    <file name="pager_noData_test.php" role="test" />
+    <file name="pager_post_test.php" role="test" />
+    <file name="pager_post_tests.php" role="test" />
+    <file name="pager_sliding_noData_test.php" role="test" />
+    <file name="pager_sliding_notExpanded_test.php" role="test" />
+    <file name="pager_sliding_test.php" role="test" />
+    <file name="pager_sliding_tests.php" role="test" />
+    <file name="pager_test.php" role="test" />
+    <file name="pager_tests.php" role="test" />
+    <file name="pager_test_xss.php" role="test" />
+    <file name="pager_wrapper_include.php" role="test" />
+    <file name="pager_wrapper_test.php" role="test" />
+    <file name="README" role="test" />
+    <file name="simple_include.php" role="test" />
+   </dir> <!-- /tests -->
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease>
   <filelist>
-   <dir name="/" baseinstalldir="Pager">
-    <file role="php" name="Common.php" />
-    <file role="php" name="HtmlWidgets.php" />
-    <file role="php" name="Jumping.php" />
-    <file role="php" name="Pager.php" />
-    <file role="php" name="Sliding.php" />
-
-    <dir name="examples">
-      <file role="doc" name="example.php" />
-      <file role="doc" name="Pager_Wrapper.php" />
-    </dir>
-
-    <dir name="tests" role="test">
-      <file name="all_tests.php" />
-      <file name="multibyte_post.php" />
-      <file name="pager_include.php" />
-      <file name="pager_jumping_noData_test.php" />
-      <file name="pager_jumping_test.php" />
-      <file name="pager_jumping_tests.php" />
-      <file name="pager_noData_test.php" />
-      <file name="pager_post_test.php" />
-      <file name="pager_post_tests.php" />
-      <file name="pager_sliding_noData_test.php" />
-      <file name="pager_sliding_notExpanded_test.php" />
-      <file name="pager_sliding_test.php" />
-      <file name="pager_sliding_tests.php" />
-      <file name="pager_test.php" />
-      <file name="pager_test_xss.php" />
-      <file name="pager_tests.php" />
-      <file name="pager_wrapper_include.php" />
-      <file name="pager_wrapper_test.php" />
-      <file name="simple_include.php" />
-      <file name="README" />
-    </dir>
-
-   </dir>
+   <install as="Pager.php" name="Pager_savebc.php" />
   </filelist>
-
- </release>
-
-
+ </phprelease>
  <changelog>
-       <release>
-            <version>2.4.3</version>
-            <date>2006-11-24</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- fixed issue with SSL (bug #7936)
-- items set in 'excludeVars' array were removed from the URL even if they were
-  also set in the 'extraVars' array (bug #8969)
-- added new option 'checkMaxLimit' to getPerPageSelectBox(): if true, Pager checks
-  if $end is bigger than $totalItems, and doesn't show the extra select options
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.4.2</version>
-            <date>2006-06-07</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- fix double escaping of arg_separator when php.ini's arg_separator.output = "&amp;"
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.4.1</version>
-            <date>2006-05-06</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- more flexible implementation of the factory pattern allowing people to use custom
+  <release>
+   <version>
+    <release>2.4.3</release>
+    <api>2.4.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-12-03</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>- fixed issue with SSL (bug #7936)
+- items set in &apos;excludeVars&apos; array were removed from the URL even if they were
+  also set in the &apos;extraVars&apos; array (bug #8969)
+- added new option &apos;checkMaxLimit&apos; to getPerPageSelectBox(): if true, Pager checks
+  if $end is bigger than $totalItems, and doesn&apos;t show the extra select options
+- moved Pager.php to the pear root and added a wrapper in the old location
+  to adhere to PEAR policies (bug #2169)
+- switched to package.xml v2
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.4.2</release>
+    <api>2.4.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-06-07</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>- fix double escaping of arg_separator when php.ini&apos;s arg_separator.output = &quot;&amp;amp;&quot;
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.4.1</release>
+    <api>2.4.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-05-06</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>- more flexible implementation of the factory pattern allowing people to use custom
   renderer classes that are not part of the Pager package (thanks to Martin Jansen)
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.4.0</version>
-            <date>2006-04-23</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- added host to CURRENT_PATHNAME constant
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.4.0</release>
+    <api>2.4.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-04-23</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>- added host to CURRENT_PATHNAME constant
 - added accesskey option (if true, accesskey attributes are added to the links)
 - fixed multibyte string issues with httpMethod==POST (bug #6812)
 - return empty array instead of FALSE in getPageData() on bad pageID (request #6986)
@@ -134,360 +170,524 @@
 - added getOption($name) and getOptions() methods (request #7413)
 - changed _setOptions() [private] to setOptions() [public]
 - added build() to refresh the links and the paged data after a new call to setOptions()
-- added 'attributes' option to set extra attributes for the <a> tag (request #7452)
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.6</version>
-            <date>2006-02-03</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- fixed bug #6680: error with fileName parameter having an extra "%" character
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.5</version>
-            <date>2006-01-20</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- remove flicker (caused by href="#") during POST requests (request #6005)
-- added "formID" option to reuse an existing form in POST requests 
+- added &apos;attributes&apos; option to set extra attributes for the &lt;a&gt; tag (request #7452)
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.6</release>
+    <api>2.3.6</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-02-03</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>- fixed bug #6680: error with fileName parameter having an extra &quot;%&quot; character
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.5</release>
+    <api>2.3.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-01-20</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>- remove flicker (caused by href=&quot;#&quot;) during POST requests (request #6005)
+- added &quot;formID&quot; option to reuse an existing form in POST requests 
   (thanks to Marc Veldman)
 - fixed bug #6529: problem with fields with quotes during POST requests
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.4</version>
-            <date>2005-09-28</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- changed license to BSD
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.4</release>
+    <api>2.3.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-09-28</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>- changed license to BSD
 - fixed bug #4897 (multibyte chars not handled correctly)
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.3</version>
-            <date>2005-07-04</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- improved Pager_Wrapper and added tests
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.3</release>
+    <api>2.3.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-07-04</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- improved Pager_Wrapper and added tests
 - urlencoded square brackets (bug #4337)
-NB: We recommend that users of Pager < 2.3.0 immediately upgrade the package,
+NB: We recommend that users of Pager &lt; 2.3.0 immediately upgrade the package,
 otherwise they might be susceptible to XSS attacks
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.2</version>
-            <date>2005-06-03</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- autodetect HTTP method used, when not specified,
-  instead of forcing "GET"  (bug #4277)
-- added "altFirst" and "altLast" options to set the 
-  "title" attribute of the first and last page links
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.1</version>
-            <date>2005-05-02</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- fixed various issues with __http_build_query() and escaped entities
-- if the value of "arg_separator.output" in php.ini is "&amp;", don't encode it again
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.2</release>
+    <api>2.3.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-06-03</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- autodetect HTTP method used, when not specified,
+  instead of forcing &quot;GET&quot;  (bug #4277)
+- added &quot;altFirst&quot; and &quot;altLast&quot; options to set the 
+  &quot;title&quot; attribute of the first and last page links
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.1</release>
+    <api>2.3.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-05-02</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- fixed various issues with __http_build_query() and escaped entities
+- if the value of &quot;arg_separator.output&quot; in php.ini is &quot;&amp;amp;&quot;, don&apos;t encode it again
 - tweaked Pager_Wrapper query rewriting function, now it is fully case insensitive
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.0</version>
-            <date>2005-04-22</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- tweaked Pager_Wrapper query rewriting function
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.0RC2</version>
-            <date>2005-04-06</date>
-            <state>beta</state>
-            <notes>
-<![CDATA[
-- fixed possible querystring duplication with front controllers
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.3.0RC1</version>
-            <date>2005-04-01</date>
-            <state>beta</state>
-            <notes>
-<![CDATA[
-- internal refactoring: added POST support: set the preferred http method
-  ('GET' or 'POST') with the 'httpMethod' option.
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.0</release>
+    <api>2.3.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-04-22</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- tweaked Pager_Wrapper query rewriting function
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.0RC2</release>
+    <api>2.3.0RC2</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2005-04-06</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- fixed possible querystring duplication with front controllers
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.3.0RC1</release>
+    <api>2.3.0RC1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2005-04-01</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- internal refactoring: added POST support: set the preferred http method
+  (&apos;GET&apos; or &apos;POST&apos;) with the &apos;httpMethod&apos; option.
 - used $_GET instead of reparsing the querystring
-  [thanks to Nikolas 'Atrus' Coukouma]
+  [thanks to Nikolas &apos;Atrus&apos; Coukouma]
   (fixed bugs #3450, #3878 and #3451)
-- added 'importQuery' boolean option to ignore the url vars entirely (bug #3449)
-- added 'excludeVars' array option to selectively exclude some url vars (bug #2461)
+- added &apos;importQuery&apos; boolean option to ignore the url vars entirely (bug #3449)
+- added &apos;excludeVars&apos; array option to selectively exclude some url vars (bug #2461)
 - countless code optimizations
 - added many new test cases to the testsuite
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.2.7</version>
-            <date>2005-03-18</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- added Pager_Wrapper_Eclipse() function in the /examples/Pager_Wrapper example
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.2.7</release>
+    <api>2.2.7</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-03-18</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- added Pager_Wrapper_Eclipse() function in the /examples/Pager_Wrapper example
   (thanks to Matte Edens)
 - added support for statements with subqueries in the Pager Wrappers 
   (thanks to Tobias Kuckuck)
 - fixed bug #3451 (arrays in extraVars not handled correctly)
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.2.6</version>
-            <date>2005-02-04</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- better 'currentPage' option support (thanks to Andrew Nagy)
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.2.6</release>
+    <api>2.2.6</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-02-04</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- better &apos;currentPage&apos; option support (thanks to Andrew Nagy)
 - fixed typo (thanks to Massimiliano Arione)
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.2.5</version>
-            <date>2005-01-17</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- allowed use of a javascript function in the fileName [bugs #2555 and #2754]
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.2.5</release>
+    <api>2.2.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-01-17</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- allowed use of a javascript function in the fileName [bugs #2555 and #2754]
 - added Pager_Wrapper_DBDO() function in the /examples/Pager_Wrapper example
   (thanks to garak AT studenti DOT it)
 - replaced urlencode() with htmlentities() because it was too aggressive
   [bugs #2908, #3043 and #3212]
-- added 'currentPage' option (patch by Kendrick Vargas)
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.2.4</version>
-            <date>2004-11-20</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- fixed "Notice: Undefined property: _totalPages" [bug #2714]
-- enforce errors (which weren't displayed at all)
+- added &apos;currentPage&apos; option (patch by Kendrick Vargas)
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.2.4</release>
+    <api>2.2.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-11-20</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- fixed &quot;Notice: Undefined property: _totalPages&quot; [bug #2714]
+- enforce errors (which weren&apos;t displayed at all)
 - fixed Pager_Wrapper (examples dir) with GROUP BY queries
 - changed $_GET to $_REQUEST. POST values should be valid too, now.
 - Pager can be used on a DirectoryIndex script, now (patch by ieure)  [bug #2617]
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.2.3</version>
-            <date>2004-08-17</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- just the last one of a set of array values given as GET parameters
-  (i.e. site.php?foo[]=1&foo[]=2&foo[]=3) was carried on (bug #1904).
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.2.3</release>
+    <api>2.2.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-08-17</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- just the last one of a set of array values given as GET parameters
+  (i.e. site.php?foo[]=1&amp;foo[]=2&amp;foo[]=3) was carried on (bug #1904).
 - make 4th parameter of getPerPageSelectBox() an array, and add an
-  "attribute" parameter to allow extra attributes for the select tag.
+  &quot;attribute&quot; parameter to allow extra attributes for the select tag.
 - added an example to show how this class can be used with big database
   resultsets efficiently.
 - prevent XSS attacks (bug #2131), thanks to sou_sk at nifty dot com
-]]>
-            </notes>
-       </release>
-       <release>
-            <version>2.2.2</version>
-            <date>2004-05-18</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- set correct selected value for getPerPageSelectBox even when "useSession"
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.2.2</release>
+    <api>2.2.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-05-18</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- set correct selected value for getPerPageSelectBox even when &quot;useSession&quot;
   option is false (bug #1263).
 - added two parameters to getPerPageSelectBox():
-  * $showAllData (if true, an <option> to show
-    all the data is displayed in the generated <select>);
-  * $optionText (text to show in each <option>; use '%d' where you want to see
+  * $showAllData (if true, an &lt;option&gt; to show
+    all the data is displayed in the generated &lt;select&gt;);
+  * $optionText (text to show in each &lt;option&gt;; use &apos;%d&apos; where you want to see
     the number of pages selected)
-- added showAllText option for alternate text in the $showAllData <option>
+- added showAllText option for alternate text in the $showAllData &lt;option&gt;
   (the default is the number of total items).
 - fixed getPageData() when $pageID is specified (bug #1377) (thanks to Ian Eure)
 - added tests for getPageData()
-- avoid duplicate vars in querystring when using 'extraVars' option (bug #1383)
+- avoid duplicate vars in querystring when using &apos;extraVars&apos; option (bug #1383)
   (thanks to pauluz at gazeta dot pl)
-]]>
-            </notes>
-        </release>
-        <release>
-            <version>2.2.1</version>
-            <date>2004-04-15</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- PHP5 compatibility (fixed bug #812)
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.2.1</release>
+    <api>2.2.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-04-15</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- PHP5 compatibility (fixed bug #812)
 - Forced ucfirst() on filename too
-]]>
-            </notes>
-        </release>
-        <release>
-            <version>2.2.0</version>
-            <date>2004-01-23</date>
-            <state>stable</state>
-            <notes>
-<![CDATA[
-- Fixed handling of errors raised in common base class
-- Added an 'extraVars' option to add vars to the querystring
-- Added <link> tags building (patch by Joerg Bruckmann)
-- Fixed Bug #589 (common.php raise a notice if the querystring has no '=' character)
-- Use '&amp;' instead of '&' in urls for better XHTML conformance
-]]>
-            </notes>
-        </release>
-        <release>
-			<version>2.1.0</version>
-			<date>2003-12-22</date>
-			<license>BSD</license>
-			<state>stable</state>
-			<notes>
-<![CDATA[
-- Added getPageRangeByPageId()
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.2.0</release>
+    <api>2.2.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-01-23</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- Fixed handling of errors raised in common base class
+- Added an &apos;extraVars&apos; option to add vars to the querystring
+- Added &lt;link&gt; tags building (patch by Joerg Bruckmann)
+- Fixed Bug #589 (common.php raise a notice if the querystring has no &apos;=&apos; character)
+- Use &apos;&amp;amp;&apos; instead of &apos;&amp;&apos; in urls for better XHTML conformance
+
+            
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.1.0</release>
+    <api>2.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-12-22</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- Added getPageRangeByPageId()
 - Fix getOffsetByPageId() in Pager_Jumping when totalItems == 0.
 - Fix getOffsetByPageId() in Pager_Sliding for BC with Pager 1.x and Pager_Jumping.
   N.B.: its previous (not-indended) behaviour is now provided by the new getPageRangeByPageId() method.
 - Fix isFirstPage() when totalItems == 0
 - Added test suite.
-]]>
-			</notes>
-		</release>
-        <release>
-			<version>2.0</version>
-			<date>2003-09-10</date>
-			<license>BSD</license>
-			<state>stable</state>
-			<notes>
-<![CDATA[
-- New major version.
+
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.0</release>
+    <api>2.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-09-10</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- New major version.
 - Pager and Pager_Sliding are now merged in the same package.
   Every option available in Pager_Sliding is now also available
   in Pager. The API is the same as the old one, BC is kept 100%.
-- Switch between "Jumping" and "Sliding" window mode just setting
+- Switch between &quot;Jumping&quot; and &quot;Sliding&quot; window mode just setting
   an option.
 - Improved error handling.
-]]>
-			</notes>
-		</release>
-		<release>
-			<version>1.0.8</version>
-			<date>2003-09-10</date>
-			<license>BSD</license>
-			<state>stable</state>
-			<notes>
-- Minor patch for script_name vs php_self (not included in v.1.0.7)
+
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.8</release>
+    <api>1.0.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-09-10</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>- Minor patch for script_name vs php_self (not included in v.1.0.7)
 - Prevent URL modification
-			</notes>
-		</release>
-
-		<release>
-			<version>1.0.7</version>
-			<date>2002-12-01</date>
-			<license>BSD</license>
-			<state>stable</state>
-			<notes>
-Minor patch for script_name vs php_self
-			</notes>
-		</release>
-
-		<release>
-			<version>1.0.6</version>
-			<date>2002-09-08</date>
-			<license>BSD</license>
-			<state>stable</state>
-			<notes>
-Updated to no longer require an array of data. Now
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.7</release>
+    <api>1.0.7</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-12-01</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>Minor patch for script_name vs php_self
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.6</release>
+    <api>1.0.6</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-09-08</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>Updated to no longer require an array of data. Now
 can be used with just a number of items. Thanks to
 Christian Dickmann for the patch.
-			</notes>
-		</release>
-
-		<release>
-			<version>1.0.5</version>
-			<date>2002-07-27</date>
-			<license>PHP</license>
-			<state>stable</state>
-			<notes>
-Changed getCurrentPage() to getCurrentPageID() and
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.5</release>
+    <api>1.0.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-07-27</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>Changed getCurrentPage() to getCurrentPageID() and
 added getNextPageID() and getPreviousPageID()
-			</notes>
-		</release>
-
-		<release>
-			<version>1.0.4</version>
-			<date>2002-06-29</date>
-			<state>stable</state>
-			<notes>
-Changed getCurrentPage() to getCurrentPageID() and
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.4</release>
+    <api>1.0.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-06-29</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>Changed getCurrentPage() to getCurrentPageID() and
 added getNextPageID() and getPreviousPageID()
-			</notes>
-		</release>
-
-		<release>
-			<version>1.0.3</version>
-			<date>2002-05-31</date>
-			<state>stable</state>
-			<notes>
-Couple of minor bugs
-			</notes>
-		</release>
-
-		<release>
-			<version>1.0.2</version>
-			<date>2002-05-31</date>
-			<state>stable</state>
-			<notes>
-Applied patch from Christian Dickmann adding getCurrentPage(), numItems()
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.3</release>
+    <api>1.0.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-05-31</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>Couple of minor bugs
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.2</release>
+    <api>1.0.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-05-31</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>Applied patch from Christian Dickmann adding getCurrentPage(), numItems()
 and optional CSS class for links.
-			</notes>
-		</release>
-
-		<release>
-			<version>1.0.1</version>
-			<date>2002-05-27</date>
-			<state>stable</state>
-			<notes>
-o No longer barfs with no querystring
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-05-27</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>o No longer barfs with no querystring
 o Now works with associative data array
-			</notes>
-		</release>
-
-		<release>
-			<version>1.0</version>
-			<date>2002-02-09</date>
-			<state>stable</state>
-			<notes>
-This is the initial release of the Pager package.
-			</notes>
-		</release>
-	</changelog>
+			
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0</release>
+    <api>1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-02-09</date>
+   <license uri="http://www.php.net/license">PHP</license>
+   <notes>This is the initial release of the Pager package.
+			
+   </notes>
+  </release>
+ </changelog>
 </package>

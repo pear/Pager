@@ -40,7 +40,9 @@
  */
 function rewriteCountQuery($sql)
 {
-    if (preg_match('/^\s*SELECT\s+\bDISTINCT\b/is', $sql) || preg_match('/\s+GROUP\s+BY\s+/is', $sql)) {
+    if (preg_match('/^\s*SELECT\s+\bDISTINCT\b/is', $sql) ||
+        preg_match('/\s+GROUP\s+BY\s+/is', $sql) ||
+        preg_match('/\s+UNION\s+/is', $sql)) {
         return false;
     }
     $open_parenthesis = '(?:\()';

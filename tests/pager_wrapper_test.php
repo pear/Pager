@@ -45,6 +45,10 @@ class TestOfPagerWrapper extends UnitTestCase
         $query = 'SELECT DISTINCT a, b, c, d FROM  mytable WHERE a=1 GROUP BY c';
         $this->assertFalse(rewriteCountQuery($query));
 
+        //test UNION
+        $query = 'SELECT a FROM mytable1 UNION SELECT a FROM mytable2';
+        $this->assertFalse(rewriteCountQuery($query));
+
         //test MiXeD Keyword CaSe
         $query = 'SELECT a, b, c, d from mytable WHERE a=1 AND c="g"';
         $expected = 'SELECT COUNT(*) FROM mytable WHERE a=1 AND c="g"';

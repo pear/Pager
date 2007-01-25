@@ -115,6 +115,19 @@ class TestOfPager extends UnitTestCase {
         );
         $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(5, 15, 5, true, $params));
     }
+    function testSelectBoxWithShowAllAndFewValues() {
+        //test getPerPagerSelectBox() with $showAllData = true and $start > $totalItems
+        $options = array(
+            'itemData'    => range(1, 5),
+            'perPage'     => 5,
+            'showAllText' => 'Show All',
+        );
+        $this->pager = Pager::factory($options);
+        $selectBox  = '<select name="'.$this->pager->_sessionVar.'">';
+        $selectBox .= '<option value="'.max($this->pager->_itemData).'" selected="selected">Show All</option>';
+        $selectBox .= '</select>';
+        $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(25, 30, 1, true, array('checkMaxLimit' => true)));
+    }
     function testSelectBoxInvalid() {
         $err = $this->pager->getPerPageSelectBox(5, 15, 5, false, '%s bugs');
         $this->assertEqual(ERROR_PAGER_INVALID_PLACEHOLDER, $err->getCode());

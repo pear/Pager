@@ -130,7 +130,7 @@ class Pager_HtmlWidgets
             }
             $tmp .= '>'.sprintf($optionText, $i).'</option>';
         }
-        if ($showAllData && $last < $this->pager->_totalItems) {
+        if ($showAllData && $last != $this->pager->_totalItems) {
             $tmp .= '<option value="'.$this->pager->_totalItems.'"';
             if ($this->pager->_totalItems == $selected) {
                 $tmp .= ' selected="selected"';

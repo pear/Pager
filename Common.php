@@ -1391,7 +1391,7 @@ class Pager_Common
             if (strncasecmp($this->_fileName, 'javascript', 10) != 0) {
                 $this->_url .= '/';
             }
-            if (!strstr($this->_fileName, '%d')) {
+            if (strpos($this->_fileName, '%d') === false) {
                 trigger_error($this->errorMessage(ERROR_PAGER_INVALID_USAGE), E_USER_WARNING);
             }
         }

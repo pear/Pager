@@ -294,6 +294,19 @@ class TestOfPager extends UnitTestCase {
         $actual = $this->pager->_renderLink('', '');
         $this->assertEqual($expected, $actual);
     }
+    function testOnClick() {
+        $options = array(
+            'itemData'    => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'     => 5,
+            'linkClass'   => 'testclass',
+            'onclick'  => 'doSomething(%d)',
+        );
+        $this->pager =& Pager::factory($options);
+
+        $expected = '<a href="'.$_SERVER['PHP_SELF'].'?pageID=2" class="testclass" onclick="doSomething(2)" title=""></a>';
+        $actual = $this->pager->_renderLink('', '');
+        $this->assertEqual($expected, $actual);
+    }
     function testImportQuery() {
         //add some fake url vars
         $_GET['arr'] = array(

@@ -202,6 +202,12 @@ class Pager_Common
     var $_attributes  = '';
 
     /**
+     * @var string onclick
+     * @access private
+     */
+    var $_onclick = '';
+
+    /**
      * @var string alt text for "first page" (use "%d" placeholder for page number)
      * @access private
      */
@@ -446,6 +452,7 @@ class Pager_Common
         'expanded',
         'accesskey',
         'attributes',
+        'onclick',
         'separator',
         'spacesBeforeSeparator',
         'spacesAfterSeparator',
@@ -753,11 +760,16 @@ class Pager_Common
             } else {
                 $href = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_fileName);
             }
-            return sprintf('<a href="%s"%s%s%s title="%s">%s</a>',
+            $onclick = '';
+            if (array_key_exists($this->_urlVar, $this->_linkData)) {
+                $onclick = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_onclick);
+            }
+            return sprintf('<a href="%s"%s%s%s%s title="%s">%s</a>',
                            htmlentities($this->_url . $href),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,
                            empty($this->_accesskey)   ? '' : ' accesskey="'.$this->_linkData[$this->_urlVar].'"',
+                           empty($onclick)            ? '' : ' onclick="'.$onclick.'"',
                            $altText,
                            $linkText
             );

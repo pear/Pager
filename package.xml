@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2007-01-25</date>
- <time>10:44:27</time>
+ <date>2007-06-06</date>
+ <time>21:44:27</time>
  <version>
   <release>2.4.4</release>
   <api>2.4.4</api>
@@ -36,6 +36,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  <notes>- handle UNION queries in the Wrapper (bug #9601)
 - getPerPagerSelectBox() with $showAllData = true and $start > $totalItems was
   returning an empty select menu (bug #9946)
+- added 'onclick' option (request #11241)
  </notes>
  <contents>
   <dir name="/">
@@ -98,11 +99,12 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-01-25</date>
+   <date>2007-06-06</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- handle UNION queries in the Wrapper (bug #9601)
 - getPerPagerSelectBox() with $showAllData = true and $start > $totalItems was
   returning an empty select menu (bug #9946)
+- added 'onclick' option (request #11241)
    </notes>
   </release>
   <release>

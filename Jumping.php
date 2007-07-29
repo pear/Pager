@@ -91,9 +91,17 @@ class Pager_Jumping extends Pager_Common
         $this->_generatePageData();
         $this->_setFirstLastText();
 
+        if ($this->_totalPages > (2 * $this->_delta + 1)) {
+            $this->links .= $this->_printFirstPage();
+        }
+
         $this->links .= $this->_getBackLink();
         $this->links .= $this->_getPageLinks();
         $this->links .= $this->_getNextLink();
+
+        if ($this->_totalPages > (2 * $this->_delta + 1)) {
+            $this->links .= $this->_printLastPage();
+        }
 
         $this->linkTags .= $this->_getFirstLinkTag();
         $this->linkTags .= $this->_getPrevLinkTag();
@@ -188,13 +196,15 @@ class Pager_Jumping extends Pager_Common
         }
 
         if (!is_null($pageID)) {
-            $_sav = $this->_currentPage;
-            $this->_currentPage = $pageID;
 
             $this->links = '';
             if ($this->_totalPages > $this->_delta) {
                 $this->links .= $this->_printFirstPage();
             }
+
+            $_sav = $this->_currentPage;
+            $this->_currentPage = $pageID;
+
             $this->links .= $this->_getBackLink('', $back_html);
             $this->links .= $this->_getPageLinks();
             $this->links .= $this->_getNextLink('', $next_html);

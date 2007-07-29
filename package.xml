@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2007-06-06</date>
- <time>21:44:27</time>
+ <date>2007-07-29</date>
+ <time>10:25:27</time>
  <version>
   <release>2.4.4</release>
   <api>2.4.4</api>
@@ -37,6 +37,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - getPerPagerSelectBox() with $showAllData = true and $start > $totalItems was
   returning an empty select menu (bug #9946)
 - added 'onclick' option (request #11241)
+- fixed bug #11697: Pager_Jumping::build() lose first and last page string concatenation
  </notes>
  <contents>
   <dir name="/">
@@ -99,12 +100,13 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-06-06</date>
+   <date>2007-07-29</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- handle UNION queries in the Wrapper (bug #9601)
 - getPerPagerSelectBox() with $showAllData = true and $start > $totalItems was
   returning an empty select menu (bug #9946)
 - added 'onclick' option (request #11241)
+- fixed bug #11697: Pager_Jumping::build() lose first and last page string concatenation
    </notes>
   </release>
   <release>

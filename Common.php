@@ -200,7 +200,7 @@ class Pager_Common
      * @access private
      */
     var $_attributes  = '';
-
+    
     /**
      * @var string onclick
      * @access private
@@ -483,7 +483,7 @@ class Pager_Common
 
     // }}}
     // {{{ build()
-    
+
     /**
      * Generate or refresh the links and paged data after a call to setOptions()
      *
@@ -491,9 +491,29 @@ class Pager_Common
      */
     function build()
     {
-        $msg = '<b>PEAR::Pager Error:</b>'
-              .' function "build()" not implemented.';
-        return $this->raiseError($msg, ERROR_PAGER_NOT_IMPLEMENTED);
+        //reset
+        $this->_pageData = array();
+        $this->links = '';
+
+        $this->_generatePageData();
+        $this->_setFirstLastText();
+
+        if ($this->_totalPages > (2 * $this->_delta + 1)) {
+            $this->links .= $this->_printFirstPage();
+        }
+
+        $this->links .= $this->_getBackLink();
+        $this->links .= $this->_getPageLinks();
+        $this->links .= $this->_getNextLink();
+
+        $this->linkTags .= $this->_getFirstLinkTag();
+        $this->linkTags .= $this->_getPrevLinkTag();
+        $this->linkTags .= $this->_getNextLinkTag();
+        $this->linkTags .= $this->_getLastLinkTag();
+
+        if ($this->_totalPages > (2 * $this->_delta + 1)) {
+            $this->links .= $this->_printLastPage();
+        }
     }
 
     // }}}

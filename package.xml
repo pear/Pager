@@ -33,11 +33,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <api>stable</api>
  </stability>
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
- <notes>- handle UNION queries in the Wrapper (bug #9601)
-- getPerPagerSelectBox() with $showAllData = true and $start > $totalItems was
-  returning an empty select menu (bug #9946)
-- added 'onclick' option (request #11241)
-- fixed bug #11697: Pager_Jumping::build() lose first and last page string concatenation
+ <notes>- request #10869: added two reverse drivers in the /examples/ dir
  </notes>
  <contents>
   <dir name="/">
@@ -91,6 +87,20 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   </filelist>
  </phprelease>
  <changelog>
+  <release>
+   <version>
+    <release>2.4.5</release>
+    <api>2.4.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-07-29</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>- request #10869: added two reverse drivers in the /examples/ dir
+   </notes>
+  </release>
   <release>
    <version>
     <release>2.4.4</release>

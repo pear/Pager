@@ -592,7 +592,7 @@ class Pager_Common
      * @param integer PageID to get offsets for
      * @return array  First and last offsets
      */
-    function getPageRangeByPageId($pageID)
+    function getPageRangeByPageId($pageID = null)
     {
         $msg = '<b>PEAR::Pager Error:</b>'
               .' function "getPageRangeByPageId()" not implemented.';

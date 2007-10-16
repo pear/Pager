@@ -24,7 +24,7 @@ class TestOfPagerSlidingNoData extends UnitTestCase {
         $this->assertEqual(array(1, 0), $this->pager->getOffsetByPageId());
     }
     function testPageIdByOffset() {
-        $this->assertNull($this->pager->getPageIdByOffset());
+        $this->assertNull($this->pager->getPageIdByOffset(1));
     }
 }
 ?>

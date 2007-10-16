@@ -92,7 +92,7 @@ class Pager_Sliding extends Pager_Common
      * @deprecated
      * @access public
      */
-    function getPageIdByOffset($index=null) { }
+    function getPageIdByOffset($index) { }
 
     // }}}
     // {{{ getPageRangeByPageId()
@@ -143,9 +143,9 @@ class Pager_Sliding extends Pager_Common
      * @return array back/pages/next/first/last/all links
      * @access public
      */
-    function getLinks($pageID = null)
+    function getLinks($pageID = null, $dummy='')
     {
-        if ($pageID != null) {
+        if (!is_null($pageID)) {
             $_sav = $this->_currentPage;
             $this->_currentPage = $pageID;
 
@@ -169,7 +169,7 @@ class Pager_Sliding extends Pager_Common
         $all   = $this->links;
         $linkTags = $this->linkTags;
 
-        if ($pageID != null) {
+        if (!is_null($pageID)) {
             $this->_currentPage = $_sav;
         }
 

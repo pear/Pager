@@ -27,13 +27,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @copyright  2003-2007 Lorenzo Alberton
- * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @copyright 2003-2007 Lorenzo Alberton
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Pager
  */
 
 /**
@@ -45,12 +45,12 @@ require_once 'Pager/Jumping.php';
  * Pager_JumpingReverse - Generic data paging class  ("jumping window" style)
  * Usage examples can be found in the PEAR manual
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @copyright  2003-2007 Lorenzo Alberton
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @copyright 2003-2007 Lorenzo Alberton
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @link      http://pear.php.net/package/Pager
  */
 class Pager_JumpingReverse extends Pager_Jumping
 {
@@ -59,8 +59,7 @@ class Pager_JumpingReverse extends Pager_Jumping
     /**
      * Constructor
      *
-     * @param array $options    An associative array of option names
-     *                          and their values
+     * @param array $options Associative array of option names and their values
      * @access public
      */
     function Pager_JumpingReverse($options = array())
@@ -82,6 +81,7 @@ class Pager_JumpingReverse extends Pager_Jumping
     /**
      * Generate or refresh the links and paged data after a call to setOptions()
      *
+     * @return void
      * @access public
      */
     function build()
@@ -117,8 +117,8 @@ class Pager_JumpingReverse extends Pager_Jumping
     /**
      * Returns back link
      *
-     * @param $url  URL to use in the link  [deprecated: use the factory instead]
-     * @param $link HTML to use as the link [deprecated: use the factory instead]
+     * @param string $url  URL to use in the link  [deprecated: use the factory instead]
+     * @param string $link HTML to use as the link [deprecated: use the factory instead]
      * @return string The link
      * @access private
      */
@@ -147,8 +147,8 @@ class Pager_JumpingReverse extends Pager_Jumping
     /**
      * Returns next link
      *
-     * @param $url  URL to use in the link  [deprecated: use the factory instead]
-     * @param $link HTML to use as the link [deprecated: use the factory instead]
+     * @param string $url  URL to use in the link  [deprecated: use the factory instead]
+     * @param string $link HTML to use as the link [deprecated: use the factory instead]
      * @return string The link
      * @access private
      */
@@ -205,6 +205,8 @@ class Pager_JumpingReverse extends Pager_Jumping
 
     /**
      * Calculates all page data
+     *
+     * @return void
      * @access private
      */
 
@@ -241,8 +243,8 @@ class Pager_JumpingReverse extends Pager_Jumping
     /**
      * Returns pages link
      *
-     * @param $url  URL to use in the link
-     *              [deprecated: use the constructor instead]
+     * @param string $url URL to use in the link
+     *                    [deprecated: use the constructor instead]
      * @return string Links
      * @access private
      */

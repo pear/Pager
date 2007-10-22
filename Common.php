@@ -745,6 +745,7 @@ class Pager_Common
 
     /**
      * Calculates all page data
+     *
      * @return void
      * @access private
      */
@@ -957,6 +958,7 @@ class Pager_Common
 
     /**
      * Helper method
+     *
      * @param string|array &$var variable to clean
      * @return void
      * @access private
@@ -977,6 +979,7 @@ class Pager_Common
 
     /**
      * Helper method
+     *
      * @param string|array &$var variable to decode
      * @return void
      * @access private
@@ -1035,8 +1038,7 @@ class Pager_Common
      */
     function _getPageLinks($url='')
     {
-        $msg = '<b>PEAR::Pager Error:</b>'
-              .' function "_getPageLinks()" not implemented.';
+        $msg = 'function "_getPageLinks()" not implemented.';
         return $this->raiseError($msg, ERROR_PAGER_NOT_IMPLEMENTED);
     }
 
@@ -1075,7 +1077,7 @@ class Pager_Common
     // {{{ _getFirstLinkTag()
 
     /**
-     * Return the first link tag
+     * Returns first link tag
      *
      * @return string
      * @access private
@@ -1500,8 +1502,7 @@ class Pager_Common
     function getOption($name)
     {
         if (!in_array($name, $this->_allowed_options)) {
-            $msg = '<b>PEAR::Pager Error:</b>'
-                  .' invalid option: '.$name;
+            $msg = 'invalid option: '.$name;
             return $this->raiseError($msg, ERROR_PAGER_INVALID);
         }
         return $this->{'_' . $name};
@@ -1549,7 +1550,7 @@ class Pager_Common
             );
         }
 
-        return '<b>PEAR::Pager error:</b> '. (isset($errorMessages[$code]) ?
+        return (isset($errorMessages[$code]) ?
             $errorMessages[$code] : $errorMessages[ERROR_PAGER]);
     }
 

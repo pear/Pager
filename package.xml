@@ -36,6 +36,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  <notes>- request #10869: added two reverse drivers in the /examples/ dir
 - fixed a few PHP5 Strict Standards warnings (bug #12257)
 - Coding Standards fixes in the phpdoc blocks
+- added 'PAGER_' prefix to internal constant names
  </notes>
  <contents>
   <dir name="/">
@@ -103,6 +104,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    <notes>- request #10869: added two reverse drivers in the /examples/ dir
 - fixed a few PHP5 Strict Standards warnings (bug #12257)
 - Coding Standards fixes in the phpdoc blocks
+- added 'PAGER_' prefix to internal constant names
    </notes>
   </release>
   <release>

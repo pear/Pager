@@ -42,12 +42,12 @@
  * when the user doesn't set any other value
  */
 if (substr($_SERVER['PHP_SELF'], -1) == '/') {
-    $http = !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
-    define('CURRENT_FILENAME', '');
-    define('CURRENT_PATHNAME', $http.$_SERVER['HTTP_HOST'].str_replace('\\', '/', $_SERVER['PHP_SELF']));
+    $http = (isset($_SERVER['HTTPS']) && ('on' == strtolower($_SERVER['HTTPS']))) ? 'https://' : 'http://';
+    define('PAGER_CURRENT_FILENAME', '');
+    define('PAGER_CURRENT_PATHNAME', $http.$_SERVER['HTTP_HOST'].str_replace('\\', '/', $_SERVER['PHP_SELF']));
 } else {
-    define('CURRENT_FILENAME', preg_replace('/(.*)\?.*/', '\\1', basename($_SERVER['PHP_SELF'])));
-    define('CURRENT_PATHNAME', str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])));
+    define('PAGER_CURRENT_FILENAME', preg_replace('/(.*)\?.*/', '\\1', basename($_SERVER['PHP_SELF'])));
+    define('PAGER_CURRENT_PATHNAME', str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])));
 }
 /**
  * Error codes
@@ -121,13 +121,13 @@ class Pager_Common
      * @var string path name
      * @access private
      */
-    var $_path        = CURRENT_PATHNAME;
+    var $_path        = PAGER_CURRENT_PATHNAME;
 
     /**
      * @var string file name
      * @access private
      */
-    var $_fileName    = CURRENT_FILENAME;
+    var $_fileName    = PAGER_CURRENT_FILENAME;
 
     /**
      * @var boolean If false, don't override the fileName option. Use at your own risk.
@@ -397,7 +397,7 @@ class Pager_Common
      * Pear error mode (when raiseError is called)
      * (see PEAR doc)
      *
-     * @var int $_pearErrorMode
+     * @var integer $_pearErrorMode
      * @access private
      */
     var $_pearErrorMode = null;
@@ -487,8 +487,8 @@ class Pager_Common
     /**
      * Generate or refresh the links and paged data after a call to setOptions()
      *
-     * @access public
      * @return void
+     * @access public
      */
     function build()
     {
@@ -547,12 +547,12 @@ class Pager_Common
      * Returns pageID for given offset
      *
      * @param integer $index Offset to get pageID for
-     * @return int PageID for given offset
+     * @return integer PageID for given offset
+     * @access public
      */
     function getPageIdByOffset($index)
     {
-        $msg = '<b>PEAR::Pager Error:</b>'
-              .' function "getPageIdByOffset()" not implemented.';
+        $msg = 'function "getPageIdByOffset()" not implemented.';
         return $this->raiseError($msg, ERROR_PAGER_NOT_IMPLEMENTED);
     }
 
@@ -591,12 +591,12 @@ class Pager_Common
 
     /**
      * @param integer $pageID PageID to get offsets for
-     * @return array  First and last offsets
+     * @return array First and last offsets
+     * @access public
      */
     function getPageRangeByPageId($pageID = null)
     {
-        $msg = '<b>PEAR::Pager Error:</b>'
-              .' function "getPageRangeByPageId()" not implemented.';
+        $msg = 'function "getPageRangeByPageId()" not implemented.';
         return $this->raiseError($msg, ERROR_PAGER_NOT_IMPLEMENTED);
     }
 
@@ -618,11 +618,11 @@ class Pager_Common
      *                for that page are provided instead of current one.  [ADDED IN NEW PAGER VERSION]
      * @param string  $next_html HTML to put inside the next link [deprecated: use the factory instead]
      * @return array back/next/first/last and page links
+     * @access public
      */
     function getLinks($pageID=null, $next_html='')
     {
-        $msg = '<b>PEAR::Pager Error:</b>'
-              .' function "getLinks()" not implemented.';
+        $msg = 'function "getLinks()" not implemented.';
         return $this->raiseError($msg, ERROR_PAGER_NOT_IMPLEMENTED);
     }
 
@@ -633,6 +633,7 @@ class Pager_Common
      * Returns ID of current page
      *
      * @return integer ID of current page
+     * @access public
      */
     function getCurrentPageID()
     {
@@ -646,7 +647,8 @@ class Pager_Common
      * Returns next page ID. If current page is last page
      * this function returns FALSE
      *
-     * @return mixed Next page ID
+     * @return mixed Next page ID or false
+     * @access public
      */
     function getNextPageID()
     {
@@ -660,7 +662,8 @@ class Pager_Common
      * Returns previous page ID. If current page is first page
      * this function returns FALSE
      *
-     * @return mixed Previous pages' ID
+     * @return mixed Previous pages' ID or false
+     * @access public
      */
     function getPreviousPageID()
     {
@@ -673,7 +676,8 @@ class Pager_Common
     /**
      * Returns number of items
      *
-     * @return int Number of items
+     * @return integer Number of items
+     * @access public
      */
     function numItems()
     {
@@ -686,7 +690,8 @@ class Pager_Common
     /**
      * Returns number of pages
      *
-     * @return int Number of pages
+     * @return integer Number of pages
+     * @access public
      */
     function numPages()
     {
@@ -700,6 +705,7 @@ class Pager_Common
      * Returns whether current page is first page
      *
      * @return bool First page or not
+     * @access public
      */
     function isFirstPage()
     {
@@ -713,6 +719,7 @@ class Pager_Common
      * Returns whether current page is last page
      *
      * @return bool Last page or not
+     * @access public
      */
     function isLastPage()
     {
@@ -726,6 +733,7 @@ class Pager_Common
      * Returns whether last page is complete
      *
      * @return bool Last age complete or not
+     * @access public
      */
     function isLastPageComplete()
     {
@@ -1377,8 +1385,8 @@ class Pager_Common
     /**
      * conditionally includes PEAR base class and raise an error
      *
-     * @param string $msg  Error message
-     * @param int    $code Error code
+     * @param string  $msg  Error message
+     * @param integer $code Error code
      * @return PEAR_Error
      * @access private
      */
@@ -1424,7 +1432,7 @@ class Pager_Common
 
         if ($this->_append) {
             if ($this->_fixFileName) {
-                $this->_fileName = CURRENT_FILENAME; //avoid possible user error;
+                $this->_fileName = PAGER_CURRENT_FILENAME; //avoid possible user error;
             }
             $this->_url = $this->_path.'/'.$this->_fileName;
         } else {
@@ -1487,6 +1495,7 @@ class Pager_Common
      *
      * @param string $option option name
      * @return mixed option value
+     * @access public
      */
     function getOption($name)
     {
@@ -1505,6 +1514,7 @@ class Pager_Common
      * Return an array with all the current pager options
      *
      * @return array list of all the pager options
+     * @access public
      */
     function getOptions()
     {
@@ -1521,8 +1531,8 @@ class Pager_Common
     /**
      * Return a textual error message for a PAGER error code
      *
-     * @param   int     $code error code
-     * @return  string  error message
+     * @param integer $code error code
+     * @return string error message
      * @access public
      */
     function errorMessage($code)

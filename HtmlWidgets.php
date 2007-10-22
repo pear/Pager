@@ -27,18 +27,24 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @copyright  2003-2006 Lorenzo Alberton
- * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @copyright 2003-2007 Lorenzo Alberton
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Pager
  */
 
 /**
- * Two constants used to guess the path- and file-name of the page
- * when the user doesn't set any other value
+ * Pager_HtmlWidgets
+ *
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @copyright 2003-2007 Lorenzo Alberton
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @link      http://pear.php.net/package/Pager
  */
 class Pager_HtmlWidgets
 {
@@ -46,6 +52,11 @@ class Pager_HtmlWidgets
     
     // {{{ constructor
     
+    /**
+     * Constructor
+     *
+     * @param &$pager Pager instance
+     */
     function Pager_HtmlWidgets(&$pager)
     {
         $this->pager =& $pager;
@@ -61,11 +72,11 @@ class Pager_HtmlWidgets
      * a session var. The string isn't echoed right now so you can use it
      * with template engines.
      *
-     * @param integer $start
-     * @param integer $end
-     * @param integer $step
+     * @param integer $start       starting value for the select menu
+     * @param integer $end         ending value for the select menu
+     * @param integer $step        step between values in the select menu
      * @param boolean $showAllData If true, perPage is set equal to totalItems.
-     * @param array   (or string $optionText for BC reasons)
+     * @param array   $extraParams (or string $optionText for BC reasons)
      *                - 'optionText': text to show in each option.
      *                  Use '%d' where you want to see the number of pages selected.
      *                - 'attributes': (html attributes) Tag attributes or
@@ -154,11 +165,11 @@ class Pager_HtmlWidgets
      * Returns a string with a XHTML SELECT menu with the page numbers,
      * useful as an alternative to the links
      *
-     * @param array   - 'optionText': text to show in each option.
+     * @param array  $params  - 'optionText': text to show in each option.
      *                  Use '%d' where you want to see the number of pages selected.
      *                - 'autoSubmit': if TRUE, add some js code to submit the
      *                  form on the onChange event
-     * @param string    $extraAttributes (html attributes) Tag attributes or
+     * @param string $extraAttributes (html attributes) Tag attributes or
      *                  HTML attributes (id="foo" pairs), will be inserted in the
      *                  <select> tag
      * @return string xhtml select box

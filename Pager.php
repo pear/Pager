@@ -27,27 +27,27 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @author     Richard Heyes <richard@phpguru.org>
- * @copyright  2003-2006 Lorenzo Alberton, Richard Heyes
- * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @author    Richard Heyes <richard@phpguru.org>
+ * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Pager
  */
 
 /**
  * Pager - Wrapper class for [Sliding|Jumping]-window Pager
  * Usage examples can be found in the PEAR manual
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @author     Richard Heyes <richard@phpguru.org>,
- * @copyright  2003-2005 Lorenzo Alberton, Richard Heyes
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @author    Richard Heyes <richard@phpguru.org>,
+ * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @link      http://pear.php.net/package/Pager
  */
 class Pager
 {

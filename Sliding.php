@@ -27,13 +27,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @copyright  2003-2006 Lorenzo Alberton
- * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @copyright 2003-2007 Lorenzo Alberton
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Pager
  */
 
 /**
@@ -45,12 +45,12 @@ require_once 'Pager/Common.php';
  * Pager_Sliding - Generic data paging class  ("sliding window" style)
  * Usage examples can be found in the PEAR manual
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @copyright  2003-2005 Lorenzo Alberton
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @copyright 2003-2007 Lorenzo Alberton
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @link      http://pear.php.net/package/Pager
  */
 class Pager_Sliding extends Pager_Common
 {
@@ -59,8 +59,7 @@ class Pager_Sliding extends Pager_Common
     /**
      * Constructor
      *
-     * @param array $options    An associative array of option names
-     *                          and their values
+     * @param array $options Associative array of option names and their values
      * @access public
      */
     function Pager_Sliding($options = array())
@@ -89,10 +88,13 @@ class Pager_Sliding extends Pager_Common
     /**
      * "Overload" PEAR::Pager method. VOID. Not needed here...
      * @param integer $index Offset to get pageID for
+     * @return void
      * @deprecated
      * @access public
      */
-    function getPageIdByOffset($index) { }
+    function getPageIdByOffset($index)
+    {
+    }
 
     // }}}
     // {{{ getPageRangeByPageId()
@@ -105,7 +107,7 @@ class Pager_Sliding extends Pager_Common
      * PageID of 9 would give you (4, 8).
      * If the method is called without parameter, pageID is set to currentPage#.
      *
-     * @param integer PageID to get offsets for
+     * @param integer $pageid PageID to get offsets for
      * @return array  First and last offsets
      * @access public
      */
@@ -140,6 +142,8 @@ class Pager_Sliding extends Pager_Common
      *
      * @param integer $pageID Optional pageID. If specified, links
      *                for that page are provided instead of current one.
+     * @param string  $dummy used to comply with parent signature (leave empty)
+     *
      * @return array back/pages/next/first/last/all links
      * @access public
      */
@@ -197,6 +201,7 @@ class Pager_Sliding extends Pager_Common
     /**
      * Returns pages link
      *
+     * @param string $url URL string [deprecated]
      * @return string Links
      * @access private
      */

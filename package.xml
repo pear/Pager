@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2007-10-16</date>
- <time>23:01:27</time>
+ <date>2007-10-22</date>
+ <time>16:13:27</time>
  <version>
   <release>2.4.5</release>
   <api>2.4.5</api>
@@ -35,6 +35,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
  <notes>- request #10869: added two reverse drivers in the /examples/ dir
 - fixed a few PHP5 Strict Standards warnings (bug #12257)
+- Coding Standards fixes in the phpdoc blocks
  </notes>
  <contents>
   <dir name="/">
@@ -97,10 +98,11 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-10-16</date>
+   <date>2007-10-22</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- request #10869: added two reverse drivers in the /examples/ dir
-fixed a few PHP5 Strict Standards warnings (bug #12257)
+- fixed a few PHP5 Strict Standards warnings (bug #12257)
+- Coding Standards fixes in the phpdoc blocks
    </notes>
   </release>
   <release>

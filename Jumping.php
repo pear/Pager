@@ -27,14 +27,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @author     Richard Heyes <richard@phpguru.org>,
- * @copyright  2003-2006 Lorenzo Alberton, Richard Heyes
- * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @author    Richard Heyes <richard@phpguru.org>,
+ * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Pager
  */
 
 /**
@@ -46,13 +46,13 @@ require_once 'Pager/Common.php';
  * Pager_Jumping - Generic data paging class  ("jumping window" style)
  * Handles paging a set of data. For usage see the example.php provided.
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @author     Richard Heyes <richard@phpguru.org>,
- * @copyright  2003-2005 Lorenzo Alberton, Richard Heyes
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @author    Richard Heyes <richard@phpguru.org>,
+ * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @link      http://pear.php.net/package/Pager
  */
 class Pager_Jumping extends Pager_Common
 {
@@ -61,8 +61,7 @@ class Pager_Jumping extends Pager_Common
     /**
      * Constructor
      *
-     * @param array $options    An associative array of option names
-     *                          and their values
+     * @param array $options Associative array of option names and their values
      * @access public
      */
     function Pager_Jumping($options = array())
@@ -80,7 +79,7 @@ class Pager_Jumping extends Pager_Common
     /**
      * Returns pageID for given offset
      *
-     * @param $index Offset to get pageID for
+     * @param integer $index Offset to get pageID for
      * @return int PageID for given offset
      */
     function getPageIdByOffset($index)
@@ -109,7 +108,7 @@ class Pager_Jumping extends Pager_Common
      * PageID of 11 would give you (11, 20).
      * If the method is called without parameter, pageID is set to currentPage#.
      *
-     * @param integer PageID to get offsets for
+     * @param integer $pageid PageID to get offsets for
      * @return array  First and last offsets
      * @access public
      */
@@ -213,8 +212,8 @@ class Pager_Jumping extends Pager_Common
     /**
      * Returns pages link
      *
-     * @param $url  URL to use in the link
-     *              [deprecated: use the constructor instead]
+     * @param string $url URL to use in the link
+     *                    [deprecated: use the constructor instead]
      * @return string Links
      * @access private
      */

@@ -27,14 +27,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @author     Richard Heyes <richard@phpguru.org>
- * @copyright  2003-2006 Lorenzo Alberton, Richard Heyes
- * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @author    Richard Heyes <richard@phpguru.org>
+ * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Pager
  */
 
 /**
@@ -63,13 +63,13 @@ define('ERROR_PAGER_NOT_IMPLEMENTED',     -5);
  * Pager_Common - Common base class for [Sliding|Jumping] Window Pager
  * Extend this class to write a custom paging class
  *
- * @category   HTML
- * @package    Pager
- * @author     Lorenzo Alberton <l dot alberton at quipo dot it>
- * @author     Richard Heyes <richard@phpguru.org>
- * @copyright  2003-2005 Lorenzo Alberton, Richard Heyes
- * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Lorenzo Alberton <l.alberton@quipo.it>
+ * @author    Richard Heyes <richard@phpguru.org>
+ * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @link      http://pear.php.net/package/Pager
  */
 class Pager_Common
 {
@@ -128,7 +128,7 @@ class Pager_Common
      * @access private
      */
     var $_fileName    = CURRENT_FILENAME;
-    
+
     /**
      * @var boolean If false, don't override the fileName option. Use at your own risk.
      * @access private
@@ -146,7 +146,7 @@ class Pager_Common
      * @access private
      */
     var $_httpMethod  = 'GET';
-    
+
     /**
      * @var string specifies which HTML form to use
      * @access private
@@ -176,7 +176,7 @@ class Pager_Common
      * @access private
      */
     var $_extraVars   = array();
-    
+
     /**
      * @var array URL vars to ignore
      * @access private
@@ -188,7 +188,7 @@ class Pager_Common
      * @access private
      */
     var $_expanded    = true;
-    
+
     /**
      * @var boolean TRUE => show accesskey attribute on <a> tags
      * @access private
@@ -200,7 +200,7 @@ class Pager_Common
      * @access private
      */
     var $_attributes  = '';
-    
+
     /**
      * @var string onclick
      * @access private
@@ -424,7 +424,7 @@ class Pager_Common
      * @access public
      */
     var $range = array();
-    
+
     /**
      * @var array list of available options (safety check)
      * @access private
@@ -488,12 +488,13 @@ class Pager_Common
      * Generate or refresh the links and paged data after a call to setOptions()
      *
      * @access public
+     * @return void
      */
     function build()
     {
         //reset
         $this->_pageData = array();
-        $this->links = '';
+        $this->links     = '';
 
         $this->_generatePageData();
         $this->_setFirstLastText();
@@ -522,7 +523,7 @@ class Pager_Common
     /**
      * Returns an array of current pages data
      *
-     * @param $pageID Desired page ID (optional)
+     * @param integer $pageID Desired page ID (optional)
      * @return array Page data
      * @access public
      */
@@ -545,7 +546,7 @@ class Pager_Common
     /**
      * Returns pageID for given offset
      *
-     * @param $index Offset to get pageID for
+     * @param integer $index Offset to get pageID for
      * @return int PageID for given offset
      */
     function getPageIdByOffset($index)
@@ -564,7 +565,7 @@ class Pager_Common
      * it will return (1, 10). PageID of 2 would
      * give you (11, 20).
      *
-     * @param integer PageID to get offsets for
+     * @param integer $pageID PageID to get offsets for
      * @return array  First and last offsets
      * @access public
      */
@@ -589,7 +590,7 @@ class Pager_Common
     // {{{ getPageRangeByPageId()
 
     /**
-     * @param integer PageID to get offsets for
+     * @param integer $pageID PageID to get offsets for
      * @return array  First and last offsets
      */
     function getPageRangeByPageId($pageID = null)
@@ -615,7 +616,7 @@ class Pager_Common
      *
      * @param integer $pageID Optional pageID. If specified, links
      *                for that page are provided instead of current one.  [ADDED IN NEW PAGER VERSION]
-     * @param  string $next_html HTML to put inside the next link [deprecated: use the factory instead]
+     * @param string  $next_html HTML to put inside the next link [deprecated: use the factory instead]
      * @return array back/next/first/last and page links
      */
     function getLinks($pageID=null, $next_html='')
@@ -643,28 +644,28 @@ class Pager_Common
 
     /**
      * Returns next page ID. If current page is last page
-	 * this function returns FALSE
-	 *
-	 * @return mixed Next page ID
+     * this function returns FALSE
+     *
+     * @return mixed Next page ID
      */
-	function getNextPageID()
-	{
-		return ($this->getCurrentPageID() == $this->numPages() ? false : $this->getCurrentPageID() + 1);
-	}
+    function getNextPageID()
+    {
+        return ($this->getCurrentPageID() == $this->numPages() ? false : $this->getCurrentPageID() + 1);
+    }
 
-	// }}}
+    // }}}
     // {{{ getPreviousPageID()
 
     /**
      * Returns previous page ID. If current page is first page
-	 * this function returns FALSE
-	 *
-	 * @return mixed Previous pages' ID
+     * this function returns FALSE
+     *
+     * @return mixed Previous pages' ID
      */
-	function getPreviousPageID()
-	{
-		return $this->isFirstPage() ? false : $this->getCurrentPageID() - 1;
-	}
+    function getPreviousPageID()
+    {
+        return $this->isFirstPage() ? false : $this->getCurrentPageID() - 1;
+    }
 
     // }}}
     // {{{ numItems()
@@ -736,6 +737,7 @@ class Pager_Common
 
     /**
      * Calculates all page data
+     * @return void
      * @access private
      */
     function _generatePageData()
@@ -767,8 +769,8 @@ class Pager_Common
     /**
      * Renders a link using the appropriate method
      *
-     * @param altText Alternative text for this link (title property)
-     * @param linkText Text contained by this link
+     * @param string $altText Alternative text for this link (title property)
+     * @param string $linkText Text contained by this link
      * @return string The link in string form
      * @access private
      */
@@ -847,7 +849,7 @@ class Pager_Common
         } else {
             $str = 'var form = document.createElement("form"); var input = ""; ';
         }
-        
+
         // We /shouldn't/ need to escape the URL ...
         $str .= sprintf('form.action = "%s"; ', htmlentities($formAction));
         $str .= sprintf('form.method = "%s"; ', $this->_httpMethod);
@@ -858,7 +860,7 @@ class Pager_Common
         if (empty($this->_formID)) {
             $str .= 'document.getElementsByTagName("body")[0].appendChild(form);';
         }
-        
+
         $str .= 'form.submit(); return false;';
         return $str;
     }
@@ -867,11 +869,11 @@ class Pager_Common
     // {{{ _generateFormOnClickHelper
 
     /**
-     * This is used by _generateFormOnClick(). 
+     * This is used by _generateFormOnClick().
      * Recursively processes the arrays, objects, and literal values.
      *
-     * @param data Data that should be rendered
-     * @param prev The name so far
+     * @param mixed  $data Data that should be rendered
+     * @param string $prev The name so far
      * @return string A string of Javascript that creates form inputs
      *                representing the data
      * @access private
@@ -932,11 +934,11 @@ class Pager_Common
                 unset($qs[$exclude]);
             }
         }
-        if (count($this->_extraVars)){
+        if (count($this->_extraVars)) {
             $this->_recursive_urldecode($this->_extraVars);
             $qs = array_merge($qs, $this->_extraVars);
         }
-        if (count($qs) && get_magic_quotes_gpc()){
+        if (count($qs) && get_magic_quotes_gpc()) {
             $this->_recursive_stripslashes($qs);
         }
         return $qs;
@@ -944,10 +946,11 @@ class Pager_Common
 
     // }}}
     // {{{ _recursive_stripslashes()
-    
+
     /**
      * Helper method
-     * @param mixed $var
+     * @param string|array &$var variable to clean
+     * @return void
      * @access private
      */
     function _recursive_stripslashes(&$var)
@@ -966,7 +969,8 @@ class Pager_Common
 
     /**
      * Helper method
-     * @param mixed $var
+     * @param string|array &$var variable to decode
+     * @return void
      * @access private
      */
     function _recursive_urldecode(&$var)
@@ -987,8 +991,8 @@ class Pager_Common
     /**
      * Returns back link
      *
-     * @param $url  URL to use in the link  [deprecated: use the factory instead]
-     * @param $link HTML to use as the link [deprecated: use the factory instead]
+     * @param string $url  URL to use in the link  [deprecated: use the factory instead]
+     * @param string $link HTML to use as the link [deprecated: use the factory instead]
      * @return string The link
      * @access private
      */
@@ -1017,7 +1021,7 @@ class Pager_Common
     /**
      * Returns pages link
      *
-     * @param $url  URL to use in the link [deprecated: use the factory instead]
+     * @param string $url URL to use in the link [deprecated: use the factory instead]
      * @return string Links
      * @access private
      */
@@ -1034,8 +1038,8 @@ class Pager_Common
     /**
      * Returns next link
      *
-     * @param $url  URL to use in the link  [deprecated: use the factory instead]
-     * @param $link HTML to use as the link [deprecated: use the factory instead]
+     * @param string $url  URL to use in the link  [deprecated: use the factory instead]
+     * @param string $link HTML to use as the link [deprecated: use the factory instead]
      * @return string The link
      * @access private
      */
@@ -1063,6 +1067,8 @@ class Pager_Common
     // {{{ _getFirstLinkTag()
 
     /**
+     * Return the first link tag
+     *
      * @return string
      * @access private
      */
@@ -1140,6 +1146,8 @@ class Pager_Common
 
     /**
      * Helper method
+     *
+     * @param integer $pageID page ID
      * @return string the link tag url
      * @access private
      */
@@ -1153,7 +1161,7 @@ class Pager_Common
         }
         return htmlentities($this->_url . $href);
     }
-    
+
     // }}}
     // {{{ getPerPageSelectBox()
 
@@ -1164,11 +1172,11 @@ class Pager_Common
      * a session var. The string isn't echoed right now so you can use it
      * with template engines.
      *
-     * @param integer $start
-     * @param integer $end
-     * @param integer $step
+     * @param integer $start       starting value for the select menu
+     * @param integer $end         ending value for the select menu
+     * @param integer $step        step between values in the select menu
      * @param boolean $showAllData If true, perPage is set equal to totalItems.
-     * @param array   (or string $optionText for BC reasons)
+     * @param array   $extraParams (or string $optionText for BC reasons)
      *                - 'optionText': text to show in each option.
      *                  Use '%d' where you want to see the number of pages selected.
      *                - 'attributes': (html attributes) Tag attributes or
@@ -1179,7 +1187,7 @@ class Pager_Common
      */
     function getPerPageSelectBox($start=5, $end=30, $step=5, $showAllData=false, $extraParams=array())
     {
-        require_once 'Pager/HtmlWidgets.php';
+        include_once 'Pager/HtmlWidgets.php';
         $widget =& new Pager_HtmlWidgets($this);
         return $widget->getPerPageSelectBox($start, $end, $step, $showAllData, $extraParams);
     }
@@ -1191,11 +1199,11 @@ class Pager_Common
      * Returns a string with a XHTML SELECT menu with the page numbers,
      * useful as an alternative to the links
      *
-     * @param array   - 'optionText': text to show in each option.
+     * @param array  $params  - 'optionText': text to show in each option.
      *                  Use '%d' where you want to see the number of pages selected.
      *                - 'autoSubmit': if TRUE, add some js code to submit the
      *                  form on the onChange event
-     * @param string   $extraAttributes (html attributes) Tag attributes or
+     * @param string $extraAttributes (html attributes) Tag attributes or
      *                  HTML attributes (id="foo" pairs), will be inserted in the
      *                  <select> tag
      * @return string xhtml select box
@@ -1203,7 +1211,7 @@ class Pager_Common
      */
     function getPageSelectBox($params = array(), $extraAttributes = '')
     {
-        require_once 'Pager/HtmlWidgets.php';
+        include_once 'Pager/HtmlWidgets.php';
         $widget =& new Pager_HtmlWidgets($this);
         return $widget->getPageSelectBox($params, $extraAttributes);
     }
@@ -1259,6 +1267,7 @@ class Pager_Common
      * sets the private _firstPageText, _lastPageText variables
      * based on whether they were set in the options
      *
+     * @return void
      * @access private
      */
     function _setFirstLastText()
@@ -1273,17 +1282,14 @@ class Pager_Common
 
     // }}}
     // {{{ _http_build_query_wrapper()
-    
+
     /**
      * This is a slightly modified version of the http_build_query() function;
      * it heavily borrows code from PHP_Compat's http_build_query().
      * The main change is the usage of htmlentities instead of urlencode,
      * since it's too aggressive
      *
-     * @author Stephan Schmidt <schst@php.net>
-     * @author Aidan Lister <aidan@php.net>
-     * @author Lorenzo Alberton <l dot alberton at quipo dot it>
-     * @param array $data
+     * @param array $data array of querystring values
      * @return string
      * @access private
      */
@@ -1319,8 +1325,10 @@ class Pager_Common
 
     /**
      * Helper function
-     * @author Stephan Schmidt <schst@php.net>
-     * @author Aidan Lister <aidan@php.net>
+     *
+     * @param array  $array array of querystring values
+     * @param string $name  key
+     * @return string
      * @access private
      */
     function __http_build_query($array, $name)
@@ -1351,11 +1359,12 @@ class Pager_Common
     /**
      * Helper function
      * Check if a string is an encoded multibyte string
-     * @param string $string
+     *
+     * @param string $string string to check
      * @return boolean
      * @access private
      */
-    
+
     function _isEncoded($string)
     {
         $hexchar = '&#[\dA-Fx]{2,};';
@@ -1370,6 +1379,7 @@ class Pager_Common
      *
      * @param string $msg  Error message
      * @param int    $code Error code
+     * @return PEAR_Error
      * @access private
      */
     function raiseError($msg, $code)
@@ -1387,8 +1397,7 @@ class Pager_Common
     /**
      * Set and sanitize options
      *
-     * @param mixed $options    An associative array of option names and
-     *                          their values.
+     * @param mixed $options An associative array of option names and their values
      * @return integer error code (PAGER_OK on success)
      * @access public
      */
@@ -1472,11 +1481,11 @@ class Pager_Common
 
     // }}}
     // {{{ getOption()
-    
+
     /**
      * Return the current value of a given option
      *
-     * @param string option name
+     * @param string $option option name
      * @return mixed option value
      */
     function getOption($name)

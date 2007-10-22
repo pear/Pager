@@ -23,7 +23,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <active>no</active>
  </lead>
  <date>2007-10-22</date>
- <time>16:13:27</time>
+ <time>23:27:27</time>
  <version>
   <release>2.4.5</release>
   <api>2.4.5</api>
@@ -37,6 +37,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - fixed a few PHP5 Strict Standards warnings (bug #12257)
 - Coding Standards fixes in the phpdoc blocks
 - added 'PAGER_' prefix to internal constant names
+- fixed bug #12267: correct detection of HTTPS on IIS (thanks to Carsten Wiedmann)
  </notes>
  <contents>
   <dir name="/">
@@ -105,6 +106,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - fixed a few PHP5 Strict Standards warnings (bug #12257)
 - Coding Standards fixes in the phpdoc blocks
 - added 'PAGER_' prefix to internal constant names
+- fixed bug #12267: correct detection of HTTPS on IIS (thanks to Carsten Wiedmann)
    </notes>
   </release>
   <release>

@@ -6,16 +6,16 @@
  *
  * PHP versions 4 and 5
  *
- * @category   HTML
- * @package    Pager
- * @author     Richard Heyes <richard@phpguru.org>
- * @copyright  2003 Richard Heyes
- * @license    http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Pager
+ * @category  HTML
+ * @package   Pager
+ * @author    Richard Heyes <richard@phpguru.org>
+ * @copyright 2003 Richard Heyes
+ * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Pager
  */
 
-include 'Pager.php';
+require 'Pager.php';
 
 $params = array(
     'totalItems' => 1600,
@@ -46,7 +46,7 @@ list($from, $to) = $pager->getOffsetByPageId();
 
 	<tr>
 		<td colspan="3">
-			<pre><?print_r($data)?></pre>
+			<pre><?php print_r($data); ?></pre>
 		</td>
 	</tr>
 </table>

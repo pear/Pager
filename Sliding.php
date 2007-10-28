@@ -60,6 +60,7 @@ class Pager_Sliding extends Pager_Common
      * Constructor
      *
      * @param array $options Associative array of option names and their values
+     *
      * @access public
      */
     function Pager_Sliding($options = array())
@@ -87,7 +88,9 @@ class Pager_Sliding extends Pager_Common
 
     /**
      * "Overload" PEAR::Pager method. VOID. Not needed here...
+     *
      * @param integer $index Offset to get pageID for
+     *
      * @return void
      * @deprecated
      * @access public
@@ -108,6 +111,7 @@ class Pager_Sliding extends Pager_Common
      * If the method is called without parameter, pageID is set to currentPage#.
      *
      * @param integer $pageid PageID to get offsets for
+     *
      * @return array  First and last offsets
      * @access public
      */
@@ -140,9 +144,9 @@ class Pager_Sliding extends Pager_Common
      * Returns back/next/first/last and page links,
      * both as ordered and associative array.
      *
-     * @param integer $pageID Optional pageID. If specified, links
-     *                for that page are provided instead of current one.
-     * @param string  $dummy used to comply with parent signature (leave empty)
+     * @param integer $pageID Optional pageID. If specified, links for that page
+     *                        are provided instead of current one.
+     * @param string  $dummy  used to comply with parent signature (leave empty)
      *
      * @return array back/pages/next/first/last/all links
      * @access public
@@ -202,6 +206,7 @@ class Pager_Sliding extends Pager_Common
      * Returns pages link
      *
      * @param string $url URL string [deprecated]
+     *
      * @return string Links
      * @access private
      */

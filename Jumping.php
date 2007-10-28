@@ -30,7 +30,7 @@
  * @category  HTML
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @author    Richard Heyes <richard@phpguru.org>,
+ * @author    Richard Heyes <richard@phpguru.org>
  * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
@@ -49,7 +49,7 @@ require_once 'Pager/Common.php';
  * @category  HTML
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @author    Richard Heyes <richard@phpguru.org>,
+ * @author    Richard Heyes <richard@phpguru.org>
  * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Pager
@@ -62,6 +62,7 @@ class Pager_Jumping extends Pager_Common
      * Constructor
      *
      * @param array $options Associative array of option names and their values
+     *
      * @access public
      */
     function Pager_Jumping($options = array())
@@ -80,6 +81,7 @@ class Pager_Jumping extends Pager_Common
      * Returns pageID for given offset
      *
      * @param integer $index Offset to get pageID for
+     *
      * @return int PageID for given offset
      */
     function getPageIdByOffset($index)
@@ -109,6 +111,7 @@ class Pager_Jumping extends Pager_Common
      * If the method is called without parameter, pageID is set to currentPage#.
      *
      * @param integer $pageid PageID to get offsets for
+     *
      * @return array  First and last offsets
      * @access public
      */
@@ -142,11 +145,12 @@ class Pager_Jumping extends Pager_Common
      * the method act as it previously did. This hack's only purpose is to
      * mantain backward compatibility.
      *
-     * @param integer $pageID Optional pageID. If specified, links
-     *                for that page are provided instead of current one.
-     *                [ADDED IN NEW PAGER VERSION]
-     * @param  string $next_html HTML to put inside the next link
-     *                [deprecated: use the constructor instead]
+     * @param integer $pageID    Optional pageID. If specified, links for that 
+     *                           page are provided instead of current one.
+     *                           [ADDED IN NEW PAGER VERSION]
+     * @param string  $next_html HTML to put inside the next link
+     *                           [deprecated: use the factory instead]
+     *
      * @return array Back/pages/next links
      */
     function getLinks($pageID=null, $next_html='')
@@ -214,6 +218,7 @@ class Pager_Jumping extends Pager_Common
      *
      * @param string $url URL to use in the link
      *                    [deprecated: use the constructor instead]
+     *
      * @return string Links
      * @access private
      */

@@ -44,7 +44,7 @@
  * @category  HTML
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @author    Richard Heyes <richard@phpguru.org>,
+ * @author    Richard Heyes <richard@phpguru.org>
  * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Pager
@@ -134,8 +134,8 @@ class Pager
      *  - itemData OR totalItems (if itemData is set, totalItems is overwritten)
      * -------------------------------------------------------------------------
      *
-     * @param mixed $options    An associative array of option names and
-     *                          their values.
+     * @param mixed $options Associative array of option names and their values
+     *
      * @access public
      */
     function Pager($options = array())
@@ -160,7 +160,7 @@ class Pager
     /**
      * Return a pager based on $mode and $options
      *
-     * @param array $options Optional parameters for the storage class
+     * @param  array $options Optional parameters for the storage class
      * @return object Storage object
      * @static
      * @access public

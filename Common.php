@@ -524,6 +524,7 @@ class Pager_Common
      * Returns an array of current pages data
      *
      * @param integer $pageID Desired page ID (optional)
+     *
      * @return array Page data
      * @access public
      */
@@ -547,6 +548,7 @@ class Pager_Common
      * Returns pageID for given offset
      *
      * @param integer $index Offset to get pageID for
+     *
      * @return integer PageID for given offset
      * @access public
      */
@@ -566,31 +568,33 @@ class Pager_Common
      * give you (11, 20).
      *
      * @param integer $pageID PageID to get offsets for
+     *
      * @return array  First and last offsets
      * @access public
      */
-    function getOffsetByPageId($pageid = null)
+    function getOffsetByPageId($pageID = null)
     {
-        $pageid = isset($pageid) ? $pageid : $this->_currentPage;
+        $pageID = isset($pageID) ? $pageID : $this->_currentPage;
         if (!isset($this->_pageData)) {
             $this->_generatePageData();
         }
 
-        if (isset($this->_pageData[$pageid]) || is_null($this->_itemData)) {
+        if (isset($this->_pageData[$pageID]) || is_null($this->_itemData)) {
             return array(
-                        max(($this->_perPage * ($pageid - 1)) + 1, 1),
-                        min($this->_totalItems, $this->_perPage * $pageid)
+                        max(($this->_perPage * ($pageID - 1)) + 1, 1),
+                        min($this->_totalItems, $this->_perPage * $pageID)
                    );
-        } else {
-            return array(0, 0);
         }
+        return array(0, 0);
     }
 
     // }}}
     // {{{ getPageRangeByPageId()
 
     /**
+     *
      * @param integer $pageID PageID to get offsets for
+     *
      * @return array First and last offsets
      * @access public
      */
@@ -614,9 +618,12 @@ class Pager_Common
      * the method act as it previously did. This hack was done to mantain
      * backward compatibility only.
      *
-     * @param integer $pageID Optional pageID. If specified, links
-     *                for that page are provided instead of current one.  [ADDED IN NEW PAGER VERSION]
-     * @param string  $next_html HTML to put inside the next link [deprecated: use the factory instead]
+     * @param integer $pageID    Optional pageID. If specified, links for that
+     *                           page are provided instead of current one.
+     *                           [ADDED IN NEW PAGER VERSION]
+     * @param string  $next_html HTML to put inside the next link
+     *                           [deprecated: use the factory instead]
+     *
      * @return array back/next/first/last and page links
      * @access public
      */
@@ -778,8 +785,9 @@ class Pager_Common
     /**
      * Renders a link using the appropriate method
      *
-     * @param string $altText Alternative text for this link (title property)
+     * @param string $altText  Alternative text for this link (title property)
      * @param string $linkText Text contained by this link
+     *
      * @return string The link in string form
      * @access private
      */
@@ -838,7 +846,8 @@ class Pager_Common
      * Javascript to create and submit a form.
      *
      * @param string $formAction where the form should be submitted
-     * @param array  $data the associative array of names and values
+     * @param array  $data       the associative array of names and values
+     *
      * @return string A string of javascript that generates a form and submits it
      * @access private
      */
@@ -883,6 +892,7 @@ class Pager_Common
      *
      * @param mixed  $data Data that should be rendered
      * @param string $prev The name so far
+     *
      * @return string A string of Javascript that creates form inputs
      *                representing the data
      * @access private
@@ -960,6 +970,7 @@ class Pager_Common
      * Helper method
      *
      * @param string|array &$var variable to clean
+     *
      * @return void
      * @access private
      */
@@ -981,6 +992,7 @@ class Pager_Common
      * Helper method
      *
      * @param string|array &$var variable to decode
+     *
      * @return void
      * @access private
      */
@@ -1004,6 +1016,7 @@ class Pager_Common
      *
      * @param string $url  URL to use in the link  [deprecated: use the factory instead]
      * @param string $link HTML to use as the link [deprecated: use the factory instead]
+     *
      * @return string The link
      * @access private
      */
@@ -1033,6 +1046,7 @@ class Pager_Common
      * Returns pages link
      *
      * @param string $url URL to use in the link [deprecated: use the factory instead]
+     *
      * @return string Links
      * @access private
      */
@@ -1050,6 +1064,7 @@ class Pager_Common
      *
      * @param string $url  URL to use in the link  [deprecated: use the factory instead]
      * @param string $link HTML to use as the link [deprecated: use the factory instead]
+     *
      * @return string The link
      * @access private
      */
@@ -1137,6 +1152,7 @@ class Pager_Common
     // {{{ _getLastLinkTag()
 
     /**
+     *
      * @return string the link tag
      * @access private
      */
@@ -1158,6 +1174,7 @@ class Pager_Common
      * Helper method
      *
      * @param integer $pageID page ID
+     *
      * @return string the link tag url
      * @access private
      */
@@ -1192,6 +1209,7 @@ class Pager_Common
      *                - 'attributes': (html attributes) Tag attributes or
      *                  HTML attributes (id="foo" pairs), will be inserted in the
      *                  <select> tag
+     *
      * @return string xhtml select box
      * @access public
      */
@@ -1209,13 +1227,15 @@ class Pager_Common
      * Returns a string with a XHTML SELECT menu with the page numbers,
      * useful as an alternative to the links
      *
-     * @param array  $params  - 'optionText': text to show in each option.
-     *                  Use '%d' where you want to see the number of pages selected.
-     *                - 'autoSubmit': if TRUE, add some js code to submit the
-     *                  form on the onChange event
+     * @param array  $params          - 'optionText': text to show in each option.
+     *                                  Use '%d' where you want to see the number
+     *                                  of pages selected.
+     *                                - 'autoSubmit': if TRUE, add some js code
+     *                                  to submit the form on the onChange event
      * @param string $extraAttributes (html attributes) Tag attributes or
-     *                  HTML attributes (id="foo" pairs), will be inserted in the
-     *                  <select> tag
+     *                                HTML attributes (id="foo" pairs), will be
+     *                                inserted in the <select> tag
+     *
      * @return string xhtml select box
      * @access public
      */
@@ -1300,6 +1320,7 @@ class Pager_Common
      * since it's too aggressive
      *
      * @param array $data array of querystring values
+     *
      * @return string
      * @access private
      */
@@ -1338,6 +1359,7 @@ class Pager_Common
      *
      * @param array  $array array of querystring values
      * @param string $name  key
+     *
      * @return string
      * @access private
      */
@@ -1371,6 +1393,7 @@ class Pager_Common
      * Check if a string is an encoded multibyte string
      *
      * @param string $string string to check
+     *
      * @return boolean
      * @access private
      */
@@ -1389,6 +1412,7 @@ class Pager_Common
      *
      * @param string  $msg  Error message
      * @param integer $code Error code
+     *
      * @return PEAR_Error
      * @access private
      */
@@ -1408,6 +1432,7 @@ class Pager_Common
      * Set and sanitize options
      *
      * @param mixed $options An associative array of option names and their values
+     *
      * @return integer error code (PAGER_OK on success)
      * @access public
      */
@@ -1495,7 +1520,8 @@ class Pager_Common
     /**
      * Return the current value of a given option
      *
-     * @param string $option option name
+     * @param string $name option name
+     *
      * @return mixed option value
      * @access public
      */
@@ -1533,6 +1559,7 @@ class Pager_Common
      * Return a textual error message for a PAGER error code
      *
      * @param integer $code error code
+     *
      * @return string error message
      * @access public
      */

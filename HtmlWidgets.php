@@ -55,7 +55,7 @@ class Pager_HtmlWidgets
     /**
      * Constructor
      *
-     * @param &$pager Pager instance
+     * @param object &$pager Pager instance
      */
     function Pager_HtmlWidgets(&$pager)
     {
@@ -84,6 +84,7 @@ class Pager_HtmlWidgets
      *                  <select> tag
      *                - 'checkMaxLimit': if true, Pager checks if $end is bigger
      *                  than $totalItems, and doesn't show the extra select options
+     *
      * @return string xhtml select box
      * @access public
      */
@@ -165,13 +166,15 @@ class Pager_HtmlWidgets
      * Returns a string with a XHTML SELECT menu with the page numbers,
      * useful as an alternative to the links
      *
-     * @param array  $params  - 'optionText': text to show in each option.
-     *                  Use '%d' where you want to see the number of pages selected.
-     *                - 'autoSubmit': if TRUE, add some js code to submit the
-     *                  form on the onChange event
+     * @param array  $params          - 'optionText': text to show in each option.
+     *                                  Use '%d' where you want to see the number
+     *                                  of pages selected.
+     *                                - 'autoSubmit': if TRUE, add some js code
+     *                                  to submit the form on the onChange event
      * @param string $extraAttributes (html attributes) Tag attributes or
-     *                  HTML attributes (id="foo" pairs), will be inserted in the
-     *                  <select> tag
+     *                                HTML attributes (id="foo" pairs), will be
+     *                                inserted in the <select> tag
+     *
      * @return string xhtml select box
      * @access public
      */

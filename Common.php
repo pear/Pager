@@ -592,6 +592,7 @@ class Pager_Common
     // {{{ getPageRangeByPageId()
 
     /**
+     * Given a PageId, it returns the limits of the range of pages displayed.
      *
      * @param integer $pageID PageID to get offsets for
      *
@@ -1152,6 +1153,7 @@ class Pager_Common
     // {{{ _getLastLinkTag()
 
     /**
+     * Returns last link tag
      *
      * @return string the link tag
      * @access private

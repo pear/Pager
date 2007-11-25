@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2007-10-22</date>
- <time>23:27:27</time>
+ <date>2007-11-25</date>
+ <time>17:20:27</time>
  <version>
   <release>2.4.5</release>
   <api>2.4.5</api>
@@ -38,6 +38,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - Coding Standards fixes in the phpdoc blocks
 - added 'PAGER_' prefix to internal constant names
 - fixed bug #12267: correct detection of HTTPS on IIS (thanks to Carsten Wiedmann)
+- request #12306: added 'addSlash' boolean option to allow relative links
  </notes>
  <contents>
   <dir name="/">
@@ -100,13 +101,14 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-10-22</date>
+   <date>2007-11-25</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- request #10869: added two reverse drivers in the /examples/ dir
 - fixed a few PHP5 Strict Standards warnings (bug #12257)
 - Coding Standards fixes in the phpdoc blocks
 - added 'PAGER_' prefix to internal constant names
 - fixed bug #12267: correct detection of HTTPS on IIS (thanks to Carsten Wiedmann)
+- request #12306: added 'addSlash' boolean option to allow relative links
    </notes>
   </release>
   <release>

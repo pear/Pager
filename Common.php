@@ -130,6 +130,12 @@ class Pager_Common
     var $_fileName    = PAGER_CURRENT_FILENAME;
 
     /**
+     * @var boolean If false, no slash is added between path and fileName
+     * @access private
+     */
+    var $_addSlash = true;
+
+    /**
      * @var boolean If false, don't override the fileName option. Use at your own risk.
      * @access private
      */
@@ -436,6 +442,7 @@ class Pager_Common
         'linkClass',
         'path',
         'fileName',
+        'addSlash',
         'fixFileName',
         'append',
         'httpMethod',
@@ -1463,10 +1470,11 @@ class Pager_Common
             if ($this->_fixFileName) {
                 $this->_fileName = PAGER_CURRENT_FILENAME; //avoid possible user error;
             }
-            $this->_url = $this->_path.'/'.$this->_fileName;
+            $slash = ($this->_addSlash) ? '/' : '';
+            $this->_url = $this->_path.$slash.$this->_fileName;
         } else {
             $this->_url = $this->_path;
-            if (strncasecmp($this->_fileName, 'javascript', 10) != 0) {
+            if (0 != strncasecmp($this->_fileName, 'javascript', 10)) {
                 $this->_url .= '/';
             }
             if (strpos($this->_fileName, '%d') === false) {

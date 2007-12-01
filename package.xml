@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2007-11-25</date>
- <time>17:20:27</time>
+ <date>2007-12-01</date>
+ <time>18:53:27</time>
  <version>
   <release>2.4.5</release>
   <api>2.4.5</api>
@@ -39,6 +39,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - added 'PAGER_' prefix to internal constant names
 - fixed bug #12267: correct detection of HTTPS on IIS (thanks to Carsten Wiedmann)
 - fixed bug #12306: allow relative links
+- fixed bug #12531: removed &lt;u&gt; tag from curPageSpan[Pre|Post] default options
+  in Pager_Sliding to make links HTML 4.01 strict.
  </notes>
  <contents>
   <dir name="/">
@@ -101,7 +103,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-11-25</date>
+   <date>2007-12-01</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- request #10869: added two reverse drivers in the /examples/ dir
 - fixed a few PHP5 Strict Standards warnings (bug #12257)
@@ -109,6 +111,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - added 'PAGER_' prefix to internal constant names
 - fixed bug #12267: correct detection of HTTPS on IIS (thanks to Carsten Wiedmann)
 - fixed bug #12306: allow relative links
+- fixed bug #12531: removed &lt;u&gt; tag from curPageSpan[Pre|Post] default options
+  in Pager_Sliding to make links HTML 4.01 strict.
    </notes>
   </release>
   <release>

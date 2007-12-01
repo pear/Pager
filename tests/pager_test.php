@@ -590,13 +590,12 @@ class TestOfPager extends UnitTestCase {
         $expected = '<link rel="previous" href="'.$this->baseurl.'/myfile.1.php" title="previous page" />'."\n";
         $this->assertEqual($expected, $this->pager->_getPrevLinkTag());
     }
-    function testAddSlash() {
+    function testRelativeLinks() {
         $fileName = array_pop(explode('/', $_SERVER['PHP_SELF']));
         $options = array(
             'mode'     => 'Sliding',
             'path'     => '',
             'fileName' => $fileName,
-            'addSlash' => false,
             'itemData' => range('a', 'z'),
             'spacesBeforeSeparator' => 0,
             'spacesAfterSeparator'  => 0,
@@ -605,9 +604,15 @@ class TestOfPager extends UnitTestCase {
         $expected = '<a href="' . $fileName . '?pageID=2" title="next page">&raquo;</a>';
         $this->assertEqual($expected, $this->pager->_getNextLink());
 
-        $this->pager->setOptions(array('addSlash' => true));
+        $options = array(
+            'mode'     => 'Sliding',
+            'itemData' => range('a', 'z'),
+            'spacesBeforeSeparator' => 0,
+            'spacesAfterSeparator'  => 0,
+        );
+        $this->pager = Pager::factory($options);
         $this->pager->build();
-        $expected = '<a href="/' . $fileName . '?pageID=2" title="next page">&raquo;</a>';
+        $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="next page">&raquo;</a>';
         $this->assertEqual($expected, $this->pager->_getNextLink());
     }
 }

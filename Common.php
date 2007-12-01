@@ -130,12 +130,6 @@ class Pager_Common
     var $_fileName    = PAGER_CURRENT_FILENAME;
 
     /**
-     * @var boolean If false, no slash is added between path and fileName
-     * @access private
-     */
-    var $_addSlash = true;
-
-    /**
      * @var boolean If false, don't override the fileName option. Use at your own risk.
      * @access private
      */
@@ -157,7 +151,7 @@ class Pager_Common
      * @var string specifies which HTML form to use
      * @access private
      */
-    var $_formID  = '';
+    var $_formID      = '';
 
     /**
      * @var boolean whether or not to import submitted data
@@ -442,7 +436,6 @@ class Pager_Common
         'linkClass',
         'path',
         'fileName',
-        'addSlash',
         'fixFileName',
         'append',
         'httpMethod',
@@ -1470,12 +1463,11 @@ class Pager_Common
             if ($this->_fixFileName) {
                 $this->_fileName = PAGER_CURRENT_FILENAME; //avoid possible user error;
             }
-            $slash = ($this->_addSlash) ? '/' : '';
-            $this->_url = $this->_path.$slash.$this->_fileName;
+            $this->_url = $this->_path.(!empty($this->_path) ? '/' : '').$this->_fileName;
         } else {
             $this->_url = $this->_path;
             if (0 != strncasecmp($this->_fileName, 'javascript', 10)) {
-                $this->_url .= '/';
+                $this->_url .= (!empty($this->_path) ? '/' : '');
             }
             if (strpos($this->_fileName, '%d') === false) {
                 trigger_error($this->errorMessage(ERROR_PAGER_INVALID_USAGE), E_USER_WARNING);

@@ -418,6 +418,12 @@ class Pager_Common
     var $linkTags = '';
 
     /**
+     * @var array Complete set of raw link tags
+     * @access public
+     */
+    var $linkTagsRaw = array();
+
+    /**
      * @var array Array with a key => value pair representing
      *            page# => bool value (true if key==currentPageNumber).
      *            can be used for extreme customization.
@@ -493,8 +499,10 @@ class Pager_Common
     function build()
     {
         //reset
-        $this->_pageData = array();
-        $this->links     = '';
+        $this->_pageData   = array();
+        $this->links       = '';
+        $this->linkTags    = '';
+        $this->linkTagsRaw = array();
 
         $this->_generatePageData();
         $this->_setFirstLastText();
@@ -511,6 +519,11 @@ class Pager_Common
         $this->linkTags .= $this->_getPrevLinkTag();
         $this->linkTags .= $this->_getNextLinkTag();
         $this->linkTags .= $this->_getLastLinkTag();
+        
+        $this->linkTagsRaw['first'] = $this->_getFirstLinkTag(true);
+        $this->linkTagsRaw['prev']  = $this->_getPrevLinkTag(true);
+        $this->linkTagsRaw['next']  = $this->_getNextLinkTag(true);
+        $this->linkTagsRaw['last']  = $this->_getLastLinkTag(true);
 
         if ($this->_totalPages > (2 * $this->_delta + 1)) {
             $this->links .= $this->_printLastPage();
@@ -670,7 +683,7 @@ class Pager_Common
      * Returns previous page ID. If current page is first page
      * this function returns FALSE
      *
-     * @return mixed Previous pages' ID or false
+     * @return mixed Previous page ID or false
      * @access public
      */
     function getPreviousPageID()
@@ -1095,13 +1108,21 @@ class Pager_Common
     /**
      * Returns first link tag
      *
-     * @return string
+     * @param bool $raw should tag returned as array
+     *
+     * @return mixed string with html link tag or separated as array
      * @access private
      */
-    function _getFirstLinkTag()
+    function _getFirstLinkTag($raw = false)
     {
         if ($this->isFirstPage() || ($this->_httpMethod != 'GET')) {
-            return '';
+            return $raw ? array() : '';
+        }
+        if ($raw) {
+            return array(
+                'url'   => $this->_getLinkTagUrl(1),
+                'title' => $this->_firstLinkTitle
+            );
         }
         return sprintf('<link rel="first" href="%s" title="%s" />'."\n",
             $this->_getLinkTagUrl(1),
@@ -1115,13 +1136,21 @@ class Pager_Common
     /**
      * Returns previous link tag
      *
-     * @return string the link tag
+     * @param bool $raw should tag returned as array
+     *
+     * @return mixed string with html link tag or separated as array
      * @access private
      */
-    function _getPrevLinkTag()
+    function _getPrevLinkTag($raw = false)
     {
         if ($this->isFirstPage() || ($this->_httpMethod != 'GET')) {
-            return '';
+            return $raw ? array() : '';
+        }
+        if ($raw) {
+            return array(
+                'url'   => $this->_getLinkTagUrl($this->getPreviousPageID()),
+                'title' => $this->_prevLinkTitle
+            );
         }
         return sprintf('<link rel="previous" href="%s" title="%s" />'."\n",
             $this->_getLinkTagUrl($this->getPreviousPageID()),
@@ -1135,13 +1164,21 @@ class Pager_Common
     /**
      * Returns next link tag
      *
-     * @return string the link tag
+     * @param bool $raw should tag returned as array
+     *
+     * @return mixed string with html link tag or separated as array
      * @access private
      */
-    function _getNextLinkTag()
+    function _getNextLinkTag($raw = false)
     {
         if ($this->isLastPage() || ($this->_httpMethod != 'GET')) {
-            return '';
+            return $raw ? array() : '';
+        }
+        if ($raw) {
+            return array(
+                'url'   => $this->_getLinkTagUrl($this->getNextPageID()),
+                'title' => $this->_nextLinkTitle
+            );
         }
         return sprintf('<link rel="next" href="%s" title="%s" />'."\n",
             $this->_getLinkTagUrl($this->getNextPageID()),
@@ -1155,13 +1192,21 @@ class Pager_Common
     /**
      * Returns last link tag
      *
-     * @return string the link tag
+     * @param bool $raw should tag returned as array
+     *
+     * @return mixed string with html link tag or separated as array
      * @access private
      */
-    function _getLastLinkTag()
+    function _getLastLinkTag($raw = false)
     {
         if ($this->isLastPage() || ($this->_httpMethod != 'GET')) {
-            return '';
+            return $raw ? array() : '';
+        }
+        if ($raw) {
+            return array(
+                'url'   => $this->_getLinkTagUrl($this->_totalPages),
+                'title' => $this->_lastLinkTitle
+            );
         }
         return sprintf('<link rel="last" href="%s" title="%s" />'."\n",
             $this->_getLinkTagUrl($this->_totalPages),

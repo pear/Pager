@@ -180,13 +180,14 @@ class Pager_Jumping extends Pager_Common
             }
         }
 
-        $back  = str_replace('&nbsp;', '', $this->_getBackLink());
-        $next  = str_replace('&nbsp;', '', $this->_getNextLink());
-        $pages = $this->_getPageLinks();
-        $first = $this->_printFirstPage();
-        $last  = $this->_printLastPage();
-        $all   = $this->links;
-        $linkTags = $this->linkTags;
+        $back        = str_replace('&nbsp;', '', $this->_getBackLink());
+        $next        = str_replace('&nbsp;', '', $this->_getNextLink());
+        $pages       = $this->_getPageLinks();
+        $first       = $this->_printFirstPage();
+        $last        = $this->_printLastPage();
+        $all         = $this->links;
+        $linkTags    = $this->linkTags;
+        $linkTagsRaw = $this->linkTagsRaw;
 
         if (!is_null($pageID)) {
             $this->_currentPage = $_sav;
@@ -200,13 +201,14 @@ class Pager_Jumping extends Pager_Common
             $last,
             $all,
             $linkTags,
-            'back'  => $back,
-            'pages' => $pages,
-            'next'  => $next,
-            'first' => $first,
-            'last'  => $last,
-            'all'   => $all,
-            'linktags' => $linkTags
+            'back'        => $back,
+            'pages'       => $pages,
+            'next'        => $next,
+            'first'       => $first,
+            'last'        => $last,
+            'all'         => $all,
+            'linktags'    => $linkTags,
+            'linkTagsRaw' => linkTagsRaw,
         );
     }
 

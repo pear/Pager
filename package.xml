@@ -40,7 +40,9 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - fixed bug #12267: correct detection of HTTPS on IIS (thanks to Carsten Wiedmann)
 - fixed bug #12306: allow relative links
 - fixed bug #12531: removed &lt;u&gt; tag from curPageSpan[Pre|Post] default options
-  in Pager_Sliding to make links HTML 4.01 strict.
+  in Pager_Sliding to make links HTML 4.01 strict
+- request #12267: added $pager-&gt;linkTagsRaw array (same as $pager-&gt;linkTags but
+  as array) to play nice with HTML_Page2 (patch by Carsten Wiedmann)
  </notes>
  <contents>
   <dir name="/">
@@ -112,7 +114,9 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - fixed bug #12267: correct detection of HTTPS on IIS (thanks to Carsten Wiedmann)
 - fixed bug #12306: allow relative links
 - fixed bug #12531: removed &lt;u&gt; tag from curPageSpan[Pre|Post] default options
-  in Pager_Sliding to make links HTML 4.01 strict.
+  in Pager_Sliding to make links HTML 4.01 strict
+- request #12267: added $pager-&gt;linkTagsRaw array (same as $pager-&gt;linkTags but
+  as array) to play nice with HTML_Page2 (patch by Carsten Wiedmann)
    </notes>
   </release>
   <release>

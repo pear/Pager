@@ -465,6 +465,14 @@ class TestOfPager extends UnitTestCase {
         $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="page 2">[LAST]</a>';
         $this->assertEqual($expected, $this->pager->_printLastPage());
     }
+    function testGetPageLinks() {
+        $links = $this->pager->_getPageLinks();
+        $this->assertTrue(false !== strpos($links, 'title="page 2"'));
+        $this->pager->setOptions(array('altPage' => '%d page'));
+        $this->pager->build();
+        $links = $this->pager->_getPageLinks();
+        $this->assertTrue(false !== strpos($links, 'title="2 page"'));
+    }
     function testGetBackLink() {
         $img = '&laquo;';
         $options = array(

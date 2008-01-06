@@ -23,7 +23,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <active>no</active>
  </lead>
  <date>2008-01-06</date>
- <time>14:10:27</time>
+ <time>14:35:27</time>
  <version>
   <release>2.4.5</release>
   <api>2.4.5</api>
@@ -44,6 +44,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - request #12267: added $pager-&gt;linkTagsRaw array (same as $pager-&gt;linkTags but
   as array) to play nice with HTML_Page2 (patch by Carsten Wiedmann)
 - fixed bug #12796: curPageLinkClassName overrides curPageSpanPre and curPageSpanPost
+- request #12797: added '%d' placeholder to altPage (by default, page number is appended)
  </notes>
  <contents>
   <dir name="/">
@@ -119,6 +120,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - request #12267: added $pager-&gt;linkTagsRaw array (same as $pager-&gt;linkTags but
   as array) to play nice with HTML_Page2 (patch by Carsten Wiedmann)
 - fixed bug #12796: curPageLinkClassName overrides curPageSpanPre and curPageSpanPost
+- request #12797: added '%d' as a placeholder to altPage (by default, page number is appended)
    </notes>
   </release>
   <release>

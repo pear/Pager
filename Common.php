@@ -31,7 +31,7 @@
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @author    Richard Heyes <richard@phpguru.org>
- * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @copyright 2003-2008 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Pager
@@ -67,7 +67,7 @@ define('ERROR_PAGER_NOT_IMPLEMENTED',     -5);
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @author    Richard Heyes <richard@phpguru.org>
- * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @copyright 2003-2008 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Pager
  */
@@ -232,7 +232,7 @@ class Pager_Common
     var $_altLast     = 'last page';
 
     /**
-     * @var string alt text for "page"
+     * @var string alt text for "page" (use optional "%d" placeholder for page number)
      * @access private
      */
     var $_altPage     = 'page';
@@ -1514,9 +1514,13 @@ class Pager_Common
             if (0 != strncasecmp($this->_fileName, 'javascript', 10)) {
                 $this->_url .= (!empty($this->_path) ? '/' : '');
             }
-            if (strpos($this->_fileName, '%d') === false) {
+            if (false === strpos($this->_fileName, '%d')) {
                 trigger_error($this->errorMessage(ERROR_PAGER_INVALID_USAGE), E_USER_WARNING);
             }
+        }
+        if (false === strpos($this->_altPage, '%d')) {
+            //by default, append page number at the end
+            $this->_altPage .= ' %d';
         }
 
         $this->_classString = '';

@@ -31,7 +31,7 @@
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @author    Richard Heyes <richard@phpguru.org>
- * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @copyright 2003-2008 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Pager
@@ -50,7 +50,7 @@ require_once 'Pager/Common.php';
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @author    Richard Heyes <richard@phpguru.org>
- * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @copyright 2003-2008 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Pager
  */
@@ -244,7 +244,7 @@ class Pager_Jumping extends Pager_Common
             if ($i != $this->_currentPage) {
                 $this->range[$i] = false;
                 $this->_linkData[$this->_urlVar] = $i;
-                $links .= $this->_renderLink($this->_altPage.' '.$i, $i);
+                $links .= $this->_renderLink(str_replace('%d', $i, $this->_altPage), $i);
             } else {
                 $this->range[$i] = true;
                 $links .= $this->_curPageSpanPre . $i . $this->_curPageSpanPost;

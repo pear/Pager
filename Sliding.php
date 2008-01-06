@@ -30,7 +30,7 @@
  * @category  HTML
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @copyright 2003-2007 Lorenzo Alberton
+ * @copyright 2003-2008 Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Pager
@@ -48,7 +48,7 @@ require_once 'Pager/Common.php';
  * @category  HTML
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
- * @copyright 2003-2007 Lorenzo Alberton
+ * @copyright 2003-2008 Lorenzo Alberton
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Pager
  */
@@ -238,7 +238,7 @@ class Pager_Sliding extends Pager_Common
                     
                     $this->range[$i] = false;
                     $this->_linkData[$this->_urlVar] = $i;
-                    $links .= $this->_renderLink($this->_altPage.' '.$i, $i)
+                    $links .= $this->_renderLink(str_replace('%d', $i, $this->_altPage), $i)
                            . $this->_spacesBefore
                            . ($print_separator_flag ? $this->_separator.$this->_spacesAfter : '');
                 }
@@ -260,7 +260,7 @@ class Pager_Sliding extends Pager_Common
                 } else {
                     $this->range[$i] = false;
                     $this->_linkData[$this->_urlVar] = $i;
-                    $links .= $this->_renderLink($this->_altPage.' '.$i, $i);
+                    $links .= $this->_renderLink(str_replace('%d', $i, $this->_altPage), $i);
                 }
                 $links .= $this->_spacesBefore
                         . ($print_separator_flag ? $this->_separator.$this->_spacesAfter : '');
@@ -272,7 +272,7 @@ class Pager_Sliding extends Pager_Common
                     $print_separator_flag = ($expansion_after != 1);
                     $this->range[$i] = false;
                     $this->_linkData[$this->_urlVar] = $i;
-                    $links .= $this->_renderLink($this->_altPage.' '.$i, $i)
+                    $links .= $this->_renderLink(str_replace('%d', $i, $this->_altPage), $i)
                       . $this->_spacesBefore
                       . ($print_separator_flag ? $this->_separator.$this->_spacesAfter : '');
                 }
@@ -284,7 +284,7 @@ class Pager_Sliding extends Pager_Common
                 if ($i != $this->_currentPage) {
                     $this->range[$i] = false;
                     $this->_linkData[$this->_urlVar] = $i;
-                    $links .= $this->_renderLink($this->_altPage.' '.$i, $i);
+                    $links .= $this->_renderLink(str_replace('%d', $i, $this->_altPage), $i);
                 } else {
                     $this->range[$i] = true;
                     $links .= $this->_curPageSpanPre . $i . $this->_curPageSpanPost;

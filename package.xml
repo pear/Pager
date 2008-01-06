@@ -46,7 +46,6 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - fixed bug #12796: curPageLinkClassName overrides curPageSpanPre and curPageSpanPost
 - request #12797: added '%d' placeholder to altPage (by default, page number is appended)
 - fixed bug #12837: if $_SESSION['setPerPage'] is set, Pager always uses it
-- added sessionName option to use multiple Pager instances at once
  </notes>
  <contents>
   <dir name="/">
@@ -124,7 +123,6 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - fixed bug #12796: curPageLinkClassName overrides curPageSpanPre and curPageSpanPost
 - request #12797: added '%d' as a placeholder to altPage (by default, page number is appended)
 - fixed bug #12837: if $_SESSION['setPerPage'] is set, Pager always uses it
-- added sessionName option to use multiple Pager instances at once
    </notes>
   </release>
   <release>

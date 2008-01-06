@@ -1525,8 +1525,8 @@ class Pager_Common
         }
 
         if (strlen($this->_curPageLinkClassName)) {
-            $this->_curPageSpanPre  = '<span class="'.$this->_curPageLinkClassName.'">';
-            $this->_curPageSpanPost = '</span>';
+            $this->_curPageSpanPre  .= '<span class="'.$this->_curPageLinkClassName.'">';
+            $this->_curPageSpanPost = '</span>' . $this->_curPageSpanPost;
         }
 
         $this->_perPage = max($this->_perPage, 1); //avoid possible user errors

@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2007-12-01</date>
- <time>18:53:27</time>
+ <date>2008-01-06</date>
+ <time>14:10:27</time>
  <version>
   <release>2.4.5</release>
   <api>2.4.5</api>
@@ -43,6 +43,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   in Pager_Sliding to make links HTML 4.01 strict
 - request #12267: added $pager-&gt;linkTagsRaw array (same as $pager-&gt;linkTags but
   as array) to play nice with HTML_Page2 (patch by Carsten Wiedmann)
+- fixed bug #12796: curPageLinkClassName overrides curPageSpanPre and curPageSpanPost
  </notes>
  <contents>
   <dir name="/">
@@ -105,7 +106,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2007-12-01</date>
+   <date>2008-01-06</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- request #10869: added two reverse drivers in the /examples/ dir
 - fixed a few PHP5 Strict Standards warnings (bug #12257)
@@ -117,6 +118,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   in Pager_Sliding to make links HTML 4.01 strict
 - request #12267: added $pager-&gt;linkTagsRaw array (same as $pager-&gt;linkTags but
   as array) to play nice with HTML_Page2 (patch by Carsten Wiedmann)
+- fixed bug #12796: curPageLinkClassName overrides curPageSpanPre and curPageSpanPost
    </notes>
   </release>
   <release>

@@ -31,7 +31,7 @@
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @author    Richard Heyes <richard@phpguru.org>
- * @copyright 2003-2008 Lorenzo Alberton, Richard Heyes
+ * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Pager
@@ -67,7 +67,7 @@ define('ERROR_PAGER_NOT_IMPLEMENTED',     -5);
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @author    Richard Heyes <richard@phpguru.org>
- * @copyright 2003-2008 Lorenzo Alberton, Richard Heyes
+ * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Pager
  */
@@ -388,6 +388,12 @@ class Pager_Common
     var $_closeSession  = false;
 
     /**
+     * @var string session array name
+     * @access private
+     */
+    var $_sessionName   = '_pager';
+
+    /**
      * @var string name of the session var for number of items per page
      * @access private
      */
@@ -480,6 +486,7 @@ class Pager_Common
         'clearIfVoid',
         'useSessions',
         'closeSession',
+        'sessionName',
         'sessionVar',
         'pearErrorMode',
         'extraVars',
@@ -1541,12 +1548,15 @@ class Pager_Common
         if (!empty($_REQUEST[$this->_sessionVar])) {
             $this->_perPage = max(1, (int)$_REQUEST[$this->_sessionVar]);
             if ($this->_useSessions) {
-                $_SESSION[$this->_sessionVar] = $this->_perPage;
+                if (empty($_SESSION[$this->_sessionName])) {
+                    $_SESSION[$this->_sessionName] = array();
+                }
+                $_SESSION[$this->_sessionName][$this->_sessionVar] = $this->_perPage;
             }
         }
 
-        if (!empty($_SESSION[$this->_sessionVar])) {
-             $this->_perPage = $_SESSION[$this->_sessionVar];
+        if (!empty($_SESSION[$this->_sessionName][$this->_sessionVar]) && $this->_useSessions) {
+             $this->_perPage = $_SESSION[$this->_sessionName][$this->_sessionVar];
         }
 
         if ($this->_closeSession) {

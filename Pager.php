@@ -31,7 +31,7 @@
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @author    Richard Heyes <richard@phpguru.org>
- * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @copyright 2003-2008 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Pager
@@ -45,7 +45,7 @@
  * @package   Pager
  * @author    Lorenzo Alberton <l.alberton@quipo.it>
  * @author    Richard Heyes <richard@phpguru.org>
- * @copyright 2003-2007 Lorenzo Alberton, Richard Heyes
+ * @copyright 2003-2008 Lorenzo Alberton, Richard Heyes
  * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
  * @link      http://pear.php.net/package/Pager
  */
@@ -181,7 +181,7 @@ class Pager
 
         // If the class exists, return a new instance of it.
         if (class_exists($classname)) {
-            $pager =& new $classname($options);
+            $pager = new $classname($options);
             return $pager;
         }
 

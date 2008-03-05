@@ -208,7 +208,7 @@ class Pager_Jumping extends Pager_Common
             'last'        => $last,
             'all'         => $all,
             'linktags'    => $linkTags,
-            'linkTagsRaw' => linkTagsRaw,
+            'linkTagsRaw' => $linkTagsRaw,
         );
     }
 

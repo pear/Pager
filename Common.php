@@ -818,7 +818,7 @@ class Pager_Common
                 $onclick = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_onclick);
             }
             return sprintf('<a href="%s"%s%s%s%s title="%s">%s</a>',
-                           htmlentities($this->_url . $href),
+                           htmlentities($this->_url . $href, ENT_COMPAT, 'UTF-8'),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,
                            empty($this->_accesskey)   ? '' : ' accesskey="'.$this->_linkData[$this->_urlVar].'"',
@@ -883,7 +883,7 @@ class Pager_Common
         }
 
         // We /shouldn't/ need to escape the URL ...
-        $str .= sprintf('form.action = "%s"; ', htmlentities($formAction));
+        $str .= sprintf('form.action = "%s"; ', htmlentities($formAction, ENT_COMPAT, 'UTF-8'));
         $str .= sprintf('form.method = "%s"; ', $this->_httpMethod);
         foreach ($data as $key => $val) {
             $str .= $this->_generateFormOnClickHelper($val, $key);
@@ -1233,7 +1233,7 @@ class Pager_Common
         } else {
             $href = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_fileName);
         }
-        return htmlentities($this->_url . $href);
+        return htmlentities($this->_url . $href, ENT_COMPAT, 'UTF-8');
     }
 
     // }}}
@@ -1391,7 +1391,7 @@ class Pager_Common
             }
             // If the value is an array, recursively parse it
             if (is_array($val)) {
-                array_push($tmp, $this->__http_build_query($val, htmlentities($key)));
+                array_push($tmp, $this->__http_build_query($val, htmlentities($key, ENT_COMPAT, 'UTF-8')));
                 continue;
             }
         }
@@ -1423,7 +1423,7 @@ class Pager_Common
                 array_push($tmp, $this->__http_build_query($value, $name.'%5B'.$key.'%5D'));
             } elseif (is_scalar($value)) {
                 //array_push($tmp, sprintf('%s[%s]=%s', $name, htmlentities($key), htmlentities($value)));
-                array_push($tmp, $name.'%5B'.htmlentities($key).'%5D='.htmlentities($value));
+                array_push($tmp, $name.'%5B'.htmlentities($key, ENT_COMPAT, 'UTF-8').'%5D='.htmlentities($value, ENT_COMPAT, 'UTF-8'));
             } elseif (is_object($value)) {
                 //array_push($tmp, $this->__http_build_query(get_object_vars($value), sprintf('%s[%s]', $name, $key)));
                 array_push($tmp, $this->__http_build_query(get_object_vars($value), $name.'%5B'.$key.'%5D'));

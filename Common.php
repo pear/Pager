@@ -1391,7 +1391,7 @@ class Pager_Common
             }
             // If the value is an array, recursively parse it
             if (is_array($val)) {
-                array_push($tmp, $this->__http_build_query($val, htmlentities($key, ENT_COMPAT, 'UTF-8')));
+                array_push($tmp, $this->__http_build_query($val, urlencode($key)));
                 continue;
             }
         }
@@ -1423,7 +1423,7 @@ class Pager_Common
                 array_push($tmp, $this->__http_build_query($value, $name.'%5B'.$key.'%5D'));
             } elseif (is_scalar($value)) {
                 //array_push($tmp, sprintf('%s[%s]=%s', $name, htmlentities($key), htmlentities($value)));
-                array_push($tmp, $name.'%5B'.htmlentities($key, ENT_COMPAT, 'UTF-8').'%5D='.htmlentities($value, ENT_COMPAT, 'UTF-8'));
+                array_push($tmp, $name.'%5B'.urlencode($key).'%5D='.urlencode($value));
             } elseif (is_object($value)) {
                 //array_push($tmp, $this->__http_build_query(get_object_vars($value), sprintf('%s[%s]', $name, $key)));
                 array_push($tmp, $this->__http_build_query(get_object_vars($value), $name.'%5B'.$key.'%5D'));

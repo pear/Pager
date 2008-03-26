@@ -496,6 +496,21 @@ class TestOfPager extends UnitTestCase {
         $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=1" title="previous page">'.$img.'</a>&nbsp;';
         $this->assertEqual($expected, $this->pager->_getBackLink());
     }
+    function testGetBackLinkEmpty() {
+        $img = '[FIRST]';
+        $options = array(
+            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'  => 5,
+        );
+        $this->pager = Pager::factory($options);
+        $expected = '';
+        $this->assertEqual($expected, $this->pager->_getBackLink());
+
+        $options['prevImgEmpty'] = $img;
+        $this->pager = Pager::factory($options);
+        $expected = $img.'&nbsp;';
+        $this->assertEqual($expected, $this->pager->_getBackLink());
+    }
     function testGetNexLink() {
         $img = '&raquo;';
         $options = array(
@@ -506,6 +521,22 @@ class TestOfPager extends UnitTestCase {
         );
         $this->pager = Pager::factory($options);
         $expected = '&nbsp;<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="next page">'.$img.'</a>&nbsp;';
+        $this->assertEqual($expected, $this->pager->_getNextLink());
+    }
+    function testGetNexLinkEmpty() {
+        $img = '[LAST]';
+        $options = array(
+            'itemData' => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'  => 5,
+            'currentPage' => 2,
+        );
+        $this->pager = Pager::factory($options);
+        $expected = '';
+        $this->assertEqual($expected, $this->pager->_getNextLink());
+
+        $options['nextImgEmpty'] = $img;
+        $this->pager = Pager::factory($options);
+        $expected = '&nbsp;'.$img.'&nbsp;';
         $this->assertEqual($expected, $this->pager->_getNextLink());
     }
     function testHttpMethodAutoDetect() {

@@ -244,10 +244,29 @@ class Pager_Common
     var $_prevImg     = '&lt;&lt; Back';
 
     /**
+     * image/text to use as "prev" link when no prev link is needed  (e.g. on the first page)
+     * NULL deactivates it
+     *
+     * @var string
+     * @access private
+     */
+    var $_prevImgEmpty = null;
+
+    /**
      * @var string image/text to use as "next" link
      * @access private
      */
     var $_nextImg     = 'Next &gt;&gt;';
+
+    /**
+     * image/text to use as "next" link when
+     * no next link is needed (e.g. on the last page)
+     * NULL deactivates it
+     *
+     * @var string
+     * @access private
+     */
+    var $_nextImgEmpty = null;
 
     /**
      * @var string link separator
@@ -454,7 +473,9 @@ class Pager_Common
         'altLast',
         'altPage',
         'prevImg',
+        'prevImgEmpty',
         'nextImg',
+        'nextImgEmpty',
         'expanded',
         'accesskey',
         'attributes',
@@ -1049,6 +1070,9 @@ class Pager_Common
             $this->_linkData[$this->_urlVar] = $this->getPreviousPageID();
             $back = $this->_renderLink($this->_altPrev, $this->_prevImg)
                   . $this->_spacesBefore . $this->_spacesAfter;
+        } else if ($this->_prevImgEmpty !== null) {
+            $back = $this->_prevImgEmpty
+                  . $this->_spacesBefore . $this->_spacesAfter;
         }
         return $back;
     }
@@ -1097,6 +1121,10 @@ class Pager_Common
             $this->_linkData[$this->_urlVar] = $this->getNextPageID();
             $next = $this->_spacesAfter
                   . $this->_renderLink($this->_altNext, $this->_nextImg)
+                  . $this->_spacesBefore . $this->_spacesAfter;
+        } else if ($this->_nextImgEmpty !== null) {
+            $next = $this->_spacesAfter
+                  . $this->_nextImgEmpty
                   . $this->_spacesBefore . $this->_spacesAfter;
         }
         return $next;

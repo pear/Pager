@@ -23,7 +23,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <active>no</active>
  </lead>
  <date>2008-03-26</date>
- <time>23:16:27</time>
+ <time>23:23:27</time>
  <version>
   <release>2.4.6</release>
   <api>2.4.6</api>
@@ -36,6 +36,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  <notes>- fixed bug #13316: NOTICE in getLinks() in Jumping mode
 - fixed bug #13342: getLinks() returns wrong result with multi-byte arrays
 - fixed bug #13469: getPerPageSelectBox() can produce invalid xhtml with no data
+- fixed bug #13472: PHP 6 Removes get_magic_quotes_gpc()
 - fixed bug #13506: POST method deletes querystring
 - request #13509: added 'prevImgEmpty' and 'nextImgEmpty' options to show a disabled
   prev/next page link when you are on the last/first page (cweiske)
@@ -107,6 +108,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    <notes>- fixed bug #13316: NOTICE in getLinks() in Jumping mode
 - fixed bug #13342: getLinks() returns wrong result with multi-byte arrays
 - fixed bug #13469: getPerPageSelectBox() can produce invalid xhtml with no data
+- fixed bug #13472: PHP 6 Removes get_magic_quotes_gpc()
 - fixed bug #13506: POST method deletes querystring
 - request #13509: added 'prevImgEmpty' and 'nextImgEmpty' options to show a disabled
   prev/next page link when you are on the last/first page (cweiske)

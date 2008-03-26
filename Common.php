@@ -996,7 +996,7 @@ class Pager_Common
             $this->_recursive_urldecode($this->_extraVars);
             $qs = array_merge($qs, $this->_extraVars);
         }
-        if (count($qs) && get_magic_quotes_gpc()) {
+        if (count($qs) && function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
             $this->_recursive_stripslashes($qs);
         }
         return $qs;

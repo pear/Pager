@@ -848,8 +848,12 @@ class Pager_Common
                            $linkText
             );
         } elseif ($this->_httpMethod == 'POST') {
+            $href = $this->_url;
+            if (!empty($_GET)) {
+                $href .= '?' . $this->_http_build_query_wrapper($_GET);
+            }
             return sprintf("<a href='javascript:void(0)' onclick='%s'%s%s%s title='%s'>%s</a>",
-                           $this->_generateFormOnClick($this->_url, $this->_linkData),
+                           $this->_generateFormOnClick($href, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,
                            empty($this->_accesskey)   ? '' : ' accesskey=\''.$this->_linkData[$this->_urlVar].'\'',

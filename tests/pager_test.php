@@ -132,6 +132,17 @@ class TestOfPager extends UnitTestCase {
         $err = $this->pager->getPerPageSelectBox(5, 15, 5, false, '%s bugs');
         $this->assertEqual(ERROR_PAGER_INVALID_PLACEHOLDER, $err->getCode());
     }
+    function testSelectBoxEmpty() {
+        $options = array(
+            'itemData'   => array(),
+            'totalItems' => 0,
+        );
+        $this->pager = Pager::factory($options);
+        $selectBox  = '<select name="'.$this->pager->_sessionVar.'">';
+        $selectBox .= '<option />';
+        $selectBox .= '</select>';
+        $this->assertEqual($selectBox, $this->pager->getPerPageSelectBox(5, 15, 5, false, array('checkMaxLimit' => true)));
+    }
     function testAppendInvalid() {
         $options = array(
             'totalItems' => 10,

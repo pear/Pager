@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2008-03-09</date>
- <time>16:48:27</time>
+ <date>2008-03-26</date>
+ <time>22:36:27</time>
  <version>
   <release>2.4.6</release>
   <api>2.4.6</api>
@@ -35,6 +35,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
  <notes>- fixed bug #13316: NOTICE in getLinks() in Jumping mode
 - fixed bug #13342: getLinks() returns wrong result with multi-byte arrays
+- fixed bug #13469: getPerPageSelectBox() can produce invalid xhtml with no data
  </notes>
  <contents>
   <dir name="/">
@@ -97,10 +98,11 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2008-03-09</date>
+   <date>2008-03-26</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- fixed bug #13316: NOTICE in getLinks() in Jumping mode
 - fixed bug #13342: getLinks() returns wrong result with multi-byte arrays
+- fixed bug #13469: getPerPageSelectBox() can produce invalid xhtml with no data
    </notes>
   </release>
   <release>

@@ -123,8 +123,8 @@ class Pager_HtmlWidgets
         } else {
             $selected = $this->pager->_perPage;
         }
-        
-        if ($checkMaxLimit && $this->pager->_totalItems > 0 && $this->pager->_totalItems < $end) {
+
+        if ($checkMaxLimit && $this->pager->_totalItems >= 0 && $this->pager->_totalItems < $end) {
             $end = $this->pager->_totalItems;
         }
 
@@ -154,6 +154,10 @@ class Pager_HtmlWidgets
                 $tmp .= $this->pager->_showAllText;
             }
             $tmp .= '</option>';
+        }
+        if (substr($tmp, -9, 9) !== '</option>') {
+            //empty select
+            $tmp .= '<option />';
         }
         $tmp .= '</select>';
         return $tmp;
@@ -225,7 +229,7 @@ class Pager_HtmlWidgets
         }
         $tmp .= '>';
         $start = 1;
-        $end = $this->pager->numPages();
+        $end   = $this->pager->numPages();
         $selected = $this->pager->getCurrentPageID();
         for ($i=$start; $i<=$end; $i++) {
             $tmp .= '<option value="'.$i.'"';

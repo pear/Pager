@@ -353,25 +353,25 @@ class Pager_Common
     var $_spacesAfter   = '';
 
     /**
-     * @var string $_firstLinkTitle
+     * @var string String used as title in <link rel="first"> tag
      * @access private
      */
     var $_firstLinkTitle = 'first page';
 
     /**
-     * @var string $_nextLinkTitle
+     * @var string String used as title in <link rel="next"> tag
      * @access private
      */
     var $_nextLinkTitle = 'next page';
 
     /**
-     * @var string $_prevLinkTitle
+     * @var string String used as title in <link rel="previous"> tag
      * @access private
      */
     var $_prevLinkTitle = 'previous page';
 
     /**
-     * @var string $_lastLinkTitle
+     * @var string String used as title in <link rel="last"> tag
      * @access private
      */
     var $_lastLinkTitle = 'last page';
@@ -996,7 +996,11 @@ class Pager_Common
             $this->_recursive_urldecode($this->_extraVars);
             $qs = array_merge($qs, $this->_extraVars);
         }
-        if (count($qs) && function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
+        if (count($qs)
+            && function_exists('get_magic_quotes_gpc')
+            && -1 == version_compare(PHP_VERSION, '5.2.99')
+            && get_magic_quotes_gpc()
+        ) {
             $this->_recursive_stripslashes($qs);
         }
         return $qs;
@@ -1295,7 +1299,7 @@ class Pager_Common
     function getPerPageSelectBox($start=5, $end=30, $step=5, $showAllData=false, $extraParams=array())
     {
         include_once 'Pager/HtmlWidgets.php';
-        $widget =& new Pager_HtmlWidgets($this);
+        $widget = new Pager_HtmlWidgets($this);
         return $widget->getPerPageSelectBox($start, $end, $step, $showAllData, $extraParams);
     }
 
@@ -1321,7 +1325,7 @@ class Pager_Common
     function getPageSelectBox($params = array(), $extraAttributes = '')
     {
         include_once 'Pager/HtmlWidgets.php';
-        $widget =& new Pager_HtmlWidgets($this);
+        $widget = new Pager_HtmlWidgets($this);
         return $widget->getPageSelectBox($params, $extraAttributes);
     }
 

@@ -175,6 +175,9 @@ class TestOfPager extends UnitTestCase {
         //$this->assertEqual($expected, $this->pager->_getLinksUrl());
 
         $expected = 'request%5B0%5D=aRequest&amp;escape=%E4%F6%25%3C%3E%2B';
+        if (version_compare(phpversion(), '5.3.0-dev', '>=')) {
+            $expected = 'request%5B0%5D=aRequest&amp;escape=%C3%A4%C3%B6%25%3C%3E%2B';
+        }
         $rendered = $this->pager->_renderLink('', '');
         preg_match('/href="(.*)"/U', $rendered, $matches);
         $actual = str_replace($_SERVER['PHP_SELF'].'?', '', $matches[1]);
@@ -198,6 +201,20 @@ class TestOfPager extends UnitTestCase {
         $options = array(
             'extraVars' => array(
                 'test' => '&#27979;&#35797;',
+            ),
+            'perPage' => 5,
+        );
+        $this->pager =& Pager::factory($options);
+        //$expected = '<a href="'.$_SERVER['PHP_SELF'].'?test=&#27979;&#35797;" title=""></a>';
+        $rendered = $this->pager->_renderLink('', '');
+        preg_match('/href="(.*)"/U', $rendered, $matches);
+        $actual = str_replace($_SERVER['PHP_SELF'].'?test=', '', $matches[1]);
+        $this->assertEqual(urlencode($options['extraVars']['test']), $actual);
+    }
+    function testMultibyteJapaneseStrings() {
+        $options = array(
+            'extraVars' => array(
+                'test' => '&#28450;&#23383;',
             ),
             'perPage' => 5,
         );
@@ -665,5 +682,10 @@ class TestOfPager extends UnitTestCase {
         $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="next page">&raquo;</a>';
         $this->assertEqual($expected, $this->pager->_getNextLink());
     }
+}
+if (!defined('TEST_RUNNING')) {
+    define('TEST_RUNNING', true);
+    $test = new TestOfPager();
+    $test->run(new HtmlReporter());
 }
 ?>

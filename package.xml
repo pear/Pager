@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2008-04-19</date>
- <time>18:51:27</time>
+ <date>2008-04-20</date>
+ <time>16:05:27</time>
  <version>
   <release>2.4.7</release>
   <api>2.4.7</api>
@@ -34,6 +34,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  </stability>
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
  <notes>- fixed bug #13604: WARNINGS with PHP 5.3-dev [thanks to Chris Troup]
+- request #13567: support for regexp in 'excludeVars' [thanks to Stefano Coletta]
  </notes>
  <contents>
   <dir name="/">
@@ -97,9 +98,10 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2008-04-19</date>
+   <date>2008-04-20</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- fixed bug #13604: WARNINGS with PHP 5.3-dev [thanks to Chris Troup]
+- request #13567: support for regexp in 'excludeVars' [thanks to Stefano Coletta]
    </notes>
   </release>
   <release>

@@ -969,6 +969,21 @@ class Pager_Common
     }
 
     // }}}
+    // {{{ _isRegexp()
+
+    /**
+     * Returns true if the string is a regexp pattern
+     *
+     * @param string $string the pattern to check
+     *
+     * @return boolean
+     * @access private
+     */
+    function _isRegexp($string) {
+        return preg_match('/^\/.*\/([Uims]+)?$/', $string);
+    }
+
+    // }}}
     // {{{ _getLinksData()
 
     /**
@@ -988,8 +1003,18 @@ class Pager_Common
             }
         }
         foreach ($this->_excludeVars as $exclude) {
-            if (array_key_exists($exclude, $qs)) {
-                unset($qs[$exclude]);
+            $use_preg = $this->_isRegexp($exclude);
+            foreach (array_keys($qs) as $qs_item) {
+                if ($use_preg) {
+                    if (preg_match($exclude, $qs_item, $matches)) {
+                        foreach ($matches as $m) {
+                            unset($qs[$m]);
+                        }
+                    }
+                } elseif ($qs_item == $exclude) {
+                    unset($qs[$qs_item]);
+                    break;
+                }
             }
         }
         if (count($this->_extraVars)) {

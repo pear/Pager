@@ -175,7 +175,7 @@ class TestOfPager extends UnitTestCase {
         //$this->assertEqual($expected, $this->pager->_getLinksUrl());
 
         $expected = 'request%5B0%5D=aRequest&amp;escape=%E4%F6%25%3C%3E%2B';
-        if (version_compare(phpversion(), '5.3.0-dev', '>=')) {
+        if (1 == version_compare(PHP_VERSION, '5.2.99')) {
             $expected = 'request%5B0%5D=aRequest&amp;escape=%C3%A4%C3%B6%25%3C%3E%2B';
         }
         $rendered = $this->pager->_renderLink('', '');
@@ -264,15 +264,23 @@ class TestOfPager extends UnitTestCase {
         $this->assertEqual($expected, $actual);
     }
     function testExcludeVars() {
-        $arr = array(
-            'apple',
-            'orange',
+        $_GET['excludeMe'] = 'foo';
+        $extraVars = array(
+            'arr' => array(
+                'apple',
+                'orange',
+            ),
+            'no' => 'test', // do not remove this one, because it has been explicitely added
+        );
+        $excludeVars = array(
+            'no',        // do not remove, @see above
+            'excludeMe', //remove
         );
         $options = array(
             'itemData'    => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
             'perPage'     => 5,
-            'extraVars'   => array('arr' => $arr, 'no' => 'test'),
-            'excludeVars' => array('no'),
+            'extraVars'   => $extraVars,
+            'excludeVars' => $excludeVars,
         );
         $this->pager =& Pager::factory($options);
         $expected = array(
@@ -283,14 +291,45 @@ class TestOfPager extends UnitTestCase {
             'no' => 'test',
         );
         $actual = $this->pager->_getLinksData();
-        $this->assertEqual($expected, $this->pager->_getLinksData());
+        $this->assertEqual($expected, $actual);
         $separator = ini_get('arg_separator.output');
         if ($separator == '&') {
             $separator = '&amp;';
         }
+
         $expected = '<a href="'.$_SERVER['PHP_SELF'].'?arr%5B0%5D=apple'.$separator.'arr%5B1%5D=orange'.$separator.'no=test'.$separator.'pageID=2" title=""></a>';
         $actual = $this->pager->_renderLink('', '');
         $this->assertEqual($expected, $actual);
+        unset($_GET['excludeMe']); //cleanup
+
+        //exclude with regexp
+
+        $_GET['reMoveAAA'] = 'aaa';
+        $_GET['RemoveBBB'] = 'bbb';
+        $_GET['leaveCCC']  = 'ccc';
+        $excludeVars = array(
+            '/remove.*/i', //regexp
+        );
+        $options = array(
+            'itemData'    => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+            'perPage'     => 5,
+            'extraVars'   => $extraVars,
+            'excludeVars' => $excludeVars,
+        );
+        $this->pager =& Pager::factory($options);
+        $expected = array(
+            'arr' => array(
+                0 => 'apple',
+                1 => 'orange'
+            ),
+            'no' => 'test',
+            'leaveCCC'  => 'ccc',
+        );
+        $this->assertEqual($expected, $this->pager->_getLinksData());
+        //cleanup
+        foreach (array_keys($_GET) as $k) {
+        	unset($_GET[$k]);
+        }
     }
     function testArgSeparator() {
         $bkp_arg_separator = ini_get('arg_separator.output');
@@ -597,7 +636,7 @@ class TestOfPager extends UnitTestCase {
             'accesskey' => true,
         );
         $this->pager = Pager::factory($options);
-        $this->assertWantedPattern('/accesskey="\d"/i', $this->pager->links);
+        $this->assertPattern('/accesskey="\d"/i', $this->pager->links);
         //var_dump($this->pager->links);
     }
     function testIsEncoded() {

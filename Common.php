@@ -1103,7 +1103,7 @@ class Pager_Common
             $this->_linkData[$this->_urlVar] = $this->getPreviousPageID();
             $back = $this->_renderLink($this->_altPrev, $this->_prevImg)
                   . $this->_spacesBefore . $this->_spacesAfter;
-        } else if ($this->_prevImgEmpty !== null) {
+        } else if ($this->_prevImgEmpty !== null && $this->_totalPages > 1) {
             $back = $this->_prevImgEmpty
                   . $this->_spacesBefore . $this->_spacesAfter;
         }
@@ -1155,7 +1155,7 @@ class Pager_Common
             $next = $this->_spacesAfter
                   . $this->_renderLink($this->_altNext, $this->_nextImg)
                   . $this->_spacesBefore . $this->_spacesAfter;
-        } else if ($this->_nextImgEmpty !== null) {
+        } else if ($this->_nextImgEmpty !== null && $this->_totalPages > 1) {
             $next = $this->_spacesAfter
                   . $this->_nextImgEmpty
                   . $this->_spacesBefore . $this->_spacesAfter;

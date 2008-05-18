@@ -721,6 +721,18 @@ class TestOfPager extends UnitTestCase {
         $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="next page">&raquo;</a>';
         $this->assertEqual($expected, $this->pager->_getNextLink());
     }
+    //http://pear.php.net/bugs/bug.php?id=13913
+    function testEmptyPagerWithImgEmpty() {
+        $options = array(
+            'itemData' => range(1, 2),
+            'perPage'  => 5,
+            'prevImgEmpty' => 'YYY',
+            'nextImgEmpty' => 'XXX',
+        );
+        $this->pager = Pager::factory($options);
+        $expected = '';
+        $this->assertEqual($expected, $this->pager->links);
+    }
 }
 if (!defined('TEST_RUNNING')) {
     define('TEST_RUNNING', true);

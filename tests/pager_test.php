@@ -21,28 +21,28 @@ class TestOfPager extends UnitTestCase {
     function tearDown() {
         unset($this->pager);
     }
-    function testCurrentPageID () {
+    function testCurrentPageID() {
         $this->assertEqual(1, $this->pager->getCurrentPageID());
     }
-    function testNextPageID () {
+    function testNextPageID() {
         $this->assertEqual(2, $this->pager->getNextPageID());
     }
-    function testPrevPageID () {
+    function testPrevPageID() {
         $this->assertEqual(false, $this->pager->getPreviousPageID());
     }
-    function testNumItems () {
+    function testNumItems() {
         $this->assertEqual(10, $this->pager->numItems());
     }
-    function testNumPages () {
+    function testNumPages() {
         $this->assertEqual(2, $this->pager->numPages());
     }
-    function testFirstPage () {
+    function testFirstPage() {
         $this->assertEqual(true, $this->pager->isFirstPage());
     }
-    function testLastPage () {
+    function testLastPage() {
         $this->assertEqual(false, $this->pager->isLastPage());
     }
-    function testLastPageComplete () {
+    function testLastPageComplete() {
         $this->assertEqual(true, $this->pager->isLastPageComplete());
     }
     function testOffsetByPageId() {
@@ -719,6 +719,34 @@ class TestOfPager extends UnitTestCase {
         $this->pager = Pager::factory($options);
         $this->pager->build();
         $expected = '<a href="' . $_SERVER['PHP_SELF'] . '?pageID=2" title="next page">&raquo;</a>';
+        $this->assertEqual($expected, $this->pager->_getNextLink());
+    }
+    //http://pear.php.net/bugs/bug.php?id=12306
+    function testAbsoluteLinks() {
+        // Reproduces bug #13881
+        $options = array (
+            'mode' => 'Sliding',
+            'delta' => 5,
+            'totalItems' => 50,
+            'perPage' => 10,
+            'urlVar' => 'page',
+            'currentPage' => 1,
+            'append' => false,
+            'path' => '',
+            'fileName' => '/report/alpha/page/%d/orderBy/foo/direction/asc',
+            'spacesBeforeSeparator' => 0,
+            'spacesAfterSeparator'  => 0,
+        );
+        $this->pager = Pager::factory($options);
+        $this->pager->build();
+        $expected = '<a href="/report/alpha/page/2/orderBy/foo/direction/asc" title="next page">&raquo;</a>';
+        $this->assertEqual($expected, $this->pager->_getNextLink());
+
+        $options['path'] = '/';
+        $options['fileName'] = '/report/alpha/page/%d/orderBy/foo/direction/asc';
+        $this->pager = Pager::factory($options);
+        $this->pager->build();
+        $expected = '<a href="/report/alpha/page/2/orderBy/foo/direction/asc" title="next page">&raquo;</a>';
         $this->assertEqual($expected, $this->pager->_getNextLink());
     }
     //http://pear.php.net/bugs/bug.php?id=13913

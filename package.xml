@@ -22,8 +22,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2008-05-18</date>
- <time>20:04:27</time>
+ <date>2008-05-31</date>
+ <time>14:44:27</time>
  <version>
   <release>2.4.7</release>
   <api>2.4.7</api>
@@ -36,6 +36,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  <notes>- fixed bug #13604: WARNINGS with PHP 5.3-dev [thanks to Chris Troup]
 - request #13567: support for regexp in 'excludeVars' [thanks to Stefano Coletta]
 - fixed bug #13913 empty prev/next image shown when only one page exists [cweiske]
+- fixed bug #13881: fix for relative links (introduced in v.2.4.5) may cause some
+  issues with absolute links
  </notes>
  <contents>
   <dir name="/">
@@ -99,11 +101,13 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2008-05-18</date>
+   <date>2008-05-31</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- fixed bug #13604: WARNINGS with PHP 5.3-dev [thanks to Chris Troup]
 - request #13567: support for regexp in 'excludeVars' [thanks to Stefano Coletta]
 - fixed bug #13913 empty prev/next image shown when only one page exists [cweiske]
+- fixed bug #13881: fix for relative links (introduced in v.2.4.5) may cause some
+  issues with absolute links
    </notes>
   </release>
   <release>

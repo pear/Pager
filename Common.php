@@ -1562,22 +1562,26 @@ class Pager_Common
             $this->_httpMethod = strtoupper($this->_httpMethod);
         }
 
-        $this->_fileName = ltrim($this->_fileName, '/');  //strip leading slash
-        $this->_path     = rtrim($this->_path, '/');      //strip trailing slash
+        if (substr($this->_path, -1, 1) == '/') {
+            $this->_fileName = ltrim($this->_fileName, '/');  //strip leading slash
+        }
 
         if ($this->_append) {
             if ($this->_fixFileName) {
                 $this->_fileName = PAGER_CURRENT_FILENAME; //avoid possible user error;
             }
-            $this->_url = $this->_path.(!empty($this->_path) ? '/' : '').$this->_fileName;
+            $this->_url = $this->_path.(empty($this->_path) ? '' : '/').$this->_fileName;
         } else {
             $this->_url = $this->_path;
             if (0 != strncasecmp($this->_fileName, 'javascript', 10)) {
-                $this->_url .= (!empty($this->_path) ? '/' : '');
+                $this->_url .= (empty($this->_path) ? '' : '/');
             }
             if (false === strpos($this->_fileName, '%d')) {
                 trigger_error($this->errorMessage(ERROR_PAGER_INVALID_USAGE), E_USER_WARNING);
             }
+        }
+        if (substr($this->_url, 0, 2) == '//') {
+            $this->_url = substr($this->_url, 1);
         }
         if (false === strpos($this->_altPage, '%d')) {
             //by default, append page number at the end

@@ -25,19 +25,16 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  <date>2008-08-11</date>
  <time>09:40:27</time>
  <version>
-  <release>2.4.7</release>
-  <api>2.4.7</api>
+  <release>2.4.8</release>
+  <api>2.4.8</api>
  </version>
  <stability>
   <release>stable</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
- <notes>- fixed bug #13604: WARNINGS with PHP 5.3-dev [thanks to Chris Troup]
-- request #13567: support for regexp in 'excludeVars' [thanks to Stefano Coletta]
-- fixed bug #13913 empty prev/next image shown when only one page exists [cweiske]
-- fixed bug #13881: fix for relative links (introduced in v.2.4.5) may cause some
-  issues with absolute links
+ <notes>
+ 
  </notes>
  <contents>
   <dir name="/">
@@ -92,6 +89,21 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   </filelist>
  </phprelease>
  <changelog>
+  <release>
+   <version>
+    <release>2.4.8</release>
+    <api>2.4.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-08-11</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>
+
+   </notes>
+  </release>
   <release>
    <version>
     <release>2.4.7</release>

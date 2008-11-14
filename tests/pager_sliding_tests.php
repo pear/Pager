@@ -15,7 +15,7 @@ class PagerSlidingTests extends GroupTest {
 
 if (!defined('TEST_RUNNING')) {
     define('TEST_RUNNING', true);
-    $test = &new PagerTests();
+    $test = new PagerTests();
     $test->run(new HtmlReporter());
 }
 ?>

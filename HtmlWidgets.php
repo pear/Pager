@@ -84,6 +84,8 @@ class Pager_HtmlWidgets
      *                  <select> tag
      *                - 'checkMaxLimit': if true, Pager checks if $end is bigger
      *                  than $totalItems, and doesn't show the extra select options
+     *                - 'autoSubmit': if TRUE, add some js code
+     *                  to submit the form on the onChange event
      *
      * @return string xhtml select box
      * @access public
@@ -132,6 +134,40 @@ class Pager_HtmlWidgets
         if (!empty($attributes)) {
             $tmp .= ' '.$attributes;
         }
+        if (!empty($extraParams['autoSubmit'])) {
+            if ('GET' == $this->pager->_httpMethod) {
+                $selector = '\' + '.'this.options[this.selectedIndex].value + \'';
+                if ($this->pager->_append) {
+                    $tmpLinkData = $this->pager->_linkData;
+                    if (isset($tmpLinkData[$this->pager->_urlVar])) {
+                        $tmpLinkData[$this->pager->_urlVar] = $this->pager->getCurrentPageID();
+                    }
+                    $tmpLinkData[$this->pager->_sessionVar] = '1';
+                    $href = '?' . $this->pager->_http_build_query_wrapper($tmpLinkData);
+                    $href = htmlentities($this->pager->_url, ENT_COMPAT, 'UTF-8'). preg_replace(
+                        '/(&|&amp;|\?)('.$this->pager->_sessionVar.'=)(\d+)/',
+                        '\\1\\2'.$selector,
+                        htmlentities($href, ENT_COMPAT, 'UTF-8')
+                    );
+                } else {
+                    $href = htmlentities($this->pager->_url . str_replace('%d', $selector, $this->pager->_fileName), ENT_COMPAT, 'UTF-8');
+                }
+                $tmp .= ' onchange="document.location.href=\''
+                     . $href .'\''
+                     . '"';
+            } elseif ($this->pager->_httpMethod == 'POST') {
+                $tmp .= " onchange='"
+                     . $this->pager->_generateFormOnClick($this->pager->_url, $this->pager->_linkData)
+                     . "'";
+                $tmp = preg_replace(
+                    '/(input\.name = \"'.$this->pager->_sessionVar.'\"; input\.value =) \"(\d+)\";/',
+                    '\\1 this.options[this.selectedIndex].value;',
+                    $tmp
+                );
+            }
+        }
+
+
         $tmp .= '>';
         $last = $start;
         for ($i=$start; $i<=$end; $i+=$step) {
@@ -205,13 +241,13 @@ class Pager_HtmlWidgets
                 $selector = '\' + '.'this.options[this.selectedIndex].value + \'';
                 if ($this->pager->_append) {
                     $href = '?' . $this->pager->_http_build_query_wrapper($this->pager->_linkData);
-                    $href = htmlentities($this->pager->_url). preg_replace(
+                    $href = htmlentities($this->pager->_url, ENT_COMPAT, 'UTF-8'). preg_replace(
                         '/(&|&amp;|\?)('.$this->pager->_urlVar.'=)(\d+)/',
                         '\\1\\2'.$selector,
-                        htmlentities($href)
+                        htmlentities($href, ENT_COMPAT, 'UTF-8')
                     );
                 } else {
-                    $href = htmlentities($this->pager->_url . str_replace('%d', $selector, $this->pager->_fileName));
+                    $href = htmlentities($this->pager->_url . str_replace('%d', $selector, $this->pager->_fileName), ENT_COMPAT, 'UTF-8');
                 }
                 $tmp .= ' onchange="document.location.href=\''
                      . $href .'\''

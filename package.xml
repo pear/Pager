@@ -25,8 +25,8 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  <date>2009-04-21</date>
  <time>22:49:27</time>
  <version>
-  <release>2.4.8</release>
-  <api>2.4.8</api>
+  <release>2.4.9</release>
+  <api>2.4.9</api>
  </version>
  <stability>
   <release>stable</release>
@@ -34,8 +34,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  </stability>
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
  <notes>
-- request #15949: add autoSubmit option to getPerPageSelectBox() [Matt Rosenquist]
-- fix potential issues with encoding in getPerPageSelectBox() and getPageSelectBox()
+
  </notes>
  <contents>
   <dir name="/">
@@ -90,6 +89,21 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   </filelist>
  </phprelease>
  <changelog>
+  <release>
+   <version>
+    <release>2.4.9</release>
+    <api>2.4.9</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-04-21</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>
+
+   </notes>
+  </release>
   <release>
    <version>
     <release>2.4.8</release>

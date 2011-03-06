@@ -10,7 +10,7 @@ class TestOfPagerPOST extends WebTestCase {
     var $options = array();
 
     function TestOfPagerPOST($name='Test of Pager with httpMethod="POST"') {
-        $this->WebTestCase($name);
+        parent::__construct($name);
     }
     function setUp() {
         $this->options = array(
@@ -40,7 +40,7 @@ class TestOfPagerPOST extends WebTestCase {
         $this->assertLink('Next >>');
         //$this->showSource();
         foreach ($test_strings_encoded as $name => $value) {
-            $this->assertWantedPattern('/'.$name.'.*'.preg_quote(str_replace('&', '&amp;', $value)).'/Uims');
+            $this->assertPattern('/'.$name.'.*'.preg_quote(str_replace('&', '&amp;', $value)).'/Uims');
         }
     }
 
@@ -60,7 +60,7 @@ class TestOfPagerPOST extends WebTestCase {
         $this->assertLink('Next >>');
         //$this->showSource();
         foreach ($test_strings_plain as $name => $value) {
-            $this->assertWantedPattern('/'.$name.'.*'.preg_quote(urlencode($value)).'/Uims');
+            $this->assertPattern('/'.$name.'.*'.preg_quote(urlencode($value)).'/Uims');
         }
     }
 }

@@ -4,11 +4,11 @@
 require_once 'simple_include.php';
 require_once 'pager_include.php';
 
-class PagerTests extends GroupTest {
+class PagerTests extends TestSuite {
     function PagerTests() {
-        $this->GroupTest('Pager Tests');
-        $this->addTestFile('pager_test.php');
-        $this->addTestFile('pager_noData_test.php');
+        $this->TestSuite('Pager Tests');
+        $this->addFile('pager_test.php');
+        $this->addFile('pager_noData_test.php');
     }
 }
 

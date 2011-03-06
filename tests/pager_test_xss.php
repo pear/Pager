@@ -11,7 +11,7 @@ class TestOfPagerXSS extends UnitTestCase {
     var $pager;
     var $baseurl;
     function TestOfPagerXSS($name='Test of Pager - XSS attacks') {
-        $this->UnitTestCase($name);
+        parent::__construct($name);
     }
     function setUp() {
         $options = array(
@@ -37,7 +37,7 @@ class TestOfPagerXSS extends UnitTestCase {
 }
 if (!defined('TEST_RUNNING')) {
     define('TEST_RUNNING', true);
-    $test = &new TestOfPagerXSS();
+    $test = new TestOfPagerXSS();
     $test->run(new HtmlReporter());
 }
 ?>

@@ -10,7 +10,7 @@ class TestOfPagerPOSTsimple extends UnitTestCase {
     var $options = array();
 
     function TestOfPagerPOSTsimple($name='Test of Pager with httpMethod="POST" - no web') {
-        $this->UnitTestCase($name);
+        parent::__construct($name);
     }
     function setUp() {
         $this->options = array(

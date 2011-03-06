@@ -7,7 +7,7 @@ require_once 'pager_include.php';
 class TestOfPagerJumping extends UnitTestCase {
     var $pager;
     function TestOfPagerJumping($name='Test of Pager_Jumping') {
-        $this->UnitTestCase($name);
+        parent::__construct($name);
     }
     function setUp() {
         $options = array(

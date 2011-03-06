@@ -7,7 +7,7 @@ require_once 'pager_wrapper_include.php';
 class TestOfPagerWrapper extends UnitTestCase
 {
     function TestOfPagerWrapper($name='Test of Pager_Wrapper') {
-        $this->UnitTestCase($name);
+        parent::__construct($name);
     }
     
     function setUp() { }

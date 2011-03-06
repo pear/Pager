@@ -11,12 +11,12 @@ require_once './pager_jumping_tests.php';
 require_once './pager_sliding_tests.php';
 
 
-class AllTests extends GroupTest {
+class AllTests extends TestSuite {
     function AllTests() {
-        $this->GroupTest('All PEAR::Pager Tests');
-        $this->AddTestCase(new PagerTests());
-        $this->AddTestCase(new PagerJumpingTests());
-        $this->AddTestCase(new PagerSlidingTests());
+        $this->TestSuite('All PEAR::Pager Tests');
+        $this->Add(new PagerTests());
+        $this->Add(new PagerJumpingTests());
+        $this->Add(new PagerSlidingTests());
     }
 }
 

@@ -7,7 +7,7 @@ require_once 'pager_include.php';
 class TestOfPagerSlidingNoData extends UnitTestCase {
     var $pager;
     function TestOfPagerSlidingNoData($name='Test of Pager_Sliding - no data') {
-        $this->UnitTestCase($name);
+        parent::__construct($name);
     }
     function setUp() {
         $options = array(

@@ -7,7 +7,7 @@ require_once 'pager_include.php';
 class TestOfPagerNoData extends UnitTestCase {
     var $pager;
     function TestOfPagerNoData($name='Test of Pager - no data') {
-        $this->UnitTestCase($name);
+        parent::__construct($name);
     }
     function setUp() {
         $options = array(

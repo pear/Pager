@@ -7,7 +7,7 @@ require_once 'pager_include.php';
 class TestOfPagerSlidingNotExpanded extends UnitTestCase {
     var $pager;
     function TestOfPagerSlidingNotExpanded($name='Test of Pager_Sliding - expanded=false') {
-        $this->UnitTestCase($name);
+        parent::__construct($name);
     }
     function setUp() {
         $options = array(
@@ -16,7 +16,7 @@ class TestOfPagerSlidingNotExpanded extends UnitTestCase {
             'mode'     => 'Sliding',
             'expanded' => false
         );
-        $this->pager = new Pager($options);
+        $this->pager = Pager::factory($options);
     }
     function tearDown() {
         unset($this->pager);

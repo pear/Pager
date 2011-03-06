@@ -292,7 +292,7 @@ function Pager_Wrapper_Eclipse(&$db, $query, $pager_options = array(), $disabled
 {
     if (!$disabled) {
         require_once(ECLIPSE_ROOT . 'PagedQuery.php');
-        $query =& new PagedQuery($db->query($query), $pager_options['perPage']);
+        $query = new PagedQuery($db->query($query), $pager_options['perPage']);
         $totalrows = $query->getRowCount();
         $numpages  = $query->getPageCount();
         $whichpage = isset($_GET[$pager_options['urlVar']]) ? (int)$_GET[$pager_options['urlVar']] - 1 : 0;
@@ -314,7 +314,7 @@ function Pager_Wrapper_Eclipse(&$db, $query, $pager_options = array(), $disabled
 
     $page = array();
     require_once(ECLIPSE_ROOT . 'QueryIterator.php');
-    for ($it =& new QueryIterator($result); $it->isValid(); $it->next()) {
+    for ($it = new QueryIterator($result); $it->isValid(); $it->next()) {
         $page['data'][] =& $it->getCurrent();
     }
     require_once 'Pager/Pager.php';

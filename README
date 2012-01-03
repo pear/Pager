@@ -1,12 +1,23 @@
 This package is http://pear.php.net/package/Pager 
 
-Please report all new issues via the PEAR bug tracker.
+Please report all new issues via the PEAR bug tracker: 
 
+
+= Documentation =
+
+Manual: https://pear.php.net/manual/en/package.html.pager.php
+
+Tutorials: http://alberton.info/pear_pager_tutorials.html
+
+
+= Testing =
 
 To test, run either
 $ phpunit tests/
   or
 $ pear run-tests -r
+
+= Build and install =
 
 To build, simply
 $ pear package

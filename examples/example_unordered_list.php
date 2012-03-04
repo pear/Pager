@@ -21,13 +21,13 @@ $params = array(
     'prevImg'   => '« Previous',
     'nextImg'   => ' Next »',
 //settings best used for lists:
-		'separator' => '',										//you shouldn't use &nbsp; anywhere, especially in lists
-		'spacesBeforeSeparator'	=> 0,					//or spaces
-		'spacesAfterSeparator'	=> 0,
-		'linkContainer' => 'li',							//default is nothing, now optionally wraps links with a html tag
-		'curLinkContainerClassName' => 'active',	//if you want <li class="active"><a>page#</a></li>
-		'curTag' => 'a',											//default is span as that's what it used to be, now it's changeable
-		//'curPageLinkClassName' => 'active',	//if you want <li><a class="active">page#</a></li>
+    'separator' => '',                        //you shouldn't use &nbsp; anywhere, especially in lists
+    'spacesBeforeSeparator'	=> 0,             //or spaces
+    'spacesAfterSeparator'	=> 0,
+    'linkContainer' => 'li',                  //default is nothing, now optionally wraps links with a html tag
+    'curLinkContainerClassName' => 'active',  //if you want <li class="active"><a>page#</a></li>
+    'curTag' => 'a',                          //default is span as that's what it used to be, now it's changeable
+    //'curPageLinkClassName' => 'active',     //if you want <li><a class="active">page#</a></li> instead of using curLinkContainerClassName
 );
 $pager = & Pager::factory($params);
 $page_data = $pager->getPageData();

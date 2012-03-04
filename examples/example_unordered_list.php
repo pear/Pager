@@ -55,6 +55,7 @@ ul.pagination li a {
 ul.pagination li.active a {
 	color: white;
 	border:1px solid black;
+	background-color:maroon;
 	cursor:pointer;
 }
 ul.pagination li a:hover {

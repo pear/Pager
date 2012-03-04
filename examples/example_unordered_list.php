@@ -25,7 +25,7 @@ $params = array(
 		'spacesBeforeSeparator'	=> 0,					//or spaces
 		'spacesAfterSeparator'	=> 0,
 		'linkContainer' => 'li',							//default is nothing, now optionally wraps links with a html tag
-		'linkContainerClassName' => 'active',	//if you want <li class="active"><a>page#</a></li>
+		'curLinkContainerClassName' => 'active',	//if you want <li class="active"><a>page#</a></li>
 		'curTag' => 'a',											//default is span as that's what it used to be, now it's changeable
 		//'curPageLinkClassName' => 'active',	//if you want <li><a class="active">page#</a></li>
 );

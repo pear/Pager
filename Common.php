@@ -294,7 +294,7 @@ class Pager_Common
     var $_linkContainer  = '';
 
     /**
-     * @var string HTML tag used by _linkContainer and _linkContainerClassName 
+     * @var string HTML tag used by _linkContainer and _curLinkContainerClassName 
      * @access private
      */
     var $_linkContainerPre  = '';
@@ -303,7 +303,7 @@ class Pager_Common
      * @var string CSS class name for linkContainer
      * @access private
      */
-    var $_linkContainerClassName  = '';
+    var $_curLinkContainerClassName  = '';
 
     /**
      * @var string HTML tag to wrap current page link
@@ -511,7 +511,7 @@ class Pager_Common
         'spacesBeforeSeparator',
         'spacesAfterSeparator',
         'linkContainer',
-        'linkContainerClassName',
+        'curLinkContainerClassName',
         'curTag',
         'curPageLinkClassName',
         'curPageSpanPre',
@@ -1628,7 +1628,7 @@ class Pager_Common
         }
 
         if (strlen($this->_linkContainer)) {
-            $this->_linkContainerPre .= empty($this->_linkContainerClassName) ? $this->_linkContainer : $this->_linkContainer . ' class="'.$this->_linkContainerClassName.'"';
+            $this->_linkContainerPre .= empty($this->_curLinkContainerClassName) ? $this->_linkContainer : $this->_linkContainer . ' class="'.$this->_curLinkContainerClassName.'"';
         }
 
         if (strlen($this->_curTag)) {

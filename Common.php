@@ -869,7 +869,7 @@ class Pager_Common
                 $onclick = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_onclick);
             }
             return sprintf('%s<a href="%s"%s%s%s%s title="%s">%s</a>%s',
-                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainerPre.'>',
+                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainer.'>',
                            htmlentities($this->_url . $href, ENT_COMPAT, 'UTF-8'),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,
@@ -885,7 +885,7 @@ class Pager_Common
                 $href .= '?' . $this->_http_build_query_wrapper($_GET);
             }
             return sprintf("%s<a href='javascript:void(0)' onclick='%s'%s%s%s title='%s'>%s</a>%s",
-                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainerPre.'>',
+                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainer.'>',
                            $this->_generateFormOnClick($href, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,

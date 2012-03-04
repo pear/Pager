@@ -25,7 +25,7 @@ $params = array(
 		'spacesBeforeSeparator'	=> 0,
 		'spacesAfterSeparator'	=> 0,
 		'linkContainer' => 'li',							//default is nothing, now optionally wraps links with a html tag
-		'curLinkContainerClass' => 'active',	//if you want <li class="active"><a>page#</a></li>
+		'linkContainerClassName' => 'active',	//if you want <li class="active"><a>page#</a></li>
 		'curTag' => 'a',											//default is span as that's what it used to be, now it's changeable
 		//'curPageLinkClassName' => 'active',	//if you want <li><a class="active">page#</a></li>
 );
@@ -53,7 +53,7 @@ ul.pagination li a {
 	font-size:11px;
 	font-weight:bold;
 }
-ul.pagination li a.active {color: #888; border:1px solid #888;}
+ul.pagination li.active a {color: #888; border:1px solid #888;}
 ul.pagination li a:hover {color: #0000CD; border:1px solid #0000CD; background-color:#FFFFE0;}
 </style>
 </head>

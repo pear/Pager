@@ -1631,9 +1631,13 @@ class Pager_Common
             $this->_linkContainerPre .= empty($this->_linkContainerClassName) ? $this->_linkContainer : $this->_linkContainer . ' class="'.$this->_linkContainerClassName.'"';
         }
 
-        if (strlen($this->_curPageLinkClassName)) {
-            $this->_curPageSpanPre  .= empty($this->_curTag) ? '' : '<' . $this->_curTag . ' class="'.$this->_curPageLinkClassName.'">';
-            $this->_curPageSpanPost = empty($this->_curTag) ? '' : '</' . $this->_curTag . '>' . $this->_curPageSpanPost;
+        if (strlen($this->_curTag)) {
+	        if (strlen($this->_curPageLinkClassName)) {
+						$this->_curPageSpanPre = empty($this->_curTag) ? '' : '<' . $this->_curTag . ' class="'.$this->_curPageLinkClassName.'">';
+	        }else{
+						$this->_curPageSpanPre = empty($this->_curTag) ? '' : '<' . $this->_curTag . '>';
+	        }
+	        $this->_curPageSpanPost = empty($this->_curTag) ? '' : '</' . $this->_curTag . '>' . $this->_curPageSpanPost;
         }
 
         $this->_perPage = max($this->_perPage, 1); //avoid possible user errors

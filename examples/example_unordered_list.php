@@ -21,8 +21,8 @@ $params = array(
     'prevImg'   => '« Previous',
     'nextImg'   => ' Next »',
 //settings best used for lists:
-		'separator' => '',
-		'spacesBeforeSeparator'	=> 0,
+		'separator' => '',										//you shouldn't use &nbsp; anywhere, especially in lists
+		'spacesBeforeSeparator'	=> 0,					//or spaces
 		'spacesAfterSeparator'	=> 0,
 		'linkContainer' => 'li',							//default is nothing, now optionally wraps links with a html tag
 		'linkContainerClassName' => 'active',	//if you want <li class="active"><a>page#</a></li>
@@ -41,7 +41,6 @@ $selectBox = $pager->getPerPageSelectBox();
 <title>new PEAR::Pager example using a list</title>
 <style>
 ul.pagination li {display:inline; margin:3px;}
-ul.pagination li a.active {cursor:pointer;}
 ul.pagination li a {
 	display: inline-block;
 	margin: 0;
@@ -53,8 +52,16 @@ ul.pagination li a {
 	font-size:11px;
 	font-weight:bold;
 }
-ul.pagination li.active a {color: #888; border:1px solid #888;}
-ul.pagination li a:hover {color: #0000CD; border:1px solid #0000CD; background-color:#FFFFE0;}
+ul.pagination li.active a {
+	color: white;
+	border:1px solid black;
+	cursor:pointer;
+}
+ul.pagination li a:hover {
+	color: maroon;
+	border:1px solid maroon;
+	background-color:#FFFFE0;
+}
 </style>
 </head>
 <body>

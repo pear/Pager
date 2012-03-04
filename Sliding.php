@@ -257,7 +257,7 @@ class Pager_Sliding extends Pager_Common
                 if ($i == $this->_currentPage) {
                     $this->range[$i] = true;
     				if (!empty($this->_linkContainer)) {
-						$links .=  '<'.$this->_linkContainer.'>' . $this->_curPageSpanPre . $i . $this->_curPageSpanPost . '</'.$this->_linkContainer.'>';
+						$links .=  '<'.$this->_linkContainerPre.'>' . $this->_curPageSpanPre . $i . $this->_curPageSpanPost . '</'.$this->_linkContainer.'>';
 					} else {
 						$links .= $this->_curPageSpanPre . $i . $this->_curPageSpanPost;
 					}
@@ -292,7 +292,7 @@ class Pager_Sliding extends Pager_Common
                 } else {
                     $this->range[$i] = true;
     				if (!empty($this->_linkContainer)) {
-						$links .=  '<'.$this->_linkContainer.'>' . $this->_curPageSpanPre . $i . $this->_curPageSpanPost . '</'.$this->_linkContainer.'>';
+						$links .=  '<'.$this->_linkContainerPre.'>' . $this->_curPageSpanPre . $i . $this->_curPageSpanPost . '</'.$this->_linkContainer.'>';
 					} else {
 					    $links .= $this->_curPageSpanPre . $i . $this->_curPageSpanPost;
 					}

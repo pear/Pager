@@ -294,6 +294,18 @@ class Pager_Common
     var $_linkContainer  = '';
 
     /**
+     * @var string HTML tag used by _linkContainer and _linkContainerClassName 
+     * @access private
+     */
+    var $_linkContainerPre  = '';
+
+    /**
+     * @var string CSS class name for linkContainer
+     * @access private
+     */
+    var $_linkContainerClassName  = '';
+
+    /**
      * @var string HTML tag to wrap current page link
      * (use 'a' to keep it like all other links and set a class with $_curPageLinkClassName)
      * defaults to 'span' for backwards compatibility
@@ -499,6 +511,7 @@ class Pager_Common
         'spacesBeforeSeparator',
         'spacesAfterSeparator',
         'linkContainer',
+        'linkContainerClassName',
         'curTag',
         'curPageLinkClassName',
         'curPageSpanPre',
@@ -856,7 +869,7 @@ class Pager_Common
                 $onclick = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_onclick);
             }
             return sprintf('%s<a href="%s"%s%s%s%s title="%s">%s</a>%s',
-                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainer.'>',
+                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainerPre.'>',
                            htmlentities($this->_url . $href, ENT_COMPAT, 'UTF-8'),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,
@@ -872,7 +885,7 @@ class Pager_Common
                 $href .= '?' . $this->_http_build_query_wrapper($_GET);
             }
             return sprintf("%s<a href='javascript:void(0)' onclick='%s'%s%s%s title='%s'>%s</a>%s",
-                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainer.'>',
+                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainerPre.'>',
                            $this->_generateFormOnClick($href, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,
@@ -1612,6 +1625,10 @@ class Pager_Common
         $this->_classString = '';
         if (strlen($this->_linkClass)) {
             $this->_classString = 'class="'.$this->_linkClass.'"';
+        }
+
+        if (strlen($this->_linkContainer)) {
+            $this->_linkContainerPre .= empty($this->_linkContainerClassName) ? $this->_linkContainer : $this->_linkContainer . ' class="'.$this->_linkContainerClassName.'"';
         }
 
         if (strlen($this->_curPageLinkClassName)) {

@@ -294,7 +294,7 @@ class Pager_Common
     var $_linkContainer  = '';
 
     /**
-     * @var string HTML tag used by _linkContainer and _curLinkContainerClassName 
+     * @var string HTML tag used to combine _linkContainer and _curLinkContainerClassName 
      * @access private
      */
     var $_linkContainerPre  = '';

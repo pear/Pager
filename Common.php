@@ -287,6 +287,33 @@ class Pager_Common
     var $_spacesAfterSeparator  = 1;
 
     /**
+     * @var string HTML tag to wrap each page link
+     * (use 'li' for pagination in a list)
+     * @access private
+     */
+    var $_linkContainer  = '';
+
+    /**
+     * @var string HTML tag used to combine _linkContainer and _curLinkContainerClassName 
+     * @access private
+     */
+    var $_linkContainerPre  = '';
+
+    /**
+     * @var string CSS class name for linkContainer
+     * @access private
+     */
+    var $_curLinkContainerClassName  = '';
+
+    /**
+     * @var string HTML tag to wrap current page link
+     * (use 'a' to keep it like all other links and set a class with $_curPageLinkClassName)
+     * defaults to 'span' for backwards compatibility
+     * @access private
+     */
+    var $_curTag  = 'span';
+
+    /**
      * @var string CSS class name for current page link
      * @access private
      */
@@ -483,6 +510,9 @@ class Pager_Common
         'separator',
         'spacesBeforeSeparator',
         'spacesAfterSeparator',
+        'linkContainer',
+        'curLinkContainerClassName',
+        'curTag',
         'curPageLinkClassName',
         'curPageSpanPre',
         'curPageSpanPost',
@@ -838,27 +868,31 @@ class Pager_Common
             if (array_key_exists($this->_urlVar, $this->_linkData)) {
                 $onclick = str_replace('%d', $this->_linkData[$this->_urlVar], $this->_onclick);
             }
-            return sprintf('<a href="%s"%s%s%s%s title="%s">%s</a>',
+            return sprintf('%s<a href="%s"%s%s%s%s title="%s">%s</a>%s',
+                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainer.'>',
                            htmlentities($this->_url . $href, ENT_COMPAT, 'UTF-8'),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,
                            empty($this->_accesskey)   ? '' : ' accesskey="'.$this->_linkData[$this->_urlVar].'"',
                            empty($onclick)            ? '' : ' onclick="'.$onclick.'"',
                            $altText,
-                           $linkText
+                           $linkText,
+                           empty($this->_linkContainer) ? '' : '</'.$this->_linkContainer.'>'
             );
         } elseif ($this->_httpMethod == 'POST') {
             $href = $this->_url;
             if (!empty($_GET)) {
                 $href .= '?' . $this->_http_build_query_wrapper($_GET);
             }
-            return sprintf("<a href='javascript:void(0)' onclick='%s'%s%s%s title='%s'>%s</a>",
+            return sprintf("%s<a href='javascript:void(0)' onclick='%s'%s%s%s title='%s'>%s</a>%s",
+                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainer.'>',
                            $this->_generateFormOnClick($href, $this->_linkData),
                            empty($this->_classString) ? '' : ' '.$this->_classString,
                            empty($this->_attributes)  ? '' : ' '.$this->_attributes,
                            empty($this->_accesskey)   ? '' : ' accesskey=\''.$this->_linkData[$this->_urlVar].'\'',
                            $altText,
-                           $linkText
+                           $linkText,
+                           empty($this->_linkContainer) ? '' : '<'.$this->_linkContainer.'>'
             );
         }
         return '';
@@ -1593,9 +1627,17 @@ class Pager_Common
             $this->_classString = 'class="'.$this->_linkClass.'"';
         }
 
-        if (strlen($this->_curPageLinkClassName)) {
-            $this->_curPageSpanPre  .= '<span class="'.$this->_curPageLinkClassName.'">';
-            $this->_curPageSpanPost = '</span>' . $this->_curPageSpanPost;
+        if (strlen($this->_linkContainer)) {
+            $this->_linkContainerPre .= empty($this->_curLinkContainerClassName) ? $this->_linkContainer : $this->_linkContainer . ' class="'.$this->_curLinkContainerClassName.'"';
+        }
+
+        if (strlen($this->_curTag)) {
+          if (strlen($this->_curPageLinkClassName)) {
+            $this->_curPageSpanPre = '<' . $this->_curTag . ' class="'.$this->_curPageLinkClassName.'">' . $this->_curPageSpanPre;
+          }else{
+            $this->_curPageSpanPre = '<' . $this->_curTag . '>' . $this->_curPageSpanPre;
+          }
+          $this->_curPageSpanPost = $this->_curPageSpanPost . '</' . $this->_curTag . '>';
         }
 
         $this->_perPage = max($this->_perPage, 1); //avoid possible user errors

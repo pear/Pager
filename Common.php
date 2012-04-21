@@ -1632,12 +1632,12 @@ class Pager_Common
         }
 
         if (strlen($this->_curTag)) {
-          if (strlen($this->_curPageLinkClassName)) {
-            $this->_curPageSpanPre = '<' . $this->_curTag . ' class="'.$this->_curPageLinkClassName.'">' . $this->_curPageSpanPre;
-          }else{
-            $this->_curPageSpanPre = '<' . $this->_curTag . '>' . $this->_curPageSpanPre;
-          }
-          $this->_curPageSpanPost = $this->_curPageSpanPost . '</' . $this->_curTag . '>';
+            if (strlen($this->_curPageLinkClassName)) {
+                $this->_curPageSpanPre = '<' . $this->_curTag . ' class="'.$this->_curPageLinkClassName.'">' . $this->_curPageSpanPre;
+            } else {
+                $this->_curPageSpanPre = '<' . $this->_curTag . '>' . $this->_curPageSpanPre;
+            }
+            $this->_curPageSpanPost = $this->_curPageSpanPost . '</' . $this->_curTag . '>';
         }
 
         $this->_perPage = max($this->_perPage, 1); //avoid possible user errors

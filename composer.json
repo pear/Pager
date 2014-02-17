@@ -1,0 +1,36 @@
+{
+    "authors": [
+        {
+            "email": "l.alberton@quipo.it",
+            "name": "Lorenzo Alberton",
+            "role": "Lead"
+        },
+        {
+            "email": "richard@phpguru.org",
+            "name": "Richard Heyes",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Pager": "./"
+        }
+    },
+    "description": "More info available on: http://pear.php.net/package/Pager",
+    "include-path": [
+        "./"
+    ],
+    "license": "BSD",
+    "name": "pear/pager",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Pager",
+        "source": "https://github.com/pear/Pager"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}

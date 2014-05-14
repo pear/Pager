@@ -22,10 +22,10 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2009-04-21</date>
+ <date>2014-05-14</date>
  <time>22:49:27</time>
  <version>
-  <release>2.4.8</release>
+  <release>2.4.9</release>
   <api>2.4.8</api>
  </version>
  <stability>
@@ -34,22 +34,24 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  </stability>
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
  <notes>
-- request #15949: add autoSubmit option to getPerPageSelectBox() [Matt Rosenquist]
-- fix potential issues with encoding in getPerPageSelectBox() and getPageSelectBox()
+  Get rid of baseinstalldir.
+  No code changes.
  </notes>
  <contents>
   <dir name="/">
    <file name="Pager.php" role="php" />
-   <file baseinstalldir="Pager" name="Common.php" role="php" />
-   <file baseinstalldir="Pager" name="HtmlWidgets.php" role="php" />
-   <file baseinstalldir="Pager" name="Jumping.php" role="php" />
-   <file baseinstalldir="Pager" name="Pager_savebc.php" role="php" />
-   <file baseinstalldir="Pager" name="Sliding.php" role="php" />
-   <dir baseinstalldir="Pager" name="examples">
+   <dir name="Pager">
+    <file name="Common.php" role="php" />
+    <file name="HtmlWidgets.php" role="php" />
+    <file name="Jumping.php" role="php" />
+    <file name="Pager.php" role="php" />
+    <file name="Sliding.php" role="php" />
+   </dir>
+   <dir name="examples">
     <file name="example.php" role="doc" />
     <file name="Pager_Wrapper.php" role="doc" />
    </dir> <!-- /examples -->
-   <dir baseinstalldir="Pager" name="tests">
+   <dir name="tests">
     <file name="all_tests.php" role="test" />
     <file name="multibyte_post.php" role="test" />
     <file name="pager_include.php" role="test" />
@@ -84,12 +86,25 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    </pearinstaller>
   </required>
  </dependencies>
- <phprelease>
-  <filelist>
-   <install as="Pager.php" name="Pager_savebc.php" />
-  </filelist>
- </phprelease>
+ <phprelease/>
  <changelog>
+  <release>
+   <version>
+    <release>2.4.9</release>
+    <api>2.4.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2014-05-14</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>
+    Get rid of baseinstalldir.
+    No code changes.
+   </notes>
+  </release>
+
   <release>
    <version>
     <release>2.4.8</release>

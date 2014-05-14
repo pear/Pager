@@ -22,11 +22,11 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2009-04-21</date>
+ <date>2014-05-14</date>
  <time>22:49:27</time>
  <version>
   <release>2.4.9</release>
-  <api>2.4.9</api>
+  <api>2.4.8</api>
  </version>
  <stability>
   <release>stable</release>
@@ -34,21 +34,24 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  </stability>
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
  <notes>
-
+  Get rid of baseinstalldir.
+  No code changes.
  </notes>
  <contents>
   <dir name="/">
    <file name="Pager.php" role="php" />
-   <file baseinstalldir="Pager" name="Common.php" role="php" />
-   <file baseinstalldir="Pager" name="HtmlWidgets.php" role="php" />
-   <file baseinstalldir="Pager" name="Jumping.php" role="php" />
-   <file baseinstalldir="Pager" name="Pager_savebc.php" role="php" />
-   <file baseinstalldir="Pager" name="Sliding.php" role="php" />
-   <dir baseinstalldir="Pager" name="examples">
+   <dir name="Pager">
+    <file name="Common.php" role="php" />
+    <file name="HtmlWidgets.php" role="php" />
+    <file name="Jumping.php" role="php" />
+    <file name="Pager.php" role="php" />
+    <file name="Sliding.php" role="php" />
+   </dir>
+   <dir name="examples">
     <file name="example.php" role="doc" />
     <file name="Pager_Wrapper.php" role="doc" />
    </dir> <!-- /examples -->
-   <dir baseinstalldir="Pager" name="tests">
+   <dir name="tests">
     <file name="all_tests.php" role="test" />
     <file name="multibyte_post.php" role="test" />
     <file name="pager_include.php" role="test" />
@@ -83,27 +86,25 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    </pearinstaller>
   </required>
  </dependencies>
- <phprelease>
-  <filelist>
-   <install as="Pager.php" name="Pager_savebc.php" />
-  </filelist>
- </phprelease>
+ <phprelease/>
  <changelog>
   <release>
    <version>
     <release>2.4.9</release>
-    <api>2.4.9</api>
+    <api>2.4.8</api>
    </version>
    <stability>
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2009-04-21</date>
+   <date>2014-05-14</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>
-
+    Get rid of baseinstalldir.
+    No code changes.
    </notes>
   </release>
+
   <release>
    <version>
     <release>2.4.8</release>
@@ -236,7 +237,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- fix double escaping of arg_separator when php.ini&apos;s arg_separator.output = &quot;&amp;amp;&quot;
 
-            
+
    </notes>
   </release>
   <release>
@@ -253,7 +254,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    <notes>- more flexible implementation of the factory pattern allowing people to use custom
   renderer classes that are not part of the Pager package (thanks to Martin Jansen)
 
-            
+
    </notes>
   </release>
   <release>
@@ -280,7 +281,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 - added build() to refresh the links and the paged data after a new call to setOptions()
 - added &apos;attributes&apos; option to set extra attributes for the &lt;a&gt; tag (request #7452)
 
-            
+
    </notes>
   </release>
   <release>
@@ -296,7 +297,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- fixed bug #6680: error with fileName parameter having an extra &quot;%&quot; character
 
-            
+
    </notes>
   </release>
   <release>
@@ -311,11 +312,11 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    <date>2006-01-20</date>
    <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
    <notes>- remove flicker (caused by href=&quot;#&quot;) during POST requests (request #6005)
-- added &quot;formID&quot; option to reuse an existing form in POST requests 
+- added &quot;formID&quot; option to reuse an existing form in POST requests
   (thanks to Marc Veldman)
 - fixed bug #6529: problem with fields with quotes during POST requests
 
-            
+
    </notes>
   </release>
   <release>
@@ -332,7 +333,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
    <notes>- changed license to BSD
 - fixed bug #4897 (multibyte chars not handled correctly)
 
-            
+
    </notes>
   </release>
   <release>
@@ -351,7 +352,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
 NB: We recommend that users of Pager &lt; 2.3.0 immediately upgrade the package,
 otherwise they might be susceptible to XSS attacks
 
-            
+
    </notes>
   </release>
   <release>
@@ -367,10 +368,10 @@ otherwise they might be susceptible to XSS attacks
    <license uri="http://www.php.net/license">PHP</license>
    <notes>- autodetect HTTP method used, when not specified,
   instead of forcing &quot;GET&quot;  (bug #4277)
-- added &quot;altFirst&quot; and &quot;altLast&quot; options to set the 
+- added &quot;altFirst&quot; and &quot;altLast&quot; options to set the
   &quot;title&quot; attribute of the first and last page links
 
-            
+
    </notes>
   </release>
   <release>
@@ -388,7 +389,7 @@ otherwise they might be susceptible to XSS attacks
 - if the value of &quot;arg_separator.output&quot; in php.ini is &quot;&amp;amp;&quot;, don&apos;t encode it again
 - tweaked Pager_Wrapper query rewriting function, now it is fully case insensitive
 
-            
+
    </notes>
   </release>
   <release>
@@ -404,7 +405,7 @@ otherwise they might be susceptible to XSS attacks
    <license uri="http://www.php.net/license">PHP</license>
    <notes>- tweaked Pager_Wrapper query rewriting function
 
-            
+
    </notes>
   </release>
   <release>
@@ -420,7 +421,7 @@ otherwise they might be susceptible to XSS attacks
    <license uri="http://www.php.net/license">PHP</license>
    <notes>- fixed possible querystring duplication with front controllers
 
-            
+
    </notes>
   </release>
   <release>
@@ -444,7 +445,7 @@ otherwise they might be susceptible to XSS attacks
 - countless code optimizations
 - added many new test cases to the testsuite
 
-            
+
    </notes>
   </release>
   <release>
@@ -460,11 +461,11 @@ otherwise they might be susceptible to XSS attacks
    <license uri="http://www.php.net/license">PHP</license>
    <notes>- added Pager_Wrapper_Eclipse() function in the /examples/Pager_Wrapper example
   (thanks to Matte Edens)
-- added support for statements with subqueries in the Pager Wrappers 
+- added support for statements with subqueries in the Pager Wrappers
   (thanks to Tobias Kuckuck)
 - fixed bug #3451 (arrays in extraVars not handled correctly)
 
-            
+
    </notes>
   </release>
   <release>
@@ -481,7 +482,7 @@ otherwise they might be susceptible to XSS attacks
    <notes>- better &apos;currentPage&apos; option support (thanks to Andrew Nagy)
 - fixed typo (thanks to Massimiliano Arione)
 
-            
+
    </notes>
   </release>
   <release>
@@ -502,7 +503,7 @@ otherwise they might be susceptible to XSS attacks
   [bugs #2908, #3043 and #3212]
 - added &apos;currentPage&apos; option (patch by Kendrick Vargas)
 
-            
+
    </notes>
   </release>
   <release>
@@ -522,7 +523,7 @@ otherwise they might be susceptible to XSS attacks
 - changed $_GET to $_REQUEST. POST values should be valid too, now.
 - Pager can be used on a DirectoryIndex script, now (patch by ieure)  [bug #2617]
 
-            
+
    </notes>
   </release>
   <release>
@@ -544,7 +545,7 @@ otherwise they might be susceptible to XSS attacks
   resultsets efficiently.
 - prevent XSS attacks (bug #2131), thanks to sou_sk at nifty dot com
 
-            
+
    </notes>
   </release>
   <release>
@@ -572,7 +573,7 @@ otherwise they might be susceptible to XSS attacks
 - avoid duplicate vars in querystring when using &apos;extraVars&apos; option (bug #1383)
   (thanks to pauluz at gazeta dot pl)
 
-            
+
    </notes>
   </release>
   <release>
@@ -589,7 +590,7 @@ otherwise they might be susceptible to XSS attacks
    <notes>- PHP5 compatibility (fixed bug #812)
 - Forced ucfirst() on filename too
 
-            
+
    </notes>
   </release>
   <release>
@@ -609,7 +610,7 @@ otherwise they might be susceptible to XSS attacks
 - Fixed Bug #589 (common.php raise a notice if the querystring has no &apos;=&apos; character)
 - Use &apos;&amp;amp;&apos; instead of &apos;&amp;&apos; in urls for better XHTML conformance
 
-            
+
    </notes>
   </release>
   <release>
@@ -630,7 +631,7 @@ otherwise they might be susceptible to XSS attacks
 - Fix isFirstPage() when totalItems == 0
 - Added test suite.
 
-			
+
    </notes>
   </release>
   <release>
@@ -652,7 +653,7 @@ otherwise they might be susceptible to XSS attacks
   an option.
 - Improved error handling.
 
-			
+
    </notes>
   </release>
   <release>
@@ -668,7 +669,7 @@ otherwise they might be susceptible to XSS attacks
    <license uri="http://www.php.net/license">PHP</license>
    <notes>- Minor patch for script_name vs php_self (not included in v.1.0.7)
 - Prevent URL modification
-			
+
    </notes>
   </release>
   <release>
@@ -683,7 +684,7 @@ otherwise they might be susceptible to XSS attacks
    <date>2002-12-01</date>
    <license uri="http://www.php.net/license">PHP</license>
    <notes>Minor patch for script_name vs php_self
-			
+
    </notes>
   </release>
   <release>
@@ -700,7 +701,7 @@ otherwise they might be susceptible to XSS attacks
    <notes>Updated to no longer require an array of data. Now
 can be used with just a number of items. Thanks to
 Christian Dickmann for the patch.
-			
+
    </notes>
   </release>
   <release>
@@ -716,7 +717,7 @@ Christian Dickmann for the patch.
    <license uri="http://www.php.net/license">PHP</license>
    <notes>Changed getCurrentPage() to getCurrentPageID() and
 added getNextPageID() and getPreviousPageID()
-			
+
    </notes>
   </release>
   <release>
@@ -732,7 +733,7 @@ added getNextPageID() and getPreviousPageID()
    <license uri="http://www.php.net/license">PHP</license>
    <notes>Changed getCurrentPage() to getCurrentPageID() and
 added getNextPageID() and getPreviousPageID()
-			
+
    </notes>
   </release>
   <release>
@@ -747,7 +748,7 @@ added getNextPageID() and getPreviousPageID()
    <date>2002-05-31</date>
    <license uri="http://www.php.net/license">PHP</license>
    <notes>Couple of minor bugs
-			
+
    </notes>
   </release>
   <release>
@@ -763,7 +764,7 @@ added getNextPageID() and getPreviousPageID()
    <license uri="http://www.php.net/license">PHP</license>
    <notes>Applied patch from Christian Dickmann adding getCurrentPage(), numItems()
 and optional CSS class for links.
-			
+
    </notes>
   </release>
   <release>
@@ -779,7 +780,7 @@ and optional CSS class for links.
    <license uri="http://www.php.net/license">PHP</license>
    <notes>o No longer barfs with no querystring
 o Now works with associative data array
-			
+
    </notes>
   </release>
   <release>
@@ -794,7 +795,7 @@ o Now works with associative data array
    <date>2002-02-09</date>
    <license uri="http://www.php.net/license">PHP</license>
    <notes>This is the initial release of the Pager package.
-			
+
    </notes>
   </release>
  </changelog>

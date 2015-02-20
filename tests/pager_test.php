@@ -767,9 +767,4 @@ class TestOfPager extends UnitTestCase {
         $this->assertEqual($expected, $this->pager->links);
     }
 }
-if (!defined('TEST_RUNNING')) {
-    define('TEST_RUNNING', true);
-    $test = new TestOfPager();
-    $test->run(new HtmlReporter());
-}
 ?>

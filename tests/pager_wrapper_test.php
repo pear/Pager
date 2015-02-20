@@ -200,10 +200,4 @@ FROM Version SubV WHERE SubV.Identifier = VersionBroker.Identifier )';
         $this->assertEqual($expected, rewriteCountQuery($query));
     }
 }
-
-if (!defined('TEST_RUNNING')) {
-    define('TEST_RUNNING', true);
-    $test = &new TestOfPagerWrapper();
-    $test->run(new HtmlReporter());
-}
 ?>

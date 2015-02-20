@@ -27,5 +27,8 @@
     "include-path": [
         "./"
     ],
-    "type": "library"
+    "type": "library",
+    "require-dev": {
+        "simpletest/simpletest": "~1.1"
+    }
 }

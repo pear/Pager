@@ -35,9 +35,4 @@ class TestOfPagerXSS extends UnitTestCase {
         $this->assertEqual($expected, $this->pager->_getNextLink());
     }
 }
-if (!defined('TEST_RUNNING')) {
-    define('TEST_RUNNING', true);
-    $test = new TestOfPagerXSS();
-    $test->run(new HtmlReporter());
-}
 ?>

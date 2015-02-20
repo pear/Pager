@@ -4,22 +4,14 @@
 require_once 'simple_include.php';
 require_once 'pager_include.php';
 
-define('TEST_RUNNING', true);
-
-require_once './pager_tests.php';
-require_once './pager_jumping_tests.php';
-require_once './pager_sliding_tests.php';
-
+error_reporting(error_reporting() & ~E_STRICT);
 
 class AllTests extends TestSuite {
     function AllTests() {
         $this->TestSuite('All PEAR::Pager Tests');
-        $this->Add(new PagerTests());
-        $this->Add(new PagerJumpingTests());
-        $this->Add(new PagerSlidingTests());
+        $this->addFile(__DIR__ . '/pager_tests.php');
+        $this->addFile(__DIR__ . '/pager_jumping_tests.php');
+        $this->addFile(__DIR__ . '/pager_sliding_tests.php');
     }
 }
-
-$test = new AllTests();
-$test->run(new HtmlReporter());
 ?>

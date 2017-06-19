@@ -23,9 +23,9 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <active>no</active>
  </lead>
  <date>2017-06-19</date>
- <time>16:45:00</time>
+ <time>17:30:00</time>
  <version>
-  <release>2.5.0</release>
+  <release>2.5.1</release>
   <api>2.4.8</api>
  </version>
  <stability>
@@ -87,6 +87,22 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  </dependencies>
  <phprelease/>
  <changelog>
+  <release>
+   <version>
+    <release>2.5.1</release>
+    <api>2.4.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2017-06-19</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>
+    PHP 7 compatibility (and BC fix for classes extending Pager)
+   </notes>
+  </release>
+
   <release>
    <version>
     <release>2.5.0</release>

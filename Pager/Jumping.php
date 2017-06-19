@@ -74,6 +74,18 @@ class Pager_Jumping extends Pager_Common
         $this->build();
     }
 
+    /**
+     * Constructor for PHP4 compatibility
+     *
+     * @param array $options Associative array of option names and their values
+     *
+     * @see http://cweiske.de/tagebuch/php4-constructors-php7.htm
+     */
+    public function Pager_Jumping($options = array())
+    {
+        self::__construct($options);
+    }
+
     // }}}
     // {{{ getPageIdByOffset()
 

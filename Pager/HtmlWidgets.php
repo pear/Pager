@@ -49,9 +49,9 @@
 class Pager_HtmlWidgets
 {
     var $pager = null;
-    
+
     // {{{ constructor
-    
+
     /**
      * Constructor
      *
@@ -61,7 +61,19 @@ class Pager_HtmlWidgets
     {
         $this->pager =& $pager;
     }
-    
+
+    /**
+     * Constructor for PHP4 compatibility
+     *
+     * @param object &$pager Pager instance
+     *
+     * @see http://cweiske.de/tagebuch/php4-constructors-php7.htm
+     */
+    public function Pager_HtmlWidgets(&$pager)
+    {
+        self::__construct($pager);
+    }
+
     // }}}
     // {{{ getPerPageSelectBox()
 

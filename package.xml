@@ -22,10 +22,10 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
   <email>richard@phpguru.org</email>
   <active>no</active>
  </lead>
- <date>2014-05-14</date>
- <time>22:49:27</time>
+ <date>2017-06-19</date>
+ <time>16:45:00</time>
  <version>
-  <release>2.4.9</release>
+  <release>2.5.0</release>
   <api>2.4.8</api>
  </version>
  <stability>
@@ -34,8 +34,7 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  </stability>
  <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
  <notes>
-  Get rid of baseinstalldir.
-  No code changes.
+  PHP 7 compatibility
  </notes>
  <contents>
   <dir name="/">
@@ -88,6 +87,22 @@ Two operating modes available: &quot;Jumping&quot; and &quot;Sliding&quot; windo
  </dependencies>
  <phprelease/>
  <changelog>
+  <release>
+   <version>
+    <release>2.5.0</release>
+    <api>2.4.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2017-06-19</date>
+   <license uri="http://www.debian.org/misc/bsd.license">BSD</license>
+   <notes>
+    PHP 7 compatibility
+   </notes>
+  </release>
+
   <release>
    <version>
     <release>2.4.9</release>

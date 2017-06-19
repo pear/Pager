@@ -6,7 +6,7 @@ require_once 'pager_include.php';
 
 class PagerTests extends TestSuite {
     function PagerTests() {
-        $this->TestSuite('Pager Tests');
+        parent::__construct('Pager Tests');
         $this->addFile(__DIR__ . '/pager_test.php');
         $this->addFile(__DIR__ . '/pager_noData_test.php');
     }

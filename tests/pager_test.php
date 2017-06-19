@@ -184,6 +184,9 @@ class TestOfPager extends UnitTestCase {
         }
         $rendered = $this->pager->_renderLink('', '');
         preg_match('/href="(.*)"/U', $rendered, $matches);
+        if (0 === strpos($matches[1], './') && 0 !== strpos($_SERVER['PHP_SELF'], './')) {
+            $_SERVER['PHP_SELF'] = './'.$_SERVER['PHP_SELF'];
+        }
         $actual = str_replace($_SERVER['PHP_SELF'].'?', '', $matches[1]);
         $this->assertEqual($expected, $actual);
 
